@@ -1,5 +1,10 @@
 pipeline {
- agent any
+    agent {
+        docker {
+            image 'node:lts-alpine3.11' 
+            args '-p 3000:3000' 
+        }
+    }
 
   environment{
    SERVICE_NAME = "mffrontend"
