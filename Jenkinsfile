@@ -19,7 +19,7 @@ pipeline {
      steps {
        cleanWs()
        git credentialsId: 'github', url: "https://github.com/myfinance/mffrontend.git"
-       sh '''npm install'''
+       sh '''rm -rf node_modules && npm install'''
        sh '''npm run build'''
      }
    }
