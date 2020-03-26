@@ -7,9 +7,6 @@ import {NotFoundViewComponent} from "./views/not-found-view/not-found-view.compo
 import {ErrorViewComponent} from "./views/error-view/error-view.component";
 import {HomeComponent} from "./views/home/home.component";
 import {BasicLayoutComponent} from "./shared/components/basic-layout/basic-layout.component";
-import {BarchartexpComponent} from "./views/examples/barchartexp/barchartexp.component";
-import {LinechartexpComponent} from "./views/examples/linechartexp/linechartexp.component";
-import {GridexpComponent} from "./views/examples/gridexp/gridexp.component";
 import {TransactioneditorComponent} from "./modules/mfaccountmanager/views/transactioneditor/transactioneditor.component";
 import {InstrumenteditorComponent} from "./modules/mfaccountmanager/views/instrumenteditor/instrumenteditor.component";
 import {TenanteditorComponent} from "./modules/mfaccountmanager/views/tenanteditor/tenanteditor.component";
@@ -49,18 +46,6 @@ const APP_ROUTES: Routes = [
       {
         path: 'instrument-search',
         component: InstrumentSearchComponent
-      },
-      {
-        path: 'barchart',
-        component: BarchartexpComponent
-      },
-      {
-        path: 'linechart',
-        component: LinechartexpComponent
-      },
-      {
-        path: 'gridexp',
-        component: GridexpComponent
       },
       {
         path: 'dashboards', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)

@@ -8,15 +8,11 @@ import {ErrorViewComponent} from './views/error-view/error-view.component';
 import {HomeComponent} from './views/home/home.component';
 import {TopNavigationComponent} from './shared/components/top-navigation/top-navigation.component';
 import {BasicLayoutComponent} from './shared/components/basic-layout/basic-layout.component';
-import { BarchartexpComponent } from './views/examples/barchartexp/barchartexp.component';
-import {WidgetModule} from './modules/widget/widget.module';
 
 // ngx-bootstrap
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {MyFinanceCommonModule} from './modules/myfinance-common/myfinance-common.module';
-import { LinechartexpComponent } from './views/examples/linechartexp/linechartexp.component';
-import { GridexpComponent } from './views/examples/gridexp/gridexp.component';
 import {HttpInterceptor} from './http-interceptor';
 import {ApiModule} from './modules/myfinance-tsclient-generated/api.module';
 import {MyFinanceDataService} from './shared/services/myfinance-data.service';
@@ -33,6 +29,7 @@ import {DashboardService} from './modules/dashboard/services/dashboard.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import {WidgetModule} from './modules/widget/widget.module';
 
 LicenseManager.setLicenseKey('Comparex_AG_on_behalf_of_DZ_BANK_AG_MultiApp_5Devs3_October_2020__MTYwMTY3OTYwMDAwMA==c1b2f2c21c08f4ac19ee3cf66789c865');
 registerLocaleData(localeDe);
@@ -49,7 +46,6 @@ export function initConfiguration(configService: ConfigService): Function {
 @NgModule({
 
   declarations: [
-
     AppComponent,
     NotFoundViewComponent,
     ErrorViewComponent,
@@ -58,16 +54,13 @@ export function initConfiguration(configService: ConfigService): Function {
     HomeComponent,
     TopNavigationComponent,
     BasicLayoutComponent,
-    BarchartexpComponent,
-    LinechartexpComponent,
-    GridexpComponent
   ],
   imports: [
+    WidgetModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutesModule,
-    WidgetModule,
     MyFinanceCommonModule,
     MfAccountManagerModule,
     ApiModule,
