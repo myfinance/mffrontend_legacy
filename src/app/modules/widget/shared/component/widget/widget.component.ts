@@ -39,7 +39,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
     } else {
       // for IE and other old browsers
       const evt = window.document.createEvent('UIEvents');
-      evt.initUIEvent('resize', true, false, window, 0);
+      evt.initEvent('resize', true, false);
       window.dispatchEvent(evt);
     }
   }
