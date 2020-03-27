@@ -32,7 +32,6 @@
     "core-js": "3.6.4",
     "font-awesome": "4.7.0",
     "json": "9.0.6",
-    "jspdf": "1.5.3",
     "moment-business": "3.0.1",
     "ng-mocks": "9.1.0",
     "ng-multiselect-dropdown": "0.2.10",
@@ -51,15 +50,13 @@
     "tslib": "1.11.1",
     "web-animations-js": "2.3.2",
     "zone.js": "0.10.3",
-    "@swimlane/ngx-charts": "13.0.2",
-    "@babel/compat-data": "7.9.0"
+    "@swimlane/ngx-charts": "13.0.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.901.0",
     "@angular/cli": "9.1.0",
     "@angular/compiler-cli": "9.1.0",
     "@angular/language-service": "9.1.0",
-    "@types/d3": "5.7.2",
     "@types/jasmine": "3.5.10",
     "@types/jasminewd2": "2.0.8",
     "@types/moment-business": "0.1.4",
