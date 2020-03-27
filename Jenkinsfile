@@ -10,8 +10,9 @@ pipeline {
  }
 
  stages{
-   agent any {
+
    stage('preperation'){
+        agent any {
      steps {
        cleanWs()
        git credentialsId: 'github', url: "https://github.com/myfinance/mffrontend.git"
