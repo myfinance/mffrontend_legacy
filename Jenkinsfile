@@ -19,20 +19,18 @@ pipeline {
      steps {
        cleanWs()
        git credentialsId: 'github', url: "https://github.com/myfinance/mffrontend.git"
-       sh '''rm -rf node_modules && npm install'''
-       sh '''npm run build'''
      }
    }
    stage('build'){
      steps {
-       sh '''npm install'''
+       sh '''rm -rf node_modules && npm install'''
        sh '''npm run build'''
      }
    }
-   //stage('build and push Image'){
-   //  steps {
-   //    sh 'docker image build -t ${REPOSITORY_TAG} ./distributions/mf-docker-images/target/docker-prep/myfinance/'
-   //  }
-  // }   
+   stage('build and push Image'){
+     steps {
+       sh 'docker image build -t ${REPOSITORY_TAG} .'
+     }
+   }   
  }
 }
