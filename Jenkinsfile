@@ -12,13 +12,18 @@ pipeline {
  stages{
 
    stage('preperation'){
-        agent any {
+    agent {
+        docker {
+            image 'node:12.16.1-alpine3.11' 
+            args '-p 3000:3000' 
+        }
+    }
      steps {
        cleanWs()
        git credentialsId: 'github', url: "https://github.com/myfinance/mffrontend.git"
      }
    }
- }
+ 
    stage('build'){
     agent {
         docker {
