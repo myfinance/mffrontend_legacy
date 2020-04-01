@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mffrontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myfinmffrontendance  
+  template:
+    metadata:
+      labels:
+        app: mffrontend
+    spec:
+      containers:
+        - name: mffrontend  
+          image: ${REPOSITORY_TAG}   
+          #never pull the image from dockerhub. Jenkins provides the image localy 
+          imagePullPolicy: Never      
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+ name: myfinance
+spec:
+ #this defines which pod is going to be presented by this service
+ selector:
+  app: myfinance
+ ports:
+  - name: http
+    port: 80
+    nodePort: 30030                   
+ type: NodePort           
