@@ -34,11 +34,11 @@ export class ConfigService {
         // Set the current zone to the saved zone or else
         // set it to the default zone in the configuration.
         const zone = localStorage.getItem('mfzone');
-        if (zone) {
-          this.setCurrentZone(zone);
-        } else {
+        //if (zone) {
+        //  this.setCurrentZone(zone);
+        //} else {
           this.setCurrentZone(data.defaultZone);
-        }
+        //}
         this.isInit = true;
       });
   }
