@@ -16,7 +16,14 @@ spec:
         - name: mffrontend  
           image: ${REPOSITORY_TAG}   
           #never pull the image from dockerhub. Jenkins provides the image localy 
-          imagePullPolicy: Never      
+          imagePullPolicy: Never  
+          volumeMounts:
+           - name: mffrontendconfig
+             mountPath: /usr/share/nginx/html/assets/config          
+      volumes:
+        - name: mffrontendconfig
+          persistentVolumeClaim:
+              claimName: mffeconfigpvc                
 
 ---
 

@@ -1,6 +1,12 @@
 {
   "zones": [
     {
+      "name": "Testk8n",
+      "identifier": "test",
+      "url": "http://myfinance.mylocaldomain/dac/rest",
+      "defaultEnvironment": "dev"
+    },    
+    {
       "name": "Localhost",
       "identifier": "local",
       "url": "http://localhost:8181/dac/rest",

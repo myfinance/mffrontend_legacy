@@ -26,7 +26,7 @@ export class ConfigService {
     this._config = null;
 
     this._http
-      .get('assets/config.json')
+      .get('assets/config/config.json')
       .subscribe((data: ConfigModel) => {
         this._config = data;
 
