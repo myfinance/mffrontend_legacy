@@ -37,6 +37,5 @@ spec:
   app: mffrontend
  ports:
   - name: http
-    port: 80
-    nodePort: 30022                   
- type: NodePort           
+    port: 80                
+ type: ClusterIP           
