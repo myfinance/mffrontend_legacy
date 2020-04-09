@@ -6,7 +6,9 @@ pipeline {
    ORGANIZATION_NAME = "myfinance"
    DOCKERHUB_USER = "holgerfischer"
    VERSION = "0.13.${BUILD_ID}"
+   K8N_IP = "192.168.100.73"
    REPOSITORY_TAG = "${DOCKERHUB_USER}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${VERSION}"
+   DOCKER_REPO = "${K8N_IP}:31003/repository/mydockerrepo/"
  }
 
  stages{
