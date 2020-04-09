@@ -45,6 +45,8 @@ pipeline {
     }     
      steps {
        sh 'docker image build -t ${REPOSITORY_TAG} .'
+       sh 'docker tag ${REPOSITORY_TAG} ${DOCKER_REPO}${REPOSITORY_TAG}'
+       sh 'docker push ${DOCKER_REPO}${REPOSITORY_TAG}'
      }
    }
       stage('deploy to cluster'){
