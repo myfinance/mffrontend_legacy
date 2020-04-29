@@ -1,0 +1,32 @@
+# Default values for mfbackend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: 192.168.100.73:31003/repository/mydockerrepo/holgerfischer/myfinance-
+  pullPolicy: IfNotPresent
+
+
+pv:
+  configpvc: mfconfigpvc
+  configstorage: /mnt/data/mf/prod_config/
+  configstoragesize: 1Mi
+  mfdbstorage: /opt/mf/prod_db/
+  mfdbpvc: mfdbpvc
+  mfdbstoragesize: 5Gi
+
+mfbackend:
+  db_pw: vulkan
+  db_name: mfdb
+  mf_http_port_ext: 30020
+  mf_http_port: 8181
+  mf_https_port_ext: 30021
+  mf_https_port: 8443
+  mf_name: myfinance
+
+ingress:
+  enabled: true
+  name: mfbackend
+  myfinance_host: myfinance.mylocaldomain   

@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mffrontend.name }} 
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.mffrontend.name }}   
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mffrontend.name }} 
+    spec:
+      containers:
+        - name: {{ .Values.mffrontend.name }}   
+          image: "{{ .Values.image.repository }}mffrontend:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}   
+          volumeMounts:
+           - name: mffrontendconfig
+             mountPath: /usr/share/nginx/html/assets/config          
+      volumes:
+        - name: mffrontendconfig
+          persistentVolumeClaim:
+              claimName: {{ .Values.pv.configpvc }}   
