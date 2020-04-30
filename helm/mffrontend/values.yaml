@@ -10,23 +10,15 @@ image:
 
 
 pv:
-  configpvc: mfconfigpvc
-  configstorage: /mnt/data/mf/prod_config/
+  configpvc: mffeconfigpvc
+  configstorage: /mnt/data/mf/prod_mffe_config/
   configstoragesize: 1Mi
-  mfdbstorage: /opt/mf/prod_db/
-  mfdbpvc: mfdbpvc
-  mfdbstoragesize: 5Gi
 
-mfbackend:
-  db_pw: vulkan
-  db_name: mfdb
-  mf_http_port_ext: 30020
-  mf_http_port: 8181
-  mf_https_port_ext: 30021
-  mf_https_port: 8443
-  mf_name: myfinance
+mffrontend:
+  name: mffrontend
+  http_port_ext: 30022
+  http_port: 80
 
 ingress:
   enabled: true
-  name: mfbackend
-  myfinance_host: myfinance.mylocaldomain   
+  host: fe.myfinance.mylocaldomain   

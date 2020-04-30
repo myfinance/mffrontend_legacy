@@ -6,7 +6,8 @@ pipeline {
    ORGANIZATION_NAME = "myfinance"
    DOCKERHUB_USER = "holgerfischer"
    //Snapshot Version
-   VERSION = "0.13.0.${BUILD_ID}-SNAPSHOT"
+   //VERSION = "0.13.0.${BUILD_ID}-SNAPSHOT"
+   VERSION = "0.13.0.1-SNAPSHOT"
    //Release Version
    //VERSION = "0.13.1.${BUILD_ID}"
    K8N_IP = "192.168.100.73"
