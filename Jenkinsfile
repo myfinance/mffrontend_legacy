@@ -6,10 +6,9 @@ pipeline {
    ORGANIZATION_NAME = "myfinance"
    DOCKERHUB_USER = "holgerfischer"
    //Snapshot Version
-   //VERSION = "0.13.0.${BUILD_ID}-SNAPSHOT"
-   VERSION = "0.13.0.1-SNAPSHOT"
+   VERSION = "0.13.0-alpha.${BUILD_ID}"
    //Release Version
-   //VERSION = "0.13.1.${BUILD_ID}"
+   //VERSION = "0.13.0"
    K8N_IP = "192.168.100.73"
    REPOSITORY_TAG = "${DOCKERHUB_USER}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${VERSION}"
    DOCKER_REPO = "${K8N_IP}:31003/repository/mydockerrepo/"
@@ -38,6 +37,7 @@ pipeline {
         }
     }
      steps {
+       sh '''npm --no-git-tag-version version ${VERSION}'''
        sh '''rm -rf node_modules && npm install'''
        sh '''npm run build'''
      }
