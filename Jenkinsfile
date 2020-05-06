@@ -12,7 +12,7 @@ pipeline {
    K8N_IP = "192.168.100.73"
    NEXUS_URL = "${K8N_IP}:31001"
    REPOSITORY_TAG = "${DOCKERHUB_USER}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${VERSION}"
-   DOCKER_REPO = "${NEXUS_URL}/repository/mydockerrepo/"
+   DOCKER_REPO = "${K8N_IP}:31003/repository/mydockerrepo/"
    TARGET_HELM_REPO = "http://${NEXUS_URL}/repository/myhelmrepo/"
  }
 
