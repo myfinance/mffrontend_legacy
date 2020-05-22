@@ -23,6 +23,6 @@ spec:
   capacity:
     storage: {{ .Values.pv.configstoragesize }}
   hostPath:
-    path: {{ .Values.pv.configstorage }}
+    path: {{ .Values.pv.mntpath }}{{ .Values.stage }}{{ .Values.pv.configstorage }}
     type: DirectoryOrCreate  
 

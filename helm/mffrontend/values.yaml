@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
+stage: dev
 
 image:
   repository: 192.168.100.73:31003/repository/mydockerrepo/holgerfischer/myfinance-
@@ -10,8 +11,9 @@ image:
 
 
 pv:
+  mntpath: /mnt/data/mf/
   configpvc: mffeconfigpvc
-  configstorage: /mnt/data/mf/prod_mffe_config/
+  configstorage: _mffe_config/
   configstoragesize: 1Mi
 
 mffrontend:
@@ -21,4 +23,6 @@ mffrontend:
 
 ingress:
   enabled: true
-  host: fe.myfinance.mylocaldomain   
+  prefix: .
+  postfix: .mylocaldomain
+  host: mffe
