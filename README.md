@@ -1,8 +1,9 @@
 
 to install the application manually with helm: 
-mkdir /opt/mf/prod_db/  (or mount die other directory)
 helm repo update
 helm upgrade -i --cleanup-on-fail mffrontend local/mffrontend --set stage=prod --devel
+
+or install the complete bundle see repo mfbundle
 
 # Angular2
 
