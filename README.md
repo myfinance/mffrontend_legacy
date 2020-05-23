@@ -1,3 +1,9 @@
+
+to install the application manually with helm: 
+mkdir /opt/mf/prod_db/  (or mount die other directory)
+helm repo update
+helm upgrade -i --cleanup-on-fail mffrontend local/mffrontend --set stage=prod --devel
+
 # Angular2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
