@@ -56,6 +56,11 @@ export class TransactionService extends AbstractDashboardDataService {
 
   private loadTransactions() {
     this.isTransactionLoaded = false;
+    // I don't know why but the daterange init is not working if hosted on linux. This is why we need this check again.
+    if (this.daterange == null) {
+      this.daterange = [new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()),
+        new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())];
+    }
     this.myFinanceService.getTransactions(this.daterange[0], this.daterange[1])
       .subscribe(
         (transactions: TransactionListModel) => {
