@@ -19,6 +19,7 @@ export class TransactionService extends AbstractDashboardDataService {
   daterange = [new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()),
     new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())];
   private transactionfilter = -1;
+  private instrumentfilter = -1;
 
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
@@ -106,7 +107,7 @@ export class TransactionService extends AbstractDashboardDataService {
   }
 
   getInstruments(): Array<Instrument> {
-    return this.instruments;
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Giro || i.instrumentType === InstrumentTypeEnum.Budget );
   }
 
   getGiros(): Array<Instrument> {
@@ -134,6 +135,17 @@ export class TransactionService extends AbstractDashboardDataService {
   }
   setTransactionfilter(transactionfilter: number) {
     this.transactionfilter = transactionfilter;
+    this.transactionFilterSubject.next();
+  }
+
+  setInstrumentfilter(instrumentid: number) {
+    this.instrumentfilter = instrumentid;
+    this.transactionFilterSubject.next();
+  }
+
+  clearFilter() {
+    this.transactionfilter = -1;
+    this.instrumentfilter = -1;
     this.transactionFilterSubject.next();
   }
 

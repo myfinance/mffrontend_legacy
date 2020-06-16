@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {BsDatepickerConfig} from "ngx-bootstrap";
-import {TransactionService} from "../../services/transaction.service";
+import {BsDatepickerConfig} from 'ngx-bootstrap';
+import {TransactionService} from '../../services/transaction.service';
+import {Instrument} from '../../../../../myfinance-tsclient-generated';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-controller',
@@ -11,22 +13,42 @@ export class ControllerComponent implements OnInit {
 
   bsConfig: Partial<BsDatepickerConfig>;
   daterange:  Array<Date>;
-  items: string[] = [
-    'The first choice!',
-    'And another choice for you.',
-    'but wait! A third!'
-  ];
+  instruments: Instrument[];
+  instrument: Instrument;
 
-  constructor(private transactionservice: TransactionService) {
+  constructor(private formBuilder: FormBuilder, private transactionservice: TransactionService) {
     this.daterange = this.transactionservice.getDaterange()
   }
 
   ngOnInit() {
+
     this.bsConfig = Object.assign({}, { containerClass: 'theme-default', rangeInputFormat: 'YYYY-MM-DD'});
+    if (this.transactionservice.getIsInit()) {
+      this.loadData();
+    } else {
+      this.transactionservice.instrumentSubject.subscribe(
+        () => {
+          this.loadData()}
+      )
+    }
+  }
+
+  private loadData(): void {
+    this.instruments = this.transactionservice.getInstruments();
   }
 
   onValueChange(value: Date[]): void {
     this.transactionservice.setDaterange(value);
+  }
+
+  onClearFilter() {
+    this.transactionservice.clearFilter();
+  }
+
+  setInstrumentFilter() {
+    if (this.instrument != null) {
+      this.transactionservice.setInstrumentfilter(this.instrument.instrumentid);
+    }
   }
 
 }
