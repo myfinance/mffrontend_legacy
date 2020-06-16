@@ -22,6 +22,10 @@ export class TransactiontableComponent implements OnInit, OnDestroy  {
     this.transactionservice.transactionSubject.subscribe(
       () => {
         this.loadData()}
+    );
+    this.transactionservice.transactionFilterSubject.subscribe(
+      () => {
+        this.loadData()}
     )
   }
 

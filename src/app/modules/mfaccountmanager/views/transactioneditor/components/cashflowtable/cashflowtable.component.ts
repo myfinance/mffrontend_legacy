@@ -2,12 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GridApi, GridOptions} from 'ag-grid-community';
 import {TransactionService} from '../../services/transaction.service';
 
-interface MyCashflow {
-  transactionId: number;
-  cashflowId: number;
-  value: number;
-  instrument: string;
-}
 
 @Component({
   selector: 'app-cashflowtable',
@@ -23,7 +17,6 @@ export class CashflowtableComponent  implements OnInit {
 
   title = 'cashflows';
 
-  cashflows: Array<MyCashflow>;
 
   constructor( private transactionservice: TransactionService) {
     this.transactionservice.transactionSubject.subscribe(
@@ -55,18 +48,8 @@ export class CashflowtableComponent  implements OnInit {
   }
 
   private loadData(): void {
-    this.cashflows = new Array<MyCashflow>();
-    let filteredTransactions = this.transactionservice.getTransactions();
-    if (this.transactionservice.getTransactionfilter() !== -1) {
-      filteredTransactions = filteredTransactions.filter(i => i.transactionid === this.transactionservice.getTransactionfilter());
-    }
-    filteredTransactions.forEach(x => x.cashflows.forEach(c => this.cashflows.push({
-      transactionId: x.transactionid,
-      value: c.value,
-      cashflowId: c.cashflowid,
-      instrument: c.instrument.description })))
     if (this.gridApi) {
-      this.gridApi.setRowData(this.cashflows);
+      this.gridApi.setRowData(this.transactionservice.getCashflows());
     }
   }
 
