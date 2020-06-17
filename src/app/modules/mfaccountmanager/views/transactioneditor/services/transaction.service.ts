@@ -1,16 +1,26 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Instrument, InstrumentListModel, Transaction, TransactionListModel} from '../../../../myfinance-tsclient-generated';
+import {Cashflow, Instrument, InstrumentListModel, Transaction, TransactionListModel} from '../../../../myfinance-tsclient-generated';
 import * as moment from 'moment';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
 import {Subject} from 'rxjs/Rx';
 
+interface MyCashflow {
+  transactionId: number;
+  cashflowId: number;
+  value: number;
+  instrument: string;
+}
+
+
 @Injectable()
 export class TransactionService extends AbstractDashboardDataService {
 
   transactions: Array<Transaction> = new Array<Transaction>();
+  filteredTransactions: Array<Transaction> = new Array<Transaction>();
+  filteredCashflows: Array<MyCashflow> = new Array<MyCashflow>();
   instruments: Array<Instrument> = new Array<Instrument>();
   transactionSubject: Subject<any> = new Subject<any>();
   transactionFilterSubject: Subject<any> = new Subject<any>();
@@ -66,6 +76,7 @@ export class TransactionService extends AbstractDashboardDataService {
       .subscribe(
         (transactions: TransactionListModel) => {
           this.transactions = transactions.values;
+          this.applyTransactionfilter();
           this.transactionSubject.next();
           this.isTransactionLoaded = true;
           this.checkDataLoadStatus();
@@ -102,8 +113,43 @@ export class TransactionService extends AbstractDashboardDataService {
   }
 
   getTransactions(): Array<Transaction> {
-    return this.transactions.filter(i => moment(i.transactiondate, 'YYYY-MM-DD').isSameOrAfter(this.daterange[0]) &&
+    return this.filteredTransactions;
+  }
+
+  getCashflows(): Array<MyCashflow> {
+    return this.filteredCashflows
+  }
+
+  private applyTransactionfilter() {
+    this.filteredTransactions = new Array<Transaction>();
+    this.filteredCashflows = new Array<MyCashflow>();
+
+    // apply filter on transactions
+    const transactionsFirstFilter =
+      this.transactions.filter(i => moment(i.transactiondate, 'YYYY-MM-DD').isSameOrAfter(this.daterange[0]) &&
       moment(i.transactiondate, 'YYYY-MM-DD').isSameOrBefore(this.daterange[1]));
+
+    if (this.instrumentfilter !== -1) {
+      transactionsFirstFilter.forEach(x => x.cashflows.forEach(c => {
+        if (c.instrument.instrumentid === this.instrumentfilter) {
+          this.filteredTransactions.push(x)
+        }
+      }))
+    } else {
+      // just clone the array - no change
+      this.filteredTransactions = [...transactionsFirstFilter];
+    }
+
+    // update filteredCashflows and apply the transactionfilter for cashflows only(this filter is not for transactions. it dosn't make
+    // sense to apply a filter on one transactionid then only one transaction is displayed)
+    this.filteredTransactions.filter(i => this.getTransactionfilter() === -1 || i.transactionid === this.getTransactionfilter()).
+    forEach(x => x.cashflows.forEach(c => {
+      this.filteredCashflows.push({
+        transactionId: x.transactionid,
+        value: c.value,
+        cashflowId: c.cashflowid,
+        instrument: c.instrument.description })
+    }));
   }
 
   getInstruments(): Array<Instrument> {
@@ -135,17 +181,20 @@ export class TransactionService extends AbstractDashboardDataService {
   }
   setTransactionfilter(transactionfilter: number) {
     this.transactionfilter = transactionfilter;
+    this.applyTransactionfilter();
     this.transactionFilterSubject.next();
   }
 
   setInstrumentfilter(instrumentid: number) {
     this.instrumentfilter = instrumentid;
+    this.applyTransactionfilter();
     this.transactionFilterSubject.next();
   }
 
   clearFilter() {
     this.transactionfilter = -1;
     this.instrumentfilter = -1;
+    this.applyTransactionfilter();
     this.transactionFilterSubject.next();
   }
 
