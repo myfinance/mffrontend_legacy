@@ -1,11 +1,18 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Cashflow, Instrument, InstrumentListModel, Transaction, TransactionListModel} from '../../../../myfinance-tsclient-generated';
+import {
+  Cashflow,
+  DateDoubleModel,
+  Instrument,
+  InstrumentListModel,
+  Transaction,
+  TransactionListModel
+} from '../../../../myfinance-tsclient-generated';
 import * as moment from 'moment';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
-import {Subject} from 'rxjs/Rx';
+import {Observable, Subject} from 'rxjs/Rx';
 
 interface MyCashflow {
   transactionId: number;
@@ -24,7 +31,9 @@ export class TransactionService extends AbstractDashboardDataService {
   instruments: Array<Instrument> = new Array<Instrument>();
   transactionSubject: Subject<any> = new Subject<any>();
   transactionFilterSubject: Subject<any> = new Subject<any>();
+  valueCurveSubject: Subject<any> = new Subject<any>();
   instrumentSubject: Subject<any> = new Subject<any>();
+  instrumentValues: DateDoubleModel;
   private isTransactionLoaded = false;
   daterange = [new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()),
     new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())];
@@ -188,7 +197,26 @@ export class TransactionService extends AbstractDashboardDataService {
   setInstrumentfilter(instrumentid: number) {
     this.instrumentfilter = instrumentid;
     this.applyTransactionfilter();
+    this.myFinanceService.getValueCurve(this.instrumentfilter, this.daterange[0], this.daterange[1])
+      .subscribe(
+        (values: DateDoubleModel) => {
+          this.instrumentValues = values;
+          this.valueCurveSubject.next();
+        },
+        (errResp) => {
+          console.error('error', errResp);
+          this.dashboardService.handleDataNotLoaded(errResp);
+        })
     this.transactionFilterSubject.next();
+  }
+
+  getInstrumentfilter(): number {
+    return this.instrumentfilter;
+  }
+
+  getValueCurve(): DateDoubleModel {
+
+    return this.instrumentValues;
   }
 
   clearFilter() {

@@ -3,7 +3,7 @@ import {Position} from '../models/position';
 import {Observable, Subject} from 'rxjs/Rx';
 import {ConfigService} from './config.service';
 import {MockDataProviderService} from './mock-data-provider.service';
-import {Instrument, InstrumentListModel, TransactionListModel} from '../../modules/myfinance-tsclient-generated';
+import {DateDoubleModel, Instrument, InstrumentListModel, TransactionListModel} from '../../modules/myfinance-tsclient-generated';
 import {MyFinanceWrapperService} from './my-finance-wrapper.service';
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
@@ -69,6 +69,12 @@ export class MyFinanceDataService {
   private getDateString(date: Date): string {
 
     return new DatePipe('de-De').transform(date, 'yyyy-MM-dd');
+  }
+
+  getValueCurve(instrumentId: number, start: Date, end: Date): Observable<DateDoubleModel> {
+
+    return this.myfinanceService.getValueMap_instrumentId_envID_startdate_enddate(
+      instrumentId, this.currentEnv, this.getDateString(start), this.getDateString(end));
   }
 
   saveIncomeExpenses(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {
