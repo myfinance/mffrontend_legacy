@@ -19,14 +19,24 @@ export class TransactioneditorComponent extends AbstractDashboard implements OnI
       title: 'Controller',
       x: 0,
       y: 0,
-      rows: 2,
+      rows: 1,
+      cols: 1,
+      draggable: true,
+      resizable: true
+    },
+    {
+      uuid: '49082ba4-15fb-4616-9fe9-b34d2a1eec4d',
+      title: 'Editor',
+      x: 0,
+      y: 1,
+      rows: 1,
       cols: 1,
       draggable: true,
       resizable: true
     },
     {
       uuid: '3870110e-6bfb-4cdc-9c3e-14d4c1924c72',
-      title: 'Editor',
+      title: 'Input',
       x: 0,
       y: 2,
       rows: 3,
