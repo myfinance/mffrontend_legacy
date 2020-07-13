@@ -32,6 +32,7 @@ import { TenantupdateformComponent } from './views/tenanteditor/components/tenan
 import {ToastrModule} from 'ngx-toastr';
 import { InstrumentupdateformComponent } from './views/instrumenteditor/components/instrumentupdateform/instrumentupdateform.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {EditorComponent} from './views/transactioneditor/components/editor/editor.component';
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
   ],
   declarations: [TransactioneditorComponent,
     TransactiontableComponent,
+    EditorComponent,
     IncomeexpensesinputformComponent,
     ControllerComponent,
     CashflowtableComponent,

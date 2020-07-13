@@ -25,11 +25,21 @@ export class TransactioneditorComponent extends AbstractDashboard implements OnI
       resizable: true
     },
     {
-      uuid: '3870110e-6bfb-4cdc-9c3e-14d4c1924c72',
+      uuid: '49082ba4-15fb-4616-9fe9-b34d2a1eec4d',
       title: 'Editor',
       x: 0,
       y: 2,
       rows: 3,
+      cols: 1,
+      draggable: true,
+      resizable: true
+    },
+    {
+      uuid: '3870110e-6bfb-4cdc-9c3e-14d4c1924c72',
+      title: 'Input',
+      x: 0,
+      y: 5,
+      rows: 5,
       cols: 1,
       draggable: true,
       resizable: true
@@ -49,7 +59,7 @@ export class TransactioneditorComponent extends AbstractDashboard implements OnI
       title: 'Alle Einnahmen und Ausgaben',
       x: 1,
       y: 1,
-      rows: 2,
+      rows: 6,
       cols: 3,
       draggable: true,
       resizable: true
@@ -58,8 +68,8 @@ export class TransactioneditorComponent extends AbstractDashboard implements OnI
       uuid: '763454ef-ca61-4a46-9df3-412f76ea3efb',
       title: 'Cashflows',
       x: 1,
-      y: 3,
-      rows: 2,
+      y: 7,
+      rows: 3,
       cols: 3,
       draggable: true,
       resizable: true

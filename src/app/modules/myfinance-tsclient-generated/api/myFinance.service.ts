@@ -1124,4 +1124,64 @@ export class MyFinanceService {
         );
     }
 
+    /**
+     * update Transaction
+     * 
+     * @param envID The Service Environment
+     * @param id id
+     * @param description description
+     * @param value the value of the income or expense
+     * @param transactiondate the transactiondate(yyyy-mm-dd
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateTransaction_envID_id_description_value_transactiondate(envID: string, id?: number, description?: string, value?: number, transactiondate?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateTransaction_envID_id_description_value_transactiondate(envID: string, id?: number, description?: string, value?: number, transactiondate?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateTransaction_envID_id_description_value_transactiondate(envID: string, id?: number, description?: string, value?: number, transactiondate?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateTransaction_envID_id_description_value_transactiondate(envID: string, id?: number, description?: string, value?: number, transactiondate?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling updateTransaction_envID_id_description_value_transactiondate.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (id !== undefined) {
+            queryParameters = queryParameters.set('id', <any>id);
+        }
+        if (description !== undefined) {
+            queryParameters = queryParameters.set('description', <any>description);
+        }
+        if (value !== undefined) {
+            queryParameters = queryParameters.set('value', <any>value);
+        }
+        if (transactiondate !== undefined) {
+            queryParameters = queryParameters.set('transactiondate', <any>transactiondate);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/updateTransaction`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
 }

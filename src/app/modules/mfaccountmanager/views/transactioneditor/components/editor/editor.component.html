@@ -1,0 +1,31 @@
+<b>Bearbeite Tranaktion: <span *ngIf="transactionSelected">
+      {{transactionId}}
+    </span>
+  </b>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <div class="form-group">
+      <label>Beschreibung:</label>
+      <input class="form-control" formControlName="description"/>
+      <span *ngIf="!editForm.get('description').valid && editForm.get('description').touched">
+      Bitte geben Sie eine Beschriebung für die Transaktion ein!
+    </span>
+    </div>
+    <div class="form-group">
+      <label>Transaktionsdatum:</label>
+      <input type="text" align="right" formControlName="transactionDate"
+             placeholder="Datepicker"
+             class="myformcontrol"
+             [bsConfig]="bsConfig"
+             bsDatepicker/>
+    </div>
+    <div class="form-group">
+      <label>Betrag:</label>
+      <input type="text" formControlName="value"
+             placeholder="0"
+             class="form-control"/>
+    </div>
+    <button class="btn btn-primary" type="submit">Update</button>
+    <button class="btn btn-primary" (click)="onDeleteTransaction()">Delete</button>
+  </div>
+</form>
