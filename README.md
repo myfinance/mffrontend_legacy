@@ -5,6 +5,10 @@ helm upgrade -i --cleanup-on-fail mffrontend local/mffrontend --set stage=prod -
 
 or install the complete bundle see repo mfbundle
 
+if you want to generate a new restclient for the backend connection:
+ start a local backend with default credentials (if you want to modify the backend location please patch myfinance-tsclient-generation/pom)
+ run "mvn clean install in folder restclientgeneration
+
 # Angular2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.

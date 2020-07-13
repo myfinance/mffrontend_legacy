@@ -25,6 +25,7 @@ export class EditorComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       description: ['', Validators.required],
       transactionDate: ['', Validators.required],
+      value: ['', Validators.required],
     });
     this.editForm.disable();
     this.transactionservice.transactionFilterSubject.subscribe(
@@ -42,6 +43,7 @@ export class EditorComponent implements OnInit {
       this.selectedTransaction = this.transactionservice.getTransactions().filter(i => i.transactionid === this.transactionId)[0];
       this.editForm.controls.description.setValue(this.selectedTransaction.description);
       this.editForm.controls.transactionDate.setValue(this.selectedTransaction.transactiondate)
+      this.editForm.controls.value.setValue(this.selectedTransaction.cashflows[0].value);
     } else {
       this.transactionSelected = false;
       this.editForm.disable();
