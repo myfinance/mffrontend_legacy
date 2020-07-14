@@ -96,6 +96,40 @@ export class MyFinanceDataService {
     );
   }
 
+  updateTransactions(desc: string, transactionId: number, value: number, transactionDate: Date) {
+
+    this.myfinanceService.updateTransaction_envID_id_description_value_transactiondate(
+      this.currentEnv,
+      transactionId,
+      desc,
+      value,
+      moment(transactionDate).format('YYYY-MM-DD')).subscribe(
+      () => {
+        this.transactionSubject.next();
+        this.printSuccess('Transaktion aktualisiert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
+  deleteTransaction(transactionId: number) {
+
+    this.myfinanceService.delTransfer_envID_transactionId(
+      this.currentEnv,
+      transactionId,
+      ).subscribe(
+      () => {
+        this.transactionSubject.next();
+        this.printSuccess('Transaktion gelöscht');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
   saveTenant(desc: string) {
     this.myfinanceService.addTenant_envID_description(this.currentEnv, desc).subscribe(
       () => {

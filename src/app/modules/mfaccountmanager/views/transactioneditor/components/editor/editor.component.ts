@@ -51,6 +51,15 @@ export class EditorComponent implements OnInit {
   }
 
   onSubmit() {
+    this.transactionservice.updateTransaction(this.editForm.value.description,
+      this.transactionId,
+      this.editForm.value.value,
+      this.editForm.value.transactionDate);
+    this.editForm.reset();
+  }
 
+  onDeleteTransaction() {
+    this.transactionservice.deleteTransaction(this.transactionId);
+    this.editForm.reset();
   }
 }
