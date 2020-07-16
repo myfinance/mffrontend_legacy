@@ -230,6 +230,10 @@ export class TransactionService extends AbstractDashboardDataService {
     this.myFinanceService.saveIncomeExpenses(desc, srcInstrumentId, trgInstrumentId, value, transactionDate);
   }
 
+  saveTransfer(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {
+    this.myFinanceService.saveTransfer(desc, srcInstrumentId, trgInstrumentId, value, transactionDate);
+  }
+
   updateTransaction(desc: string, transactionId: number, value: number, transactionDate: Date) {
     this.myFinanceService.updateTransactions(desc, transactionId, value, transactionDate);
   }
