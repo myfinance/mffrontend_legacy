@@ -33,6 +33,8 @@ import {ToastrModule} from 'ngx-toastr';
 import { InstrumentupdateformComponent } from './views/instrumenteditor/components/instrumentupdateform/instrumentupdateform.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {EditorComponent} from './views/transactioneditor/components/editor/editor.component';
+import {BudgettransferinputformComponent} from './views/transactioneditor/components/budgettransferinputform/budgettransferinputform.component';
+import {TransferinputformComponent} from './views/transactioneditor/components/transferinputform/transferinputform.component';
 
 @NgModule({
   imports: [
@@ -62,6 +64,8 @@ import {EditorComponent} from './views/transactioneditor/components/editor/edito
     TransactiontableComponent,
     EditorComponent,
     IncomeexpensesinputformComponent,
+    BudgettransferinputformComponent,
+    TransferinputformComponent,
     ControllerComponent,
     CashflowtableComponent,
     ValuegraphComponent,

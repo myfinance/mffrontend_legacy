@@ -96,6 +96,25 @@ export class MyFinanceDataService {
     );
   }
 
+  saveTransfer(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {
+
+    this.myfinanceService.addTransfer_envID_description_srcId_trgId_value_transactiondate(
+      this.currentEnv,
+      desc,
+      srcInstrumentId,
+      trgInstrumentId,
+      value,
+      moment(transactionDate).format('YYYY-MM-DD')).subscribe(
+      () => {
+        this.transactionSubject.next();
+        this.printSuccess('Transaktion gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
   updateTransactions(desc: string, transactionId: number, value: number, transactionDate: Date) {
 
     this.myfinanceService.updateTransaction_envID_id_description_value_transactiondate(
