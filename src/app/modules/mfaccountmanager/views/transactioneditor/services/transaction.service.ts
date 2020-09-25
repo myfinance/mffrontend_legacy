@@ -63,7 +63,8 @@ export class TransactionService extends AbstractDashboardDataService {
     // subscribe to all transaction updates
     this.myFinanceService.transactionSubject.subscribe(
       () => {
-        this.loadData()
+        this.dashboardService.handleDataPreparing();
+        this.loadTransactions();
       }
     )
   }

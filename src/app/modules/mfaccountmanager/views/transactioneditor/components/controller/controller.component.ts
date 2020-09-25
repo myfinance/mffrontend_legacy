@@ -35,10 +35,16 @@ export class ControllerComponent implements OnInit {
 
   private loadData(): void {
     this.instruments = this.transactionservice.getInstruments();
+    if (this.transactionservice.getInstrumentfilter() > -1) {
+      this.instrument = this.instruments.find(x => x.instrumentid === this.transactionservice.getInstrumentfilter());
+      this.setInstrumentFilter();
+    }
   }
 
   onValueChange(value: Date[]): void {
-    this.transactionservice.setDaterange(value);
+    if (value !== null) {
+      this.transactionservice.setDaterange(value);
+    }
   }
 
   onClearFilter() {

@@ -48,7 +48,7 @@ export class TransferinputformComponent implements OnInit {
       this.transferForm.value.srcaccount.instrumentid,
       this.transferForm.value.trgaccount.instrumentid,
       this.transferForm.value.value,
-      new Date());
+      this.transferForm.value.transactionDate);
     this.transferForm.reset();
   }
 }
