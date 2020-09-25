@@ -50,7 +50,7 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onUpdateTransaction() {
     this.transactionservice.updateTransaction(this.editForm.value.description,
       this.transactionId,
       this.editForm.value.value,

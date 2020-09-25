@@ -36,16 +36,32 @@ export class ValuegraphComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
+  isInit = false;
+
   constructor(private transactionservice: TransactionService) {
     this.transactionservice.valueCurveSubject.subscribe(
       () => {
          this.setValueMap()
       }
     )
+    this.transactionservice.transactionSubject.subscribe(
+      () => {
+        this.updateValues()}
+    );
+    this.transactionservice.transactionFilterSubject.subscribe(
+      () => {
+        this.updateValues()}
+    )
   }
 
   ngOnInit() {
 
+  }
+
+  updateValues() {
+    if (this.isInit) {
+      this.setValueMap()
+    }
   }
 
   setValueMap() {
@@ -65,6 +81,7 @@ export class ValuegraphComponent implements OnInit {
 
     }
     this.valuemap = newvaluemap;
+    this.isInit = true;
   }
 
 }

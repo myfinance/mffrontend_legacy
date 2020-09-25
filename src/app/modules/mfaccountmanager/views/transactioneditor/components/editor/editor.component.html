@@ -2,7 +2,7 @@
       {{transactionId}}
     </span>
   </b>
-<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="editForm">
   <div class="form-group">
     <div class="form-group">
       <label>Beschreibung:</label>
@@ -25,7 +25,7 @@
              placeholder="0"
              class="form-control"/>
     </div>
-    <button class="btn btn-primary" type="submit">Update</button>
+    <button class="btn btn-primary" (click)="onUpdateTransaction()">Update</button>
     <button class="btn btn-primary" (click)="onDeleteTransaction()">Delete</button>
   </div>
 </form>

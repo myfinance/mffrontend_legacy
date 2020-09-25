@@ -52,7 +52,7 @@ export class IncomeexpensesinputformComponent implements OnInit {
       this.incomeExpensesForm.value.giro.instrumentid,
       this.incomeExpensesForm.value.budget.instrumentid,
       this.incomeExpensesForm.value.value,
-      new Date());
+      this.incomeExpensesForm.value.transactionDate);
     this.incomeExpensesForm.reset();
   }
 }
