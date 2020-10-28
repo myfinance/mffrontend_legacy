@@ -49,8 +49,8 @@ export class RecurrenttransactioneditorComponent extends AbstractDashboard imple
       title: 'Alle Dauertransfers',
       x: 1,
       y: 0,
-      rows: 3,
-      cols: 3,
+      rows: 1,
+      cols: 1,
       draggable: true,
       resizable: true
     }

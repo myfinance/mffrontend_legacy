@@ -41,6 +41,9 @@ import { RecurrenttransactionviewComponent } from './views/recurrenttransactione
 import { RecurrenttransactioncreatorComponent } from './views/recurrenttransactioneditor/components/recurrenttransactioncreator/recurrenttransactioncreator.component';
 import {RecurrentTransactionService} from './views/recurrenttransactioneditor/services/recurrenttransaction.service';
 import {RecurrenttransactioneditorformComponent} from './views/recurrenttransactioneditor/components/recurrenttransactioneditorform/recurrenttransactioneditorform.component';
+import { RecurrentincomeexpensesComponent } from './views/recurrenttransactioneditor/components/recurrentincomeexpenses/recurrentincomeexpenses.component';
+import { RecurrentbudgettransferComponent } from './views/recurrenttransactioneditor/components/recurrentbudgettransfer/recurrentbudgettransfer.component';
+import { RecurrenttransferComponent } from './views/recurrenttransactioneditor/components/recurrenttransfer/recurrenttransfer.component';
 
 @NgModule({
   imports: [
@@ -90,7 +93,10 @@ import {RecurrenttransactioneditorformComponent} from './views/recurrenttransact
     RecurrenttransactioneditorformComponent,
     RecurrenttransactioncontrollerComponent,
     RecurrenttransactionviewComponent,
-    RecurrenttransactioncreatorComponent],
+    RecurrenttransactioncreatorComponent,
+    RecurrentincomeexpensesComponent,
+    RecurrentbudgettransferComponent,
+    RecurrenttransferComponent],
   exports: [
     InstrumenteditorComponent,
     TransactioneditorComponent,
