@@ -29,7 +29,7 @@ export class RecurrenttransactioneditorComponent extends AbstractDashboard imple
       title: 'Editor',
       x: 0,
       y: 1,
-      rows: 1,
+      rows: 2,
       cols: 1,
       draggable: true,
       resizable: true
@@ -38,8 +38,8 @@ export class RecurrenttransactioneditorComponent extends AbstractDashboard imple
       uuid: 'b05f9c4b-43cc-44f6-9734-e202deab8d64',
       title: 'Input',
       x: 0,
-      y: 2,
-      rows: 1,
+      y: 3,
+      rows: 2,
       cols: 1,
       draggable: true,
       resizable: true
@@ -49,7 +49,7 @@ export class RecurrenttransactioneditorComponent extends AbstractDashboard imple
       title: 'Alle Dauertransfers',
       x: 1,
       y: 0,
-      rows: 1,
+      rows: 5,
       cols: 1,
       draggable: true,
       resizable: true

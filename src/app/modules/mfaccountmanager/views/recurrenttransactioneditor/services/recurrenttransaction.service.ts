@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
 import {
+  Instrument,
   InstrumentListModel,
 } from '../../../../myfinance-tsclient-generated';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
+import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 
 @Injectable()
 export class RecurrentTransactionService extends AbstractDashboardDataService {
@@ -58,5 +60,13 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
     } else {
       return false;
     }
+  }
+
+  getGiros(): Array<Instrument> {
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Giro);
+  }
+
+  getBudgets(): Array<Instrument> {
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget);
   }
 }
