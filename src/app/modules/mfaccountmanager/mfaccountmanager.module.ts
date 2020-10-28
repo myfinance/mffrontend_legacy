@@ -35,6 +35,12 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {EditorComponent} from './views/transactioneditor/components/editor/editor.component';
 import {BudgettransferinputformComponent} from './views/transactioneditor/components/budgettransferinputform/budgettransferinputform.component';
 import {TransferinputformComponent} from './views/transactioneditor/components/transferinputform/transferinputform.component';
+import {RecurrenttransactioneditorComponent} from './views/recurrenttransactioneditor/recurrenttransactioneditor.component';
+import { RecurrenttransactioncontrollerComponent } from './views/recurrenttransactioneditor/components/recurrenttransactioncontroller/recurrenttransactioncontroller.component';
+import { RecurrenttransactionviewComponent } from './views/recurrenttransactioneditor/components/recurrenttransactionview/recurrenttransactionview.component';
+import { RecurrenttransactioncreatorComponent } from './views/recurrenttransactioneditor/components/recurrenttransactioncreator/recurrenttransactioncreator.component';
+import {RecurrentTransactionService} from './views/recurrenttransactioneditor/services/recurrenttransaction.service';
+import {RecurrenttransactioneditorformComponent} from './views/recurrenttransactioneditor/components/recurrenttransactioneditorform/recurrenttransactioneditorform.component';
 
 @NgModule({
   imports: [
@@ -79,13 +85,19 @@ import {TransferinputformComponent} from './views/transactioneditor/components/t
     TenantinputformComponent,
     TenanttableComponent,
     TenantupdateformComponent,
-    InstrumentupdateformComponent],
+    InstrumentupdateformComponent,
+    RecurrenttransactioneditorComponent,
+    RecurrenttransactioneditorformComponent,
+    RecurrenttransactioncontrollerComponent,
+    RecurrenttransactionviewComponent,
+    RecurrenttransactioncreatorComponent],
   exports: [
     InstrumenteditorComponent,
-    TransactioneditorComponent
+    TransactioneditorComponent,
+    RecurrenttransactioneditorComponent
   ],
   providers: [
-    MyFinanceService, ConfigService, MyFinanceDataService, TransactionService, InstrumentService, TenantService
+    MyFinanceService, ConfigService, MyFinanceDataService, TransactionService, InstrumentService, TenantService, RecurrentTransactionService
   ]
 })
 export class MfAccountManagerModule { }
