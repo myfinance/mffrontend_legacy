@@ -21,6 +21,7 @@ import { Observable }                                        from 'rxjs/Observab
 import { DateDoubleModel } from '../model/dateDoubleModel';
 import { InstrumentListModel } from '../model/instrumentListModel';
 import { InstrumentModel } from '../model/instrumentModel';
+import { RecurrentTransactionListModel } from '../model/recurrentTransactionListModel';
 import { TransactionListModel } from '../model/transactionListModel';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -236,6 +237,46 @@ export class UtilityResourcesService {
         return this.httpClient.get<InstrumentModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/getequity`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * List Data
+     * 
+     * @param envID The Service Environment
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getRecurrentTransactionList_envID(envID: string, observe?: 'body', reportProgress?: boolean): Observable<RecurrentTransactionListModel>;
+    public getRecurrentTransactionList_envID(envID: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RecurrentTransactionListModel>>;
+    public getRecurrentTransactionList_envID(envID: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RecurrentTransactionListModel>>;
+    public getRecurrentTransactionList_envID(envID: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling getRecurrentTransactionList_envID.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<RecurrentTransactionListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/listRecurrentTransactions`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

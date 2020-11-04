@@ -6,7 +6,7 @@ helm upgrade -i --cleanup-on-fail mffrontend local/mffrontend --set stage=prod -
 or install the complete bundle see repo mfbundle
 
 if you want to generate a new restclient for the backend connection:
- start a local backend with default credentials (if you want to modify the backend location please patch myfinance-tsclient-generation/pom)
+ start a local backend with default credentials. open the url http://127.0.0.1:8181/dac/rest/swagger.json and copy the content in the file myfinance-tsclient-generation/swagger.json 
  run "mvn clean install in folder restclientgeneration
 
 # Angular2

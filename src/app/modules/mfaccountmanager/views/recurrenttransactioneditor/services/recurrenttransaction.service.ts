@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
 import {
   Instrument,
-  InstrumentListModel,
+  InstrumentListModel, RecurrentTransaction,
 } from '../../../../myfinance-tsclient-generated';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
+import RecurrentfrequenceEnum = RecurrentTransaction.RecurrentfrequenceEnum;
 
 @Injectable()
 export class RecurrentTransactionService extends AbstractDashboardDataService {
@@ -68,5 +69,10 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
 
   getBudgets(): Array<Instrument> {
     return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget);
+  }
+
+  saveRecurrentTransaction(desc: string, srcInstrumentId: number, trgInstrumentId: number,
+                           recurrentFrequency: RecurrentfrequenceEnum, value: number, transactionDate: Date) {
+    this.myFinanceService.saveRecurrentTransfer(desc, srcInstrumentId, trgInstrumentId, value, transactionDate, recurrentFrequency);
   }
 }

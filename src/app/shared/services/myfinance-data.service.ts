@@ -3,13 +3,20 @@ import {Position} from '../models/position';
 import {Observable, Subject} from 'rxjs/Rx';
 import {ConfigService} from './config.service';
 import {MockDataProviderService} from './mock-data-provider.service';
-import {DateDoubleModel, Instrument, InstrumentListModel, TransactionListModel} from '../../modules/myfinance-tsclient-generated';
+import {
+  DateDoubleModel,
+  Instrument,
+  InstrumentListModel,
+  RecurrentTransaction,
+  TransactionListModel
+} from '../../modules/myfinance-tsclient-generated';
 import {MyFinanceWrapperService} from './my-finance-wrapper.service';
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
+import RecurrentfrequenceEnum = RecurrentTransaction.RecurrentfrequenceEnum;
 
 @Injectable()
 export class MyFinanceDataService {
@@ -20,6 +27,7 @@ export class MyFinanceDataService {
   configSubject: Subject<any> = new Subject<any>();
   instrumentSubject: Subject<any> = new Subject<any>();
   transactionSubject: Subject<any> = new Subject<any>();
+  recurrentTransactionSubject: Subject<any> = new Subject<any>();
 
 
   constructor(
@@ -115,6 +123,32 @@ export class MyFinanceDataService {
     );
   }
 
+  saveRecurrentTransfer(
+    desc: string,
+    srcInstrumentId: number,
+    trgInstrumentId: number,
+    value: number,
+    transactionDate: Date,
+    recurrentFrequency: RecurrentfrequenceEnum ) {
+
+    this.myfinanceService.addRecurrentTransfer_envID_description_srcId_trgId_recurrentFrequency_value_transactiondate(
+      this.currentEnv,
+      desc,
+      srcInstrumentId,
+      trgInstrumentId,
+      recurrentFrequency,
+      value,
+      moment(transactionDate).format('YYYY-MM-DD')).subscribe(
+      () => {
+        this.recurrentTransactionSubject.next();
+        this.printSuccess('Dauertransaktion gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
   updateTransactions(desc: string, transactionId: number, value: number, transactionDate: Date) {
 
     this.myfinanceService.updateTransaction_envID_id_description_value_transactiondate(
@@ -185,7 +219,7 @@ export class MyFinanceDataService {
       })
   }
 
-  saveBudget(desc: string, budgetGroupId: number){
+  saveBudget(desc: string, budgetGroupId: number) {
     this.myfinanceService.addBudget_envID_description_budgetGroupId(
       this.currentEnv, desc, budgetGroupId).subscribe(
       () => {

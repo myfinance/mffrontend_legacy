@@ -13,12 +13,12 @@
 
 export interface Instrument {
     instrumentid: number;
+    instrumentType: Instrument.InstrumentTypeEnum;
     description: string;
     isactive: boolean;
     maturitydate?: string;
     closingdate?: string;
     treelastchanged: Date;
-    instrumentType: Instrument.InstrumentTypeEnum;
     businesskey?: string;
 }
 export namespace Instrument {

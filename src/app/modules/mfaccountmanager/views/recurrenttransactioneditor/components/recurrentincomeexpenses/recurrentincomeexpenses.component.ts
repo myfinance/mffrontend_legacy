@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {RecurrentTransactionService} from '../../services/recurrenttransaction.service';
-import {Instrument} from '../../../../../myfinance-tsclient-generated';
+import {Instrument, RecurrentTransaction} from '../../../../../myfinance-tsclient-generated';
+import RecurrentfrequenceEnum = RecurrentTransaction.RecurrentfrequenceEnum;
 
 @Component({
   selector: 'app-recurrentincomeexpenses',
@@ -17,6 +18,8 @@ export class RecurrentincomeexpensesComponent implements OnInit {
   budgets: Instrument[];
   giroDefault: Instrument;
   budgetDefault: Instrument;
+  frequencyValues: string[] = ['Monat', 'Quartal', 'Jahr'];
+  frequency = this.frequencyValues[0];
 
   constructor(private formBuilder: FormBuilder, private recurrentTransactionService: RecurrentTransactionService) {
   }
@@ -29,6 +32,7 @@ export class RecurrentincomeexpensesComponent implements OnInit {
       budget: ['', Validators.required],
       value: [0, Validators.required],
       transactionDate: [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), Validators.required],
+      recurrentFrequency: [this.frequencyValues[0], Validators.required],
     });
     if (this.recurrentTransactionService.getIsInit()) {
       this.loadData();
@@ -48,5 +52,33 @@ export class RecurrentincomeexpensesComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.recurrentTransactionForm)
+    let frequencyEnum: RecurrentfrequenceEnum;
+    switch (this.recurrentTransactionForm.value.recurrentFrequency) {
+      case 'Monat': {
+        frequencyEnum = RecurrentfrequenceEnum.Monthly;
+        break;
+      }
+      case 'Quartal': {
+        frequencyEnum = RecurrentfrequenceEnum.Quaterly;
+        break;
+      }
+      case 'Jahr': {
+        frequencyEnum = RecurrentfrequenceEnum.Yearly;
+        break;
+      }
+      default: {
+        frequencyEnum = RecurrentfrequenceEnum.UNKNOWN;
+        break;
+      }
+    }
+    this.recurrentTransactionService.saveRecurrentTransaction(this.recurrentTransactionForm.value.description,
+      this.recurrentTransactionForm.value.giro.instrumentid,
+      this.recurrentTransactionForm.value.budget.instrumentid,
+      frequencyEnum,
+      this.recurrentTransactionForm.value.value,
+      this.recurrentTransactionForm.value.transactionDate
+    );
+    this.recurrentTransactionForm.reset();
   }
 }

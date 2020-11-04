@@ -21,6 +21,7 @@ import { Observable }                                        from 'rxjs/Observab
 import { DateDoubleModel } from '../model/dateDoubleModel';
 import { InstrumentListModel } from '../model/instrumentListModel';
 import { InstrumentModel } from '../model/instrumentModel';
+import { RecurrentTransactionListModel } from '../model/recurrentTransactionListModel';
 import { StringListModel } from '../model/stringListModel';
 import { TransactionListModel } from '../model/transactionListModel';
 
@@ -393,6 +394,74 @@ export class MyFinanceService {
     }
 
     /**
+     * save RecurrentTransfer
+     * 
+     * @param envID The Service Environment
+     * @param description description
+     * @param srcId the instrumentId of the source
+     * @param trgId the instrumentId of the target
+     * @param recurrentFrequency the frequency of the recurrent transaction
+     * @param value the value of the income or expense
+     * @param transactiondate the transactiondate(yyyy-mm-dd
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public addRecurrentTransfer_envID_description_srcId_trgId_recurrentFrequency_value_transactiondate(envID: string, description?: string, srcId?: number, trgId?: number, recurrentFrequency?: string, value?: number, transactiondate?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addRecurrentTransfer_envID_description_srcId_trgId_recurrentFrequency_value_transactiondate(envID: string, description?: string, srcId?: number, trgId?: number, recurrentFrequency?: string, value?: number, transactiondate?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addRecurrentTransfer_envID_description_srcId_trgId_recurrentFrequency_value_transactiondate(envID: string, description?: string, srcId?: number, trgId?: number, recurrentFrequency?: string, value?: number, transactiondate?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addRecurrentTransfer_envID_description_srcId_trgId_recurrentFrequency_value_transactiondate(envID: string, description?: string, srcId?: number, trgId?: number, recurrentFrequency?: string, value?: number, transactiondate?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling addRecurrentTransfer_envID_description_srcId_trgId_recurrentFrequency_value_transactiondate.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (description !== undefined) {
+            queryParameters = queryParameters.set('description', <any>description);
+        }
+        if (srcId !== undefined) {
+            queryParameters = queryParameters.set('srcId', <any>srcId);
+        }
+        if (trgId !== undefined) {
+            queryParameters = queryParameters.set('trgId', <any>trgId);
+        }
+        if (recurrentFrequency !== undefined) {
+            queryParameters = queryParameters.set('recurrentFrequency', <any>recurrentFrequency);
+        }
+        if (value !== undefined) {
+            queryParameters = queryParameters.set('value', <any>value);
+        }
+        if (transactiondate !== undefined) {
+            queryParameters = queryParameters.set('transactiondate', <any>transactiondate);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/addRecurrentTransfer`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * save Instrument
      * 
      * @param envID The Service Environment
@@ -497,7 +566,7 @@ export class MyFinanceService {
     }
 
     /**
-     * save Transfer
+     * save Transfer or BudgetTransfer
      * 
      * @param envID The Service Environment
      * @param description description
@@ -873,6 +942,46 @@ export class MyFinanceService {
         return this.httpClient.get<InstrumentModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/getequity`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * List Data
+     * 
+     * @param envID The Service Environment
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getRecurrentTransactionList_envID(envID: string, observe?: 'body', reportProgress?: boolean): Observable<RecurrentTransactionListModel>;
+    public getRecurrentTransactionList_envID(envID: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RecurrentTransactionListModel>>;
+    public getRecurrentTransactionList_envID(envID: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RecurrentTransactionListModel>>;
+    public getRecurrentTransactionList_envID(envID: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling getRecurrentTransactionList_envID.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<RecurrentTransactionListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/listRecurrentTransactions`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
