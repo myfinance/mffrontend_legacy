@@ -15,7 +15,9 @@ export class RecurrentbudgettransferinputComponent  implements OnInit {
   recurrentTransactionForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   budgets: Instrument[];
-  budgetDefault: Instrument;
+  srcbudget: Instrument;
+  budgetDescription = 'NA';
+  trgbudget: Instrument;
   frequencyValues: string[] = ['Monat', 'Quartal', 'Jahr'];
   frequency = this.frequencyValues[0];
 
@@ -26,9 +28,8 @@ export class RecurrentbudgettransferinputComponent  implements OnInit {
     this.bsConfig = Object.assign({}, {containerClass: 'theme-default', dateInputFormat: 'YYYY-MM-DD'});
     this.recurrentTransactionForm = this.formBuilder.group({
       description: ['', Validators.required],
-      srcbudget: ['', Validators.required],
       trgbudget: ['', Validators.required],
-      value: [0, Validators.required],
+      value: [0, [Validators.required, Validators.min(0)]],
       transactionDate: [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), Validators.required],
       recurrentFrequency: [this.frequencyValues[0], Validators.required],
     });
@@ -43,12 +44,17 @@ export class RecurrentbudgettransferinputComponent  implements OnInit {
   }
 
   private loadData(): void {
-    this.budgets = this.recurrentTransactionService.getBudgets();
-    this.budgetDefault = this.budgets[0];
+    this.budgets = this.recurrentTransactionService.getExpenseBudgets();
+    this.srcbudget = this.recurrentTransactionService.getIncomeBudget();
+    this.budgetDescription = this.srcbudget.description;
+    this.trgbudget = this.budgets[0];
   }
 
   onSubmit() {
-    console.log(this.recurrentTransactionForm)
+    console.log(this.recurrentTransactionForm);
+    if (!this.recurrentTransactionForm.valid) {
+      return;
+    }
     let frequencyEnum: RecurrentfrequenceEnum;
     switch (this.recurrentTransactionForm.value.recurrentFrequency) {
       case 'Monat': {
@@ -69,8 +75,8 @@ export class RecurrentbudgettransferinputComponent  implements OnInit {
       }
     }
     this.recurrentTransactionService.saveRecurrentTransaction(this.recurrentTransactionForm.value.description,
-      this.recurrentTransactionForm.value.giro.instrumentid,
-      this.recurrentTransactionForm.value.budget.instrumentid,
+      this.srcbudget.instrumentid,
+      this.recurrentTransactionForm.value.trgbudget.instrumentid,
       frequencyEnum,
       this.recurrentTransactionForm.value.value,
       this.recurrentTransactionForm.value.transactionDate

@@ -52,7 +52,10 @@ export class RecurrentexpensesinputComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.recurrentTransactionForm)
+    console.log(this.recurrentTransactionForm);
+    if (!this.recurrentTransactionForm.valid) {
+      return;
+    }
     let frequencyEnum: RecurrentfrequenceEnum;
     switch (this.recurrentTransactionForm.value.recurrentFrequency) {
       case 'Monat': {
