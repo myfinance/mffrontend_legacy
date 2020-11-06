@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecurrentincomeexpensesComponent } from './recurrentincomeexpenses.component';
+import { RecurrentexpensesinputComponent } from './recurrentexpensesinput.component';
 
 describe('RecurrentincomeexpensesComponent', () => {
-  let component: RecurrentincomeexpensesComponent;
-  let fixture: ComponentFixture<RecurrentincomeexpensesComponent>;
+  let component: RecurrentexpensesinputComponent;
+  let fixture: ComponentFixture<RecurrentexpensesinputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecurrentincomeexpensesComponent ]
+      declarations: [ RecurrentexpensesinputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecurrentincomeexpensesComponent);
+    fixture = TestBed.createComponent(RecurrentexpensesinputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

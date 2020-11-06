@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecurrentbudgettransferComponent } from './recurrentbudgettransfer.component';
+import { RecurrentbudgettransferinputComponent } from './recurrentbudgettransferinput.component';
 
 describe('RecurrentbudgettransferComponent', () => {
-  let component: RecurrentbudgettransferComponent;
-  let fixture: ComponentFixture<RecurrentbudgettransferComponent>;
+  let component: RecurrentbudgettransferinputComponent;
+  let fixture: ComponentFixture<RecurrentbudgettransferinputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecurrentbudgettransferComponent ]
+      declarations: [ RecurrentbudgettransferinputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecurrentbudgettransferComponent);
+    fixture = TestBed.createComponent(RecurrentbudgettransferinputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

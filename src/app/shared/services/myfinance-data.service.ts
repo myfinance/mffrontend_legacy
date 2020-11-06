@@ -6,7 +6,7 @@ import {MockDataProviderService} from './mock-data-provider.service';
 import {
   DateDoubleModel,
   Instrument,
-  InstrumentListModel,
+  InstrumentListModel, InstrumentModel,
   RecurrentTransaction,
   TransactionListModel
 } from '../../modules/myfinance-tsclient-generated';
@@ -260,6 +260,11 @@ export class MyFinanceDataService {
 
     return this.myfinanceService.getInstrumentPerTypeList_envID_tenant_instrumenttype(this.configService.getCurrentEnv(),
       this.configService.getCurrentTenant().instrumentid, instrumentType);
+  }
+
+  getIncomeBudgetForBudgetGroup(budgetGroupId: number): Observable<InstrumentModel> {
+    return this.myfinanceService.getIncomeBudget_envID_budgetGroup(this.configService.getCurrentEnv(),
+      budgetGroupId);
   }
 
   printError(errResp: HttpErrorResponse) {

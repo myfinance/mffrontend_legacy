@@ -1,1 +1,6 @@
-<p>recurrenttransactioncontroller works!</p>
+<div class="form-group">
+  <label>Budgetgruppenfilter:</label>
+  <select class="btn btn-primary dropdown-toggle" [(ngModel)]="budgetGroup" (change)="setBudgetGroupfilter()">
+    <option class="mydropdown-item" *ngFor="let item of budgetGroups" [ngValue]="item">{{item.description}}</option>
+  </select>
+</div>

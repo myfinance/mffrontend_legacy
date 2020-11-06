@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecurrenttransferComponent } from './recurrenttransfer.component';
+import { RecurrenttransferinputComponent } from './recurrenttransferinput.component';
 
 describe('RecurrenttransferComponent', () => {
-  let component: RecurrenttransferComponent;
-  let fixture: ComponentFixture<RecurrenttransferComponent>;
+  let component: RecurrenttransferinputComponent;
+  let fixture: ComponentFixture<RecurrenttransferinputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecurrenttransferComponent ]
+      declarations: [ RecurrenttransferinputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecurrenttransferComponent);
+    fixture = TestBed.createComponent(RecurrenttransferinputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

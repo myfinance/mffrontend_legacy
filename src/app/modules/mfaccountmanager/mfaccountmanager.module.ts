@@ -41,9 +41,10 @@ import { RecurrenttransactionviewComponent } from './views/recurrenttransactione
 import { RecurrenttransactioncreatorComponent } from './views/recurrenttransactioneditor/components/recurrenttransactioncreator/recurrenttransactioncreator.component';
 import {RecurrentTransactionService} from './views/recurrenttransactioneditor/services/recurrenttransaction.service';
 import {RecurrenttransactioneditorformComponent} from './views/recurrenttransactioneditor/components/recurrenttransactioneditorform/recurrenttransactioneditorform.component';
-import { RecurrentincomeexpensesComponent } from './views/recurrenttransactioneditor/components/recurrentincomeexpenses/recurrentincomeexpenses.component';
-import { RecurrentbudgettransferComponent } from './views/recurrenttransactioneditor/components/recurrentbudgettransfer/recurrentbudgettransfer.component';
-import { RecurrenttransferComponent } from './views/recurrenttransactioneditor/components/recurrenttransfer/recurrenttransfer.component';
+import { RecurrentexpensesinputComponent } from './views/recurrenttransactioneditor/components/recurrentexpensesinput/recurrentexpensesinput.component';
+import { RecurrentbudgettransferinputComponent } from './views/recurrenttransactioneditor/components/recurrentbudgettransferinput/recurrentbudgettransferinput.component';
+import { RecurrenttransferinputComponent } from './views/recurrenttransactioneditor/components/recurrenttransferinput/recurrenttransferinput.component';
+import { RecurrentincomeinputComponent } from './views/recurrenttransactioneditor/components/recurrentincomeinput/recurrentincomeinput.component';
 
 @NgModule({
   imports: [
@@ -94,9 +95,10 @@ import { RecurrenttransferComponent } from './views/recurrenttransactioneditor/c
     RecurrenttransactioncontrollerComponent,
     RecurrenttransactionviewComponent,
     RecurrenttransactioncreatorComponent,
-    RecurrentincomeexpensesComponent,
-    RecurrentbudgettransferComponent,
-    RecurrenttransferComponent],
+    RecurrentexpensesinputComponent,
+    RecurrentbudgettransferinputComponent,
+    RecurrenttransferinputComponent,
+    RecurrentincomeinputComponent],
   exports: [
     InstrumenteditorComponent,
     TransactioneditorComponent,

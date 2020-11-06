@@ -6,11 +6,11 @@ import {Instrument, RecurrentTransaction} from '../../../../../myfinance-tsclien
 import RecurrentfrequenceEnum = RecurrentTransaction.RecurrentfrequenceEnum;
 
 @Component({
-  selector: 'app-recurrentincomeexpenses',
-  templateUrl: './recurrentincomeexpenses.component.html',
-  styleUrls: ['./recurrentincomeexpenses.component.css']
+  selector: 'app-recurrentexpensesinput',
+  templateUrl: './recurrentexpensesinput.component.html',
+  styleUrls: ['./recurrentexpensesinput.component.css']
 })
-export class RecurrentincomeexpensesComponent implements OnInit {
+export class RecurrentexpensesinputComponent implements OnInit {
 
   recurrentTransactionForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -30,7 +30,7 @@ export class RecurrentincomeexpensesComponent implements OnInit {
       description: ['', Validators.required],
       giro: ['', Validators.required],
       budget: ['', Validators.required],
-      value: [0, Validators.required],
+      value: [0, [Validators.required, Validators.max(0)]],
       transactionDate: [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), Validators.required],
       recurrentFrequency: [this.frequencyValues[0], Validators.required],
     });
@@ -47,7 +47,7 @@ export class RecurrentincomeexpensesComponent implements OnInit {
   private loadData(): void {
     this.giros = this.recurrentTransactionService.getGiros();
     this.giroDefault = this.giros[0];
-    this.budgets = this.recurrentTransactionService.getBudgets();
+    this.budgets = this.recurrentTransactionService.getExpenseBudgets();
     this.budgetDefault = this.budgets[0];
   }
 

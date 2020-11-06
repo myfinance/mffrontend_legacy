@@ -766,6 +766,53 @@ export class MyFinanceService {
     }
 
     /**
+     * get Data
+     * 
+     * @param envID The Service Environment
+     * @param budgetGroup budgetGroup id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getIncomeBudget_envID_budgetGroup(envID: string, budgetGroup?: number, observe?: 'body', reportProgress?: boolean): Observable<InstrumentModel>;
+    public getIncomeBudget_envID_budgetGroup(envID: string, budgetGroup?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentModel>>;
+    public getIncomeBudget_envID_budgetGroup(envID: string, budgetGroup?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentModel>>;
+    public getIncomeBudget_envID_budgetGroup(envID: string, budgetGroup?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling getIncomeBudget_envID_budgetGroup.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (budgetGroup !== undefined) {
+            queryParameters = queryParameters.set('budgetGroup', <any>budgetGroup);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<InstrumentModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/incomebudgetforbudgetgroup`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * List Data
      * 
      * @param envID The Service Environment

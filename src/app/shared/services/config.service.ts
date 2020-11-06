@@ -185,7 +185,9 @@ export class ConfigService {
         if (tenant) {
           const savedTenant = this.tenants.filter(i => i.instrumentid.toString() === tenant)
           if (savedTenant && savedTenant.length > 0) {
-          this.setCurrentTenant(savedTenant[0]);
+            this.setCurrentTenant(savedTenant[0]);
+          } else {
+            this.setCurrentTenant(this.tenants[0])
           }
         } else {
           this.setCurrentTenant(this.tenants[0])
