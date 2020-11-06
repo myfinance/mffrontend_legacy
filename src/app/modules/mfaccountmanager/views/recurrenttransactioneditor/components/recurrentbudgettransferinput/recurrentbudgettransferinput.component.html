@@ -38,7 +38,7 @@
       <label>Betrag:</label>
       <input type="number" class="form-control" formControlName="value"/>
       <span *ngIf="!recurrentTransactionForm.get('value').valid && recurrentTransactionForm.get('value').touched">
-      Bitte geben Sie einen Wert kleiner 0 an!
+      Bitte geben Sie einen Wert größer 0 an!
     </span>
     </div>
     <button class="btn btn-primary" type="submit">Speichern</button>
