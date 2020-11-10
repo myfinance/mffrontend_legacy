@@ -3,7 +3,7 @@ import {Observable} from '../../../../node_modules/rxjs';
 import {
   Cashflow,
   Instrument,
-  InstrumentListModel,
+  InstrumentListModel, RecurrentTransaction, RecurrentTransactionListModel,
   StringListModel, Trade,
   Transaction,
   TransactionListModel
@@ -43,6 +43,22 @@ export class MockDataProviderService {
       cashflows: cashflows, trades: trades };
     const transactions: Transaction[] = [transaction];
     const transactionList: TransactionListModel = {values: transactions, url: 'mock', id: 'mockid'};
+    return Observable.of(transactionList);
+
+  }
+
+  getRecurrentTransactions(): Observable<RecurrentTransactionListModel> {
+    const now: Date = new Date(Date.now());
+    const instrument1: Instrument = {
+      instrumentid: 1, description: 'giro', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.Giro };
+    const instrument2: Instrument = {
+      instrumentid: 2, description: 'budget', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.Budget };
+    const transaction: RecurrentTransaction = {
+      recurrenttransactionid: 1, description: 'testdauertransaction1', nexttransaction: '2019-01-01',
+      instrumentByInstrumentid2: instrument1, instrumentByInstrumentid1: instrument2, recurrencytype: 1,
+      value: 10, recurrentfrequence: RecurrentTransaction.RecurrentfrequenceEnum.Monthly, instrumentBySecurityid: null};
+    const transactions: RecurrentTransaction[] = [transaction];
+    const transactionList: RecurrentTransactionListModel = {values: transactions, url: 'mock', id: 'mockid'};
     return Observable.of(transactionList);
 
   }

@@ -7,7 +7,7 @@ import {
   DateDoubleModel,
   Instrument,
   InstrumentListModel, InstrumentModel,
-  RecurrentTransaction,
+  RecurrentTransaction, RecurrentTransactionListModel,
   TransactionListModel
 } from '../../modules/myfinance-tsclient-generated';
 import {MyFinanceWrapperService} from './my-finance-wrapper.service';
@@ -72,6 +72,16 @@ export class MyFinanceDataService {
     }
     return this.myfinanceService.getTransactionList_envID_startdate_enddate(
       this.currentEnv, this.getDateString(start), this.getDateString(end));
+  }
+
+  getRecurrentTransactions(): Observable<RecurrentTransactionListModel> {
+    if (!this.isInit) {
+      return null;
+    } else if (this.isMock) {
+      return this.mock.getRecurrentTransactions()
+    }
+    return this.myfinanceService.getRecurrentTransactionList_envID(
+      this.currentEnv);
   }
 
   private getDateString(date: Date): string {

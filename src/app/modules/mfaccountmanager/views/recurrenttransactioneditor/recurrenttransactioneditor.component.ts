@@ -50,7 +50,7 @@ export class RecurrenttransactioneditorComponent extends AbstractDashboard imple
       x: 1,
       y: 0,
       rows: 5,
-      cols: 1,
+      cols: 4,
       draggable: true,
       resizable: true
     }

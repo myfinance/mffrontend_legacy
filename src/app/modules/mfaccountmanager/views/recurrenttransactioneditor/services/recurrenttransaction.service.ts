@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
 import {
   Instrument,
-  InstrumentListModel, InstrumentModel, RecurrentTransaction,
+  InstrumentListModel, InstrumentModel, RecurrentTransaction, RecurrentTransactionListModel, Transaction, TransactionListModel,
 } from '../../../../myfinance-tsclient-generated';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import RecurrentfrequenceEnum = RecurrentTransaction.RecurrentfrequenceEnum;
+import {Subject} from 'rxjs/Rx';
 
 @Injectable()
 export class RecurrentTransactionService extends AbstractDashboardDataService {
@@ -15,6 +16,9 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
   private budgetGroupFilter = -1;
   private incomeBudget: Instrument;
   private isIncomeBudgetLoaded = false;
+  private isRecurrentTransactionLoaded = false;
+  private recurrenttransactions: Array<RecurrentTransaction> = new Array<RecurrentTransaction>();
+  recurrentTransactionSubject: Subject<any> = new Subject<any>();
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -26,13 +30,21 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
     }
     this.myFinanceService.configSubject.subscribe(
       () => {
-        this.loadData()
+        this.loadData();
+        this.loadRecurrentTransactions();
       }
     )
     // subscribe to all instrument updates
     this.myFinanceService.instrumentSubject.subscribe(
       () => {
-        this.loadData()
+        this.loadData();
+      }
+    )
+    // subscribe to all transaction updates
+    this.myFinanceService.recurrentTransactionSubject.subscribe(
+      () => {
+        this.dashboardService.handleDataPreparing();
+        this.loadRecurrentTransactions();
       }
     )
   }
@@ -59,8 +71,25 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
         })
   }
 
+  private loadRecurrentTransactions() {
+    this.isRecurrentTransactionLoaded = false;
+    this.myFinanceService.getRecurrentTransactions()
+      .subscribe(
+        (recurrentTransactions: RecurrentTransactionListModel) => {
+          this.recurrenttransactions = recurrentTransactions.values;
+          this.recurrentTransactionSubject.next();
+          this.isRecurrentTransactionLoaded = true;
+          this.checkDataLoadStatus();
+        },
+        (errResp) => {
+          console.error('error', errResp);
+          this.dashboardService.handleDataNotLoaded(errResp);
+
+        })
+  }
+
   protected isDataLoadComplete(): boolean {
-    if (this.isInstrumentLoaded && this.isIncomeBudgetLoaded) {
+    if (this.isInstrumentLoaded && this.isIncomeBudgetLoaded && this.isRecurrentTransactionLoaded) {
       return true;
     } else {
       return false;
@@ -112,5 +141,9 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
 
   getBudgetGroupfilter(): number {
     return this.budgetGroupFilter;
+  }
+
+  getRecurrentTransactions(): Array<RecurrentTransaction> {
+    return this.recurrenttransactions;
   }
 }
