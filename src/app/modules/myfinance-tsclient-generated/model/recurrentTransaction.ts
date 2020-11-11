@@ -21,6 +21,7 @@ export interface RecurrentTransaction {
     description: string;
     value: number;
     nexttransaction: string;
+    recurrentfrequenceId: number;
     recurrentfrequence: RecurrentTransaction.RecurrentfrequenceEnum;
 }
 export namespace RecurrentTransaction {

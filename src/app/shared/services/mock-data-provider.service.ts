@@ -36,7 +36,7 @@ export class MockDataProviderService {
     const cashflow1: Cashflow = {cashflowid: 1, instrument: instrument1, value: 100};
     const cashflow2: Cashflow = {cashflowid: 2, instrument: instrument2, value: 100};
     const cashflows: Cashflow[] = [cashflow1, cashflow2];
-    let trades: Trade[];
+    const trades: Trade[] = [];
     const transaction: Transaction = {
         transactionid: 1, description: 'testtransaction1', transactiondate: '2019-01-01',
         lastchanged: now, transactionType: Transaction.TransactionTypeEnum.INCOMEEXPENSES,
@@ -56,7 +56,8 @@ export class MockDataProviderService {
     const transaction: RecurrentTransaction = {
       recurrenttransactionid: 1, description: 'testdauertransaction1', nexttransaction: '2019-01-01',
       instrumentByInstrumentid2: instrument1, instrumentByInstrumentid1: instrument2, recurrencytype: 1,
-      value: 10, recurrentfrequence: RecurrentTransaction.RecurrentfrequenceEnum.Monthly, instrumentBySecurityid: null};
+      value: 10, recurrentfrequence: RecurrentTransaction.RecurrentfrequenceEnum.Monthly,
+      instrumentBySecurityid: null, recurrentfrequenceId: 0};
     const transactions: RecurrentTransaction[] = [transaction];
     const transactionList: RecurrentTransactionListModel = {values: transactions, url: 'mock', id: 'mockid'};
     return Observable.of(transactionList);

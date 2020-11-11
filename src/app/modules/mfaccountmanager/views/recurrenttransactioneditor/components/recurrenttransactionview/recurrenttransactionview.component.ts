@@ -37,15 +37,18 @@ export class RecurrenttransactionviewComponent implements OnInit, OnDestroy  {
       defaultColDef: {
         resizable: true
       },
+      groupIncludeFooter: true,
+      rowGroupPanelShow: 'always',
+      animateRows: true,
       columnDefs: [
-        {headerName: 'Id', field: 'recurrenttransactionid' },
+        {headerName: 'TransactionType', field: 'recurrencytype', rowGroup: true},
+        {headerName: 'Id', field: 'Id', maxWidth: 100 },
         {headerName: 'Beschreibung', field: 'description'},
         {headerName: 'Nächste Transaktion', field: 'nexttransaction'},
-        {headerName: 'Betrag', field: 'value'},
-        {headerName: 'TransactionType', field: 'recurrencytype'},
-        {headerName: 'Frequenz', field: 'recurrentfrequence.toString()'},
-        {headerName: 'Instrument1', field: 'instrumentByInstrumentid1.description'},
-        {headerName: 'Instrument2', field: 'instrumentByInstrumentid2.description'},
+        {headerName: 'Betrag', field: 'value', aggFunc: 'sum'},
+        {headerName: 'Frequenz', field: 'recurrentfrequence'},
+        {headerName: 'Instrument1', field: 'instrument1'},
+        {headerName: 'Instrument2', field: 'instrument2'},
       ]
     };
   }
@@ -54,13 +57,17 @@ export class RecurrenttransactionviewComponent implements OnInit, OnDestroy  {
     if (this.options.api != null) {
       this.options.api.setRowData(this.recurrentTransactionservice.getRecurrentTransactions());
       this.options.api.sizeColumnsToFit();
+      this.options.api.forEachNode(function(node) {
+        node.setExpanded(true);
+      });
     }
   }
 
   onSelectionChanged(): void {
     const selectedTransaction: RecurrentTransaction = this.options.api.getSelectedRows()[0];
     // this.recurrentTransactionservice.setTransactionfilter(selectedTransaction.transactionid);
-    //selectedTransaction.recurrentfrequence.
+    //let value: RecurrentfrequenceEnum = selectedTransaction.recurrentfrequence;
+    //value
   }
 
   onGridReady(params): void {

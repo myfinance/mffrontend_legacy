@@ -10,6 +10,17 @@ import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import RecurrentfrequenceEnum = RecurrentTransaction.RecurrentfrequenceEnum;
 import {Subject} from 'rxjs/Rx';
 
+export class RecurrentTransactionFEModel {
+  Id: number;
+  description: string;
+  nexttransaction: string;
+  instrument1: string;
+  instrument2: string;
+  recurrencytype: string;
+  recurrentfrequence: string;
+  value: number;
+}
+
 @Injectable()
 export class RecurrentTransactionService extends AbstractDashboardDataService {
 
@@ -143,7 +154,58 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
     return this.budgetGroupFilter;
   }
 
-  getRecurrentTransactions(): Array<RecurrentTransaction> {
-    return this.recurrenttransactions;
+  getRecurrentTransactions(): Array<RecurrentTransactionFEModel> {
+    const returnvalueList: RecurrentTransactionFEModel[] = [];
+    this.recurrenttransactions.forEach(i => {
+      const aValue = new RecurrentTransactionFEModel();
+      aValue.Id = i.recurrenttransactionid;
+      aValue.description = i.description;
+      aValue.value = i.value;
+      aValue.instrument1 = i.instrumentByInstrumentid1.description;
+      aValue.instrument2 = i.instrumentByInstrumentid2.description;
+      aValue.nexttransaction = i.nexttransaction;
+      switch (i.recurrencytype) {
+        case 1: {
+          aValue.recurrencytype = 'Einnahme'
+          break;
+        }
+        case 2: {
+          aValue.recurrencytype = 'Ausgabe'
+          break;
+        }
+        case 3: {
+          aValue.recurrencytype = 'Budgettransfer'
+          break;
+        }
+        case 4: {
+          aValue.recurrencytype = 'Transfer'
+          break;
+        }
+        default: {
+          aValue.recurrencytype = 'NA'
+          break;
+        }
+      }
+      switch (i.recurrentfrequenceId) {
+        case 1: {
+          aValue.recurrentfrequence = 'Monat'
+          break;
+        }
+        case 2: {
+          aValue.recurrentfrequence = 'Quartal'
+          break;
+        }
+        case 3: {
+          aValue.recurrentfrequence = 'Yearly'
+          break;
+        }
+        default: {
+          aValue.recurrentfrequence = 'NA'
+          break;
+        }
+      }
+      returnvalueList.push(aValue);
+    })
+    return returnvalueList;
   }
 }
