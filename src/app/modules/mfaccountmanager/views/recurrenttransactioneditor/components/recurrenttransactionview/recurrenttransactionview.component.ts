@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {GridOptions} from 'ag-grid-community';
 import {RecurrentTransaction} from '../../../../../myfinance-tsclient-generated';
-import {RecurrentTransactionService} from '../../services/recurrenttransaction.service';
+import {RecurrentTransactionFEModel, RecurrentTransactionService} from '../../services/recurrenttransaction.service';
 
 @Component({
   selector: 'app-recurrenttransactionview',
@@ -66,7 +66,7 @@ export class RecurrenttransactionviewComponent implements OnInit, OnDestroy  {
   }
 
   onSelectionChanged(): void {
-    const selectedTransaction: RecurrentTransaction = this.options.api.getSelectedRows()[0];
+    const selectedTransaction: RecurrentTransactionFEModel = this.options.api.getSelectedRows()[0];
     this.recurrentTransactionservice.setTransactionfilter(selectedTransaction);
   }
 

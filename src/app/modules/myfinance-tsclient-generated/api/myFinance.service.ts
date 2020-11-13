@@ -630,6 +630,54 @@ export class MyFinanceService {
     }
 
     /**
+     * delete Recurrent Transfer
+     * 
+     * @param envID The Service Environment
+     * @param recurrentTransactionId recurrentTransactionId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public delRecurrentTransfer_envID_recurrentTransactionId(envID: string, recurrentTransactionId?: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public delRecurrentTransfer_envID_recurrentTransactionId(envID: string, recurrentTransactionId?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public delRecurrentTransfer_envID_recurrentTransactionId(envID: string, recurrentTransactionId?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public delRecurrentTransfer_envID_recurrentTransactionId(envID: string, recurrentTransactionId?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling delRecurrentTransfer_envID_recurrentTransactionId.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (recurrentTransactionId !== undefined) {
+            queryParameters = queryParameters.set('recurrentTransactionId', <any>recurrentTransactionId);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/delRecurrentTransfer`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * delete Transfer
      * 
      * @param envID The Service Environment
@@ -1269,6 +1317,66 @@ export class MyFinanceService {
         ];
 
         return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/updateInstrument`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * update recurrent Transaction
+     * 
+     * @param envID The Service Environment
+     * @param id id
+     * @param description description
+     * @param value the value of the income or expense
+     * @param nexttransaction the transactiondate(yyyy-mm-dd
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateRecurrentTransaction_envID_id_description_value_nexttransaction(envID: string, id?: number, description?: string, value?: number, nexttransaction?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateRecurrentTransaction_envID_id_description_value_nexttransaction(envID: string, id?: number, description?: string, value?: number, nexttransaction?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateRecurrentTransaction_envID_id_description_value_nexttransaction(envID: string, id?: number, description?: string, value?: number, nexttransaction?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateRecurrentTransaction_envID_id_description_value_nexttransaction(envID: string, id?: number, description?: string, value?: number, nexttransaction?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling updateRecurrentTransaction_envID_id_description_value_nexttransaction.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (id !== undefined) {
+            queryParameters = queryParameters.set('id', <any>id);
+        }
+        if (description !== undefined) {
+            queryParameters = queryParameters.set('description', <any>description);
+        }
+        if (value !== undefined) {
+            queryParameters = queryParameters.set('value', <any>value);
+        }
+        if (nexttransaction !== undefined) {
+            queryParameters = queryParameters.set('nexttransaction', <any>nexttransaction);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/updateRecurrentTransaction`,
             null,
             {
                 params: queryParameters,

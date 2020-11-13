@@ -221,8 +221,10 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
   }
 
   deleteRecurrentTransaction(recurrentTransactionId: number) {
+    this.myFinanceService.deleteRecurrentTransfer(recurrentTransactionId);
   }
 
   updateRecurrentTransaction(recurrentTransactionId: number, description: string, nexttransaction: Date, value: number) {
+    this.myFinanceService.updateRecurrentTransfer(description, recurrentTransactionId, value, nexttransaction);
   }
 }

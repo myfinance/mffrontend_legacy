@@ -159,6 +159,40 @@ export class MyFinanceDataService {
     );
   }
 
+  updateRecurrentTransfer(desc: string, transactionId: number, value: number, transactionDate: Date) {
+
+    this.myfinanceService.updateRecurrentTransaction_envID_id_description_value_nexttransaction(
+      this.currentEnv,
+      transactionId,
+      desc,
+      value,
+      moment(transactionDate).format('YYYY-MM-DD')).subscribe(
+      () => {
+        this.recurrentTransactionSubject.next();
+        this.printSuccess('DauerTransaktion aktualisiert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
+  deleteRecurrentTransfer(transactionId: number) {
+
+    this.myfinanceService.delRecurrentTransfer_envID_recurrentTransactionId(
+      this.currentEnv,
+      transactionId,
+    ).subscribe(
+      () => {
+        this.recurrentTransactionSubject.next();
+        this.printSuccess('DauerTransaktion gelöscht');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
   updateTransactions(desc: string, transactionId: number, value: number, transactionDate: Date) {
 
     this.myfinanceService.updateTransaction_envID_id_description_value_transactiondate(
