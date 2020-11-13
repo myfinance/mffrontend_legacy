@@ -35,7 +35,9 @@ export class RecurrenttransactionviewComponent implements OnInit, OnDestroy  {
       sideBar: 'filters',
       suppressPropertyNamesCheck: true,
       defaultColDef: {
-        resizable: true
+        resizable: true,
+        sortable: true,
+        filter: true
       },
       groupIncludeFooter: true,
       rowGroupPanelShow: 'always',
@@ -56,18 +58,16 @@ export class RecurrenttransactionviewComponent implements OnInit, OnDestroy  {
   private loadData(): void {
     if (this.options.api != null) {
       this.options.api.setRowData(this.recurrentTransactionservice.getRecurrentTransactions());
-      this.options.api.sizeColumnsToFit();
       this.options.api.forEachNode(function(node) {
         node.setExpanded(true);
       });
+      this.options.api.sizeColumnsToFit();
     }
   }
 
   onSelectionChanged(): void {
     const selectedTransaction: RecurrentTransaction = this.options.api.getSelectedRows()[0];
-    // this.recurrentTransactionservice.setTransactionfilter(selectedTransaction.transactionid);
-    //let value: RecurrentfrequenceEnum = selectedTransaction.recurrentfrequence;
-    //value
+    this.recurrentTransactionservice.setTransactionfilter(selectedTransaction);
   }
 
   onGridReady(params): void {

@@ -30,6 +30,8 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
   private isRecurrentTransactionLoaded = false;
   private recurrenttransactions: Array<RecurrentTransaction> = new Array<RecurrentTransaction>();
   recurrentTransactionSubject: Subject<any> = new Subject<any>();
+  recurrentTransactionSelectionSubject: Subject<any> = new Subject<any>();
+  private selectedRecurrentTransaction: RecurrentTransactionFEModel;
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -117,7 +119,8 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
 
   getExpenseBudgets(): Array<Instrument> {
     const expenseBudgets =
-      this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget && i.instrumentid !== this.incomeBudget.instrumentid);
+      this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget &&
+        (this.incomeBudget !== null || i.instrumentid !== this.incomeBudget.instrumentid));
     return expenseBudgets;
   }
 
@@ -207,5 +210,19 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
       returnvalueList.push(aValue);
     })
     return returnvalueList;
+  }
+
+  getSelectedRecurrentTransaction(): RecurrentTransactionFEModel {
+    return this.selectedRecurrentTransaction;
+  }
+  setTransactionfilter(selectedRecurrentTransaction: RecurrentTransactionFEModel) {
+    this.selectedRecurrentTransaction = selectedRecurrentTransaction;
+    this.recurrentTransactionSelectionSubject.next();
+  }
+
+  deleteRecurrentTransaction(recurrentTransactionId: number) {
+  }
+
+  updateRecurrentTransaction(recurrentTransactionId: number, description: string, nexttransaction: Date, value: number) {
   }
 }

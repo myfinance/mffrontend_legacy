@@ -46,7 +46,9 @@ export class RecurrentbudgettransferinputComponent  implements OnInit {
   private loadData(): void {
     this.budgets = this.recurrentTransactionService.getExpenseBudgets();
     this.srcbudget = this.recurrentTransactionService.getIncomeBudget();
-    this.budgetDescription = this.srcbudget.description;
+    if ( this.srcbudget != null) {
+      this.budgetDescription = this.srcbudget.description;
+    }
     this.trgbudget = this.budgets[0];
   }
 

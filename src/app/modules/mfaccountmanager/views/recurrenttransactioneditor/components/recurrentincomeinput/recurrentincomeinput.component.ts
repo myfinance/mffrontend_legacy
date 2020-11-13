@@ -47,7 +47,9 @@ export class RecurrentincomeinputComponent implements OnInit {
     this.giros = this.recurrentTransactionService.getGiros();
     this.giroDefault = this.giros[0];
     this.budget = this.recurrentTransactionService.getIncomeBudget();
-    this.budgetDescription = this.budget.description;
+    if ( this.budget != null) {
+      this.budgetDescription = this.budget.description;
+    }
   }
 
   onSubmit() {
