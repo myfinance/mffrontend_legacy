@@ -32,6 +32,9 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
   recurrentTransactionSubject: Subject<any> = new Subject<any>();
   recurrentTransactionSelectionSubject: Subject<any> = new Subject<any>();
   private selectedRecurrentTransaction: RecurrentTransactionFEModel;
+  private income: number;
+  private budgettransfersum: number;
+  private incomeBudgetTransferDiff = 0.0;
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -90,8 +93,9 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
       .subscribe(
         (recurrentTransactions: RecurrentTransactionListModel) => {
           this.recurrenttransactions = recurrentTransactions.values;
-          this.recurrentTransactionSubject.next();
           this.isRecurrentTransactionLoaded = true;
+          this.setIncomeBudgetTransferDiff();
+          this.recurrentTransactionSubject.next();
           this.checkDataLoadStatus();
         },
         (errResp) => {
@@ -177,11 +181,11 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
           break;
         }
         case 3: {
-          aValue.recurrencytype = 'Budgettransfer'
+          aValue.recurrencytype = 'Transfer'
           break;
         }
         case 4: {
-          aValue.recurrencytype = 'Transfer'
+          aValue.recurrencytype = 'Budgettransfer'
           break;
         }
         default: {
@@ -226,5 +230,17 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
 
   updateRecurrentTransaction(recurrentTransactionId: number, description: string, nexttransaction: Date, value: number) {
     this.myFinanceService.updateRecurrentTransfer(description, recurrentTransactionId, value, nexttransaction);
+  }
+
+  private setIncomeBudgetTransferDiff() {
+    this.income = 0;
+    this.recurrenttransactions.filter(i => i.recurrencytype === 1).forEach(i => this.income += i.value);
+    this.budgettransfersum = 0;
+    this.recurrenttransactions.filter(i => i.recurrencytype === 4).forEach(i => this.budgettransfersum += i.value);
+    this.incomeBudgetTransferDiff = this.income - this.budgettransfersum;
+  }
+
+  getIncomeBudgetTransferDiff() {
+    return this.incomeBudgetTransferDiff;
   }
 }

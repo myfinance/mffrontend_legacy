@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Instrument} from '../../../../../myfinance-tsclient-generated';
 import {FormBuilder} from '@angular/forms';
-import {RecurrentTransactionService} from '../../services/recurrenttransaction.service';
+import {RecurrentTransactionFEModel, RecurrentTransactionService} from '../../services/recurrenttransaction.service';
 
 @Component({
   selector: 'app-recurrenttransactioncontroller',
@@ -12,6 +12,7 @@ export class RecurrenttransactioncontrollerComponent implements OnInit {
 
   budgetGroups: Instrument[];
   budgetGroup: Instrument;
+  incomeBudgetTransferDiff = 0.0;
 
   constructor(private formBuilder: FormBuilder, private recurrentTransactionService: RecurrentTransactionService) {
   }
@@ -25,6 +26,13 @@ export class RecurrenttransactioncontrollerComponent implements OnInit {
           this.loadData()}
       )
     }
+    // subscribe to all transaction updates
+    this.incomeBudgetTransferDiff = this.recurrentTransactionService.getIncomeBudgetTransferDiff();
+    this.recurrentTransactionService.recurrentTransactionSubject.subscribe(
+      () => {
+        this.incomeBudgetTransferDiff = this.recurrentTransactionService.getIncomeBudgetTransferDiff();
+      }
+    )
   }
 
   private loadData(): void {
@@ -33,9 +41,6 @@ export class RecurrenttransactioncontrollerComponent implements OnInit {
   }
 
   setBudgetGroupfilter() {
-    if (this.budgetGroup != null) {
-      this.recurrentTransactionService.setBudgetGroupfilter(this.budgetGroup.instrumentid);
-    }
+    this.recurrentTransactionService.setBudgetGroupfilter(this.budgetGroup.instrumentid);
   }
-
 }

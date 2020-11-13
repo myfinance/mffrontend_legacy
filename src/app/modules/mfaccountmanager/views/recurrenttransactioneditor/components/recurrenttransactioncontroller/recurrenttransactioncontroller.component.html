@@ -3,4 +3,13 @@
   <select class="btn btn-primary dropdown-toggle" [(ngModel)]="budgetGroup" (change)="setBudgetGroupfilter()">
     <option class="mydropdown-item" *ngFor="let item of budgetGroups" [ngValue]="item">{{item.description}}</option>
   </select>
+  <div *ngIf="incomeBudgetTransferDiff>0">
+    <label>Noch zu verteilende Einnahmen:</label>
+    <div style="background-color: #00FF00">{{incomeBudgetTransferDiff}}</div>
+  </div>
+  <div *ngIf="incomeBudgetTransferDiff<0">
+    <label>Zu viel verteilte Einnahmen:</label>
+    <div style="background-color: #FF0000">{{incomeBudgetTransferDiff}}</div>
+  </div>
 </div>
+
