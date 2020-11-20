@@ -47,13 +47,13 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
     this.myFinanceService.configSubject.subscribe(
       () => {
         this.loadData();
-        this.loadRecurrentTransactions();
       }
     )
     // subscribe to all instrument updates
     this.myFinanceService.instrumentSubject.subscribe(
       () => {
-        this.loadData();
+        this.dashboardService.handleDataPreparing();
+        this.loadInstruments();
       }
     )
     // subscribe to all transaction updates
@@ -68,6 +68,7 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
   protected loadData(): void {
     this.dashboardService.handleDataPreparing();
     this.loadInstruments();
+    this.loadRecurrentTransactions();
   }
 
   protected loadInstruments(): void {
