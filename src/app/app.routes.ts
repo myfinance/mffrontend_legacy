@@ -2,14 +2,15 @@
  * Created by hf on 19.05.2017.
  */
 import { Routes, RouterModule } from '@angular/router';
-import {InstrumentSearchComponent} from "./instrument-search/instrument-search.component";
-import {NotFoundViewComponent} from "./views/not-found-view/not-found-view.component";
-import {ErrorViewComponent} from "./views/error-view/error-view.component";
-import {HomeComponent} from "./views/home/home.component";
-import {BasicLayoutComponent} from "./shared/components/basic-layout/basic-layout.component";
-import {TransactioneditorComponent} from "./modules/mfaccountmanager/views/transactioneditor/transactioneditor.component";
-import {InstrumenteditorComponent} from "./modules/mfaccountmanager/views/instrumenteditor/instrumenteditor.component";
-import {TenanteditorComponent} from "./modules/mfaccountmanager/views/tenanteditor/tenanteditor.component";
+import {InstrumentSearchComponent} from './instrument-search/instrument-search.component';
+import {NotFoundViewComponent} from './views/not-found-view/not-found-view.component';
+import {ErrorViewComponent} from './views/error-view/error-view.component';
+import {HomeComponent} from './views/home/home.component';
+import {BasicLayoutComponent} from './shared/components/basic-layout/basic-layout.component';
+import {TransactioneditorComponent} from './modules/mfaccountmanager/views/transactioneditor/transactioneditor.component';
+import {InstrumenteditorComponent} from './modules/mfaccountmanager/views/instrumenteditor/instrumenteditor.component';
+import {TenanteditorComponent} from './modules/mfaccountmanager/views/tenanteditor/tenanteditor.component';
+import {RecurrenttransactioneditorComponent} from './modules/mfaccountmanager/views/recurrenttransactioneditor/recurrenttransactioneditor.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -38,6 +39,10 @@ const APP_ROUTES: Routes = [
       {
         path: 'instruments',
         component: InstrumenteditorComponent
+      },
+      {
+        path: 'recurrenttransactions',
+        component: RecurrenttransactioneditorComponent
       },
       {
         path: 'tenants',

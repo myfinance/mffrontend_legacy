@@ -1,0 +1,18 @@
+<div class="recurrenttransaction-view-wrapper">
+  <div class="grid">
+    <app-dashboard-grid [title]="title" [view]="view" [widgets]="widgets">
+      <ng-template appDashboardWidget [uuid]="'e4b9c374-93f6-469b-9874-de3ab729f9f6'">
+        <app-recurrenttransactioncontroller></app-recurrenttransactioncontroller>
+      </ng-template>
+      <ng-template appDashboardWidget [uuid]="'21ce418a-de25-476a-962f-6a222517c0c9'">
+        <app-recurrenttransactioneditorform></app-recurrenttransactioneditorform>
+      </ng-template>
+      <ng-template appDashboardWidget [uuid]="'5cbceb3d-a766-4ed0-8b83-467490bd3c9b'">
+        <app-recurrenttransactionview></app-recurrenttransactionview>
+      </ng-template>
+      <ng-template appDashboardWidget [uuid]="'b05f9c4b-43cc-44f6-9734-e202deab8d64'">
+        <app-recurrenttransactioncreator></app-recurrenttransactioncreator>
+      </ng-template>
+    </app-dashboard-grid>
+  </div>
+</div>

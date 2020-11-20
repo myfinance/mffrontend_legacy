@@ -5,7 +5,7 @@
       "identifier": "test",
       "url": "http://myfinance.mylocaldomain/dac/rest",
       "defaultEnvironment": "dev"
-    },    
+    },
     {
       "name": "Localhost",
       "identifier": "local",

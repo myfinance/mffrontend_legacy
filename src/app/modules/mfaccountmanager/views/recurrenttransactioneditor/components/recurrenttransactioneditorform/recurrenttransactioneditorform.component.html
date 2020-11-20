@@ -1,0 +1,45 @@
+<b>Bearbeite Tranaktion: <span *ngIf="recurrentTransactionSelected">
+      {{selectedRecurrentTransaction.Id}}
+    </span>
+</b>
+<form [formGroup]="recurrentEditForm">
+  <div class="form-group">
+    <div class="form-group">
+      <label>Beschreibung:</label>
+      <input class="form-control" formControlName="description"/>
+      <span *ngIf="!recurrentEditForm.get('description').valid && recurrentEditForm.get('description').touched">
+      Bitte geben Sie eine Beschriebung für die Transaktion ein!
+    </span>
+    </div>
+    <div class="form-group">
+      <label>Nächstes Transaktionsdatum:</label>
+      <input type="text" align="right" formControlName="nexttransaction"
+             placeholder="Datepicker"
+             class="myformcontrol"
+             [bsConfig]="bsConfig"
+             bsDatepicker/>
+    </div>
+    <div class="form-group">
+      <label *ngIf="recurrentTransactionSelected">Instrument1: {{selectedRecurrentTransaction.instrument1}} </label>
+    </div>
+    <div class="form-group">
+      <label *ngIf="recurrentTransactionSelected">Instrument2: {{selectedRecurrentTransaction.instrument2}} </label>
+    </div>
+    <div class="form-group">
+      <label>Frequenz:</label>
+      <select class="btn btn-primary dropdown-toggle" formControlName="recurrentFrequency">
+        <option class="mydropdown-item" [ngValue]="frequency" *ngFor="let frequency of frequencyValues" >
+          {{frequency}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Betrag:</label>
+      <input type="number" class="form-control" formControlName="value"/>
+    </div>
+    <button class="btn btn-primary" (click)="onUpdateRecurrentTransaction()">Update</button>
+    <button class="btn btn-primary" (click)="onDeleteRecurrentTransaction()">Delete</button>
+  </div>
+</form>
+
+

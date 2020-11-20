@@ -10,10 +10,12 @@
  * Do not edit the class manually.
  */
 import { InstrumentListResource } from './instrumentListResource';
+import { RecurrentTransactionListResource } from './recurrentTransactionListResource';
 import { TenantListResource } from './tenantListResource';
 
 
 export interface EnvironmentDataResource {
     instruments?: InstrumentListResource;
+    recurrentTransaction?: RecurrentTransactionListResource;
     tenants?: TenantListResource;
 }
