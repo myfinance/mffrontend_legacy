@@ -124,8 +124,9 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
 
   getExpenseBudgets(): Array<Instrument> {
     const expenseBudgets =
-      this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget &&
-        (this.incomeBudget !== null || i.instrumentid !== this.incomeBudget.instrumentid));
+      this.instruments.filter(i =>
+        (i.instrumentType === InstrumentTypeEnum.Budget &&
+        (this.incomeBudget == null || i.instrumentid !== this.incomeBudget.instrumentid)));
     return expenseBudgets;
   }
 
