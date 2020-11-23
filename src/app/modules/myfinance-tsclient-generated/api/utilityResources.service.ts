@@ -68,6 +68,53 @@ export class UtilityResourcesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public getActiveInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'body', reportProgress?: boolean): Observable<InstrumentListModel>;
+    public getActiveInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
+    public getActiveInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
+    public getActiveInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling getActiveInstrumentForTenantList_envID_tenant.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (tenant !== undefined) {
+            queryParameters = queryParameters.set('tenant', <any>tenant);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<InstrumentListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/activeinstrumentsfortenant`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * List Data
+     * 
+     * @param envID The Service Environment
+     * @param tenant tenant id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public getInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'body', reportProgress?: boolean): Observable<InstrumentListModel>;
     public getInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
     public getInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;

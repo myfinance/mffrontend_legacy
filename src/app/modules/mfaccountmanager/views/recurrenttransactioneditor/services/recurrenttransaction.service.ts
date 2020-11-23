@@ -73,7 +73,7 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
 
   protected loadInstruments(): void {
     this.isInstrumentLoaded = false;
-    this.myFinanceService.getInstruments()
+    this.myFinanceService.getActiveInstrumentsForTenant()
       .subscribe(
         (instruments: InstrumentListModel) => {
           this.instruments = instruments.values;
