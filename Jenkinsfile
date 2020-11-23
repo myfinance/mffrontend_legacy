@@ -6,9 +6,9 @@ pipeline {
    ORGANIZATION_NAME = "myfinance"
    DOCKERHUB_USER = "holgerfischer"
    //Snapshot Version
-   VERSION = "0.15.0-alpha.${BUILD_ID}"
+   //VERSION = "0.15.0-alpha.${BUILD_ID}"
    //Release Version
-   //VERSION = "0.14.0"
+   VERSION = "0.15.0"
    K8N_IP = "192.168.100.73"
    NEXUS_URL = "${K8N_IP}:31001"
    REPOSITORY_TAG = "${DOCKERHUB_USER}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${VERSION}"
@@ -21,8 +21,8 @@ pipeline {
    stage('preperation'){
     agent {
         docker {
-            image 'node:12.16.1-alpine3.11' 
-            args '-p 3000:3000' 
+            image 'node:12.16.1-alpine3.11'
+            args '-p 3000:3000'
         }
     }
      steps {
@@ -30,12 +30,12 @@ pipeline {
        git credentialsId: 'github', url: "https://github.com/myfinance/mffrontend.git"
      }
    }
- 
+
    stage('build'){
     agent {
         docker {
-            image 'node:12.16.1-alpine3.11' 
-            args '-p 3000:3000' 
+            image 'node:12.16.1-alpine3.11'
+            args '-p 3000:3000'
         }
     }
      steps {
@@ -47,9 +47,9 @@ pipeline {
    stage('build and push Image'){
     agent {
         docker {
-            image 'docker' 
+            image 'docker'
         }
-    }     
+    }
      steps {
        sh 'docker image build -t ${REPOSITORY_TAG} .'
        sh 'docker tag ${REPOSITORY_TAG} ${DOCKER_REPO}${REPOSITORY_TAG}'
@@ -64,7 +64,7 @@ pipeline {
        sh 'helm package helm/mffrontend -u -d helmcharts/'
        sh 'curl ${TARGET_HELM_REPO} --upload-file helmcharts/mffrontend-${VERSION}.tgz -v'
      }
-   }   
+   }
  }
 }
 
