@@ -18,7 +18,7 @@ pv:
 
 mffrontend:
   name: mffrontend
-  http_port_ext: 30022
+  http_port_ext: 30023
   http_port: 80
 
 ingress:
