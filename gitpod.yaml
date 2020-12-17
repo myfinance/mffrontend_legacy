@@ -1,0 +1,4 @@
+tasks:
+  - init: npm install
+  - init: npm install -g @angular/cli
+  - command: ng serve
