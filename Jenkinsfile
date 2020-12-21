@@ -62,8 +62,9 @@ pipeline {
      agent any
      steps {
        sh 'envsubst < ./helm/mffrontend/Chart_template.yaml > ./helm/mffrontend/Chart.yaml'
-       sh 'helm upgrade -i --cleanup-on-fail mffrontend ./helm/mffrontend/ -n ${DEV_NAMESPACE} --set repository=${DOCKER_REPO}/${DOCKERHUB_USER}/${ORGANIZATION_NAME}-'
-       sh 'helm upgrade -i --cleanup-on-fail mffrontend ./helm/mffrontend/ -n ${TEST_NAMESPACE} --set stage=test --set mffrontend.mf_http_port_ext=30033 --set repository=${DOCKER_REPO}/${DOCKERHUB_USER}/${ORGANIZATION_NAME}-'
+       // no jobs for dev necessary
+       // sh 'helm upgrade -i --cleanup-on-fail mffrontend ./helm/mffrontend/ -n ${DEV_NAMESPACE} --set repository=${DOCKER_REPO}/${DOCKERHUB_USER}/${ORGANIZATION_NAME}-'
+       sh 'helm upgrade -i --cleanup-on-fail mffrontend ./helm/mffrontend/ -n ${TEST_NAMESPACE} --set stage=test --set mffrontend.http_port_ext=30033 --set repository=${DOCKER_REPO}/${DOCKERHUB_USER}/${ORGANIZATION_NAME}-'
        sh 'helm package helm/mffrontend -u -d helmcharts/'
        sh 'curl ${TARGET_HELM_REPO} --upload-file helmcharts/mffrontend-${VERSION}.tgz -v'
      }
