@@ -9,6 +9,14 @@ if you want to generate a new restclient for the backend connection:
  start a local backend with default credentials. open the url http://127.0.0.1:8181/dac/rest/swagger.json and copy the content in the file myfinance-tsclient-generation/swagger.json 
  run "mvn clean install in folder restclientgeneration
 
+# development
+
+recommended IDE: GitPod
+To run and debug mf-frontend with gitPod use the dev environment (https://babcom.myds.me:30022/dac/rest) as a backend. 
+SSL usage is import or other wise no connection is allowed from an gitpod envirmonment. 
+You can find the description of how to create and update ssl certificates in my wiki itdocs-java-ssl. copy the certificate to /mnt/data/mf/dev_config and restart the container.
+
+
 # Angular2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.

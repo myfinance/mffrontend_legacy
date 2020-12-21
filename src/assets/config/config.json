@@ -9,7 +9,7 @@
     {
       "name": "Dev",
       "identifier": "dev",
-      "url": "http://babylonnet.selfhost.bz:30021/dac/rest",
+      "url": "https://babcom.myds.me:30022/dac/rest",
       "defaultEnvironment": "dev"
     },
     {
