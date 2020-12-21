@@ -3,13 +3,13 @@
     {
       "name": "Testk8n",
       "identifier": "test",
-      "url": "http://myfinance.mylocaldomain/dac/rest",
+      "url": "http://dev.myfinance.mylocaldomain/dac/rest",
       "defaultEnvironment": "dev"
     },
     {
       "name": "Dev",
       "identifier": "dev",
-      "url": "http://babylonnet.selfhost.bz/dac/rest",
+      "url": "http://babylonnet.selfhost.bz:30021/dac/rest",
       "defaultEnvironment": "dev"
     },
     {

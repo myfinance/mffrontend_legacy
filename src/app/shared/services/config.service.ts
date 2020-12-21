@@ -68,10 +68,12 @@ export class ConfigService {
   }
 
   setCurrentTenant(tenant: Instrument): void {
-    this.currentTenant = tenant;
-    // Additionally save the zone in the local storage.
-    localStorage.setItem('tenant', tenant.instrumentid.toString());
-    console.info('set tenant');
+    if (tenant != null) {
+      this.currentTenant = tenant;
+      // Additionally save the zone in the local storage.
+      localStorage.setItem('tenant', tenant.instrumentid.toString());
+      console.info('set tenant');
+    }
     this.configLoaded.next(true);
   }
 
