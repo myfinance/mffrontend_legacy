@@ -1,34 +1,10 @@
 {
   "zones": [
     {
-      "name": "Testk8n",
-      "identifier": "test",
-      "url": "http://dev.myfinance.mylocaldomain/dac/rest",
-      "defaultEnvironment": "dev"
-    },
-    {
       "name": "Dev",
       "identifier": "dev",
       "url": "https://babcom.myds.me:30022/dac/rest",
       "defaultEnvironment": "dev"
-    },
-    {
-      "name": "Localhost",
-      "identifier": "local",
-      "url": "http://localhost:8181/dac/rest",
-      "defaultEnvironment": "dev"
-    },
-    {
-      "name": "Selber Host",
-      "identifier": "samehost",
-      "url": "https://8181-e3b2e80e-d91c-443e-ba1b-8576db0eb453.ws-eu03.gitpod.io/dac/rest",
-      "defaultEnvironment": "md"
-    },
-    {
-      "name": "Produktion",
-      "identifier": "prod",
-      "url": "https://babcom.myds.me:8443/dac/rest",
-      "defaultEnvironment": "md"
     },
     {
       "name": "Mock",
