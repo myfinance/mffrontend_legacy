@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Instrument, InstrumentListModel} from '../../../../myfinance-tsclient-generated';
+import {Instrument, InstrumentListModel, DateDoubleModel} from '../../../../myfinance-tsclient-generated';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {HttpErrorResponse} from '@angular/common/http';
 import {Subject} from 'rxjs/Rx';
@@ -14,6 +14,8 @@ export class AssetviewService extends AbstractDashboardDataService {
   instrumentSubject: Subject<any> = new Subject<any>();
   selectedinstrumentSubject: Subject<any> = new Subject<any>();
   selectedTenant: Instrument;
+  valueCurveSubject: Subject<any> = new Subject<any>();
+  instrumentValues: DateDoubleModel;
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -59,6 +61,11 @@ export class AssetviewService extends AbstractDashboardDataService {
     } else {
       return false;
     }
+  }
+
+  getValueCurve(): DateDoubleModel {
+
+    return this.instrumentValues;
   }
 
 }
