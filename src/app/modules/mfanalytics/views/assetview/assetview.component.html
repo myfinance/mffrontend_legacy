@@ -1,0 +1,21 @@
+<div class="grid-view-wrapper">
+  <div  class="grid">
+    <app-dashboard-grid [title]="title" [view]="view" [widgets]="widgets">
+      <ng-template appDashboardWidget [uuid]="'704197f2-6152-11eb-ae93-0242ac130002'">
+        <app-assetviewcontroller></app-assetviewcontroller>
+      </ng-template>
+      <ng-template appDashboardWidget [uuid]="'7f38672c-6152-11eb-ae93-0242ac130002'">
+        <app-instrumentvaluehistory></app-instrumentvaluehistory>
+      </ng-template>
+      <ng-template appDashboardWidget [uuid]="'8d019478-6152-11eb-ae93-0242ac130002'">
+        <app-assetgroupview></app-assetgroupview>
+      </ng-template>
+      <ng-template appDashboardWidget [uuid]="'972aa46c-6152-11eb-ae93-0242ac130002'">
+        <app-assetdetailsview></app-assetdetailsview>
+      </ng-template>
+      <ng-template appDashboardWidget [uuid]="'9ea794fc-6152-11eb-ae93-0242ac130002'">
+        <app-instrumentvaluedetailsview></app-instrumentvaluedetailsview>
+      </ng-template>
+    </app-dashboard-grid>
+  </div>
+</div>

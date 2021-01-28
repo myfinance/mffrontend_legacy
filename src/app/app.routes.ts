@@ -11,6 +11,7 @@ import {TransactioneditorComponent} from './modules/mfaccountmanager/views/trans
 import {InstrumenteditorComponent} from './modules/mfaccountmanager/views/instrumenteditor/instrumenteditor.component';
 import {TenanteditorComponent} from './modules/mfaccountmanager/views/tenanteditor/tenanteditor.component';
 import {RecurrenttransactioneditorComponent} from './modules/mfaccountmanager/views/recurrenttransactioneditor/recurrenttransactioneditor.component';
+import { AssetviewComponent } from './modules/mfanalytics/views/assetview/assetview.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -47,6 +48,10 @@ const APP_ROUTES: Routes = [
       {
         path: 'tenants',
         component: TenanteditorComponent
+      },
+       {
+        path: 'assetview',
+        component: AssetviewComponent
       },
       {
         path: 'instrument-search',
