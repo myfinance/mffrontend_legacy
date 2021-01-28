@@ -6,7 +6,7 @@ import { AssetviewService } from './services/assetview.service';
 @Component({
   selector: 'app-assetview',
   templateUrl: './assetview.component.html',
-  styleUrls: ['./assetview.component.css']
+  styleUrls: ['./assetview.component.scss']
 })
 export class AssetviewComponent  extends AbstractDashboard implements OnInit, OnDestroy {
 
