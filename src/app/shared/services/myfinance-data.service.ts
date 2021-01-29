@@ -95,6 +95,14 @@ export class MyFinanceDataService {
       instrumentId, this.currentEnv, this.getDateString(start), this.getDateString(end));
   }
 
+  getValueCurveForTenant(start: Date, end: Date): Observable<DateDoubleModel> {
+
+    this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
+
+    return this.myfinanceService.getValueMap_instrumentId_envID_startdate_enddate(
+      this.configService.getCurrentTenant().instrumentid, this.currentEnv, this.getDateString(start), this.getDateString(end));
+  }
+
   saveIncomeExpenses(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {
 
     this.myfinanceService.addIncomeExpense_envID_description_accId_budgetId_value_transactiondate(
