@@ -4,6 +4,8 @@ export * from './dateDoubleModel';
 export * from './environmentDataResource';
 export * from './environmentListResource';
 export * from './instrument';
+export * from './instrumentDetailModel';
+export * from './instrumentDetails';
 export * from './instrumentListModel';
 export * from './instrumentListResource';
 export * from './instrumentModel';

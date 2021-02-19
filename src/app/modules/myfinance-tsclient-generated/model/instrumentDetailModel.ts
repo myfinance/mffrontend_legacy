@@ -9,14 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Instrument } from './instrument';
-import { Transaction } from './transaction';
+import { InstrumentDetails } from './instrumentDetails';
 
 
-export interface Cashflow {
-    cashflowid: number;
-    instrument: Instrument;
-    transaction?: Transaction;
-    value: number;
-    description?: string;
+export interface InstrumentDetailModel {
+    url: string;
+    id: string;
+    values: { [key: string]: InstrumentDetails; };
 }

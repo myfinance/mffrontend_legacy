@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs/Observable';
 
 import { DateDoubleModel } from '../model/dateDoubleModel';
+import { InstrumentDetailModel } from '../model/instrumentDetailModel';
 import { InstrumentListModel } from '../model/instrumentListModel';
 import { InstrumentModel } from '../model/instrumentModel';
 import { RecurrentTransactionListModel } from '../model/recurrentTransactionListModel';
@@ -808,6 +809,61 @@ export class MyFinanceService {
 
         return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/fillpricehistory`,
             null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Map Data
+     * 
+     * @param tenantId the tenantId
+     * @param envID The Service Environment
+     * @param date date in Format yyyy-mm-dd
+     * @param diffdate date for value diff in Format yyyy-mm-dd
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAccountValueTupleMap_tenantId_envID_date_diffdate(tenantId: number, envID: string, date?: string, diffdate?: string, observe?: 'body', reportProgress?: boolean): Observable<InstrumentDetailModel>;
+    public getAccountValueTupleMap_tenantId_envID_date_diffdate(tenantId: number, envID: string, date?: string, diffdate?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentDetailModel>>;
+    public getAccountValueTupleMap_tenantId_envID_date_diffdate(tenantId: number, envID: string, date?: string, diffdate?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentDetailModel>>;
+    public getAccountValueTupleMap_tenantId_envID_date_diffdate(tenantId: number, envID: string, date?: string, diffdate?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (tenantId === null || tenantId === undefined) {
+            throw new Error('Required parameter tenantId was null or undefined when calling getAccountValueTupleMap_tenantId_envID_date_diffdate.');
+        }
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling getAccountValueTupleMap_tenantId_envID_date_diffdate.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (date !== undefined) {
+            queryParameters = queryParameters.set('date', <any>date);
+        }
+        if (diffdate !== undefined) {
+            queryParameters = queryParameters.set('diffdate', <any>diffdate);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<InstrumentDetailModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/getinstrumentvalues/${encodeURIComponent(String(tenantId))}`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

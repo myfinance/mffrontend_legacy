@@ -44,6 +44,7 @@ export class InstrumentvaluehistoryComponent implements OnInit {
          this.setValueMap()
       }
     )
+    this.updateValues();
   }
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class InstrumentvaluehistoryComponent implements OnInit {
   }
 
   updateValues() {
-    if (this.isInit) {
+    if (this.assetviewservice.getIsValueCurveLoaded()) {
       this.setValueMap()
     }
   }

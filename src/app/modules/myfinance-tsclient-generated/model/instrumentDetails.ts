@@ -9,14 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Instrument } from './instrument';
-import { Transaction } from './transaction';
 
 
-export interface Cashflow {
-    cashflowid: number;
-    instrument: Instrument;
-    transaction?: Transaction;
-    value: number;
-    description?: string;
+export interface InstrumentDetails {
+    valuemap?: { [key: string]: string; };
+    expensesLastMonth?: Array<Array<string>>;
+    incomeLastMonth?: Array<Array<string>>;
 }

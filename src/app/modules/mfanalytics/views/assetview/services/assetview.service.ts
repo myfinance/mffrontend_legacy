@@ -88,4 +88,8 @@ export class AssetviewService extends AbstractDashboardDataService {
     return this.instrumentValues;
   }
 
+  getIsValueCurveLoaded():boolean {
+    return this.isValueCurveLoaded
+  }
+
 }
