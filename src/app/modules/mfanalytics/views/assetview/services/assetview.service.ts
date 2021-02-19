@@ -19,6 +19,8 @@ export class AssetviewService extends AbstractDashboardDataService {
   daterange = [new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()),
     new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())];
   private isValueCurveLoaded = false;
+  dueday: Date;
+  diffday: Date;
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -90,6 +92,20 @@ export class AssetviewService extends AbstractDashboardDataService {
 
   getIsValueCurveLoaded():boolean {
     return this.isValueCurveLoaded
+  }
+
+  getDueday() : Date {
+    return this.dueday;
+  }
+  setDueday(dueday: Date) {
+    this.dueday = dueday;
+  }
+
+  getDiffday() : Date {
+    return this.diffday;
+  }
+  setDiffday(diffday: Date) {
+    this.diffday = diffday;
   }
 
 }
