@@ -23,9 +23,7 @@ export class AccountValueChangeViewComponent implements OnInit {
   xAxisLabel = 'Wertänderung';
   showDataLabel = true;
 
-  colorScheme = {
-    domain: ['#5AA454', '#C7B42C', '#AAAAAA']
-  };
+  colorScheme = 'horizon'
   schemeType: string = 'ordinal';
 
   isInit = false;

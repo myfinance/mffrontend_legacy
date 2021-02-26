@@ -42,6 +42,7 @@ export class AssetviewService extends AbstractDashboardDataService {
     },
   ];
   accountDiffValuemap = [];
+  budgetDiffValuemap = [];
   liquidAsset = 0.0;
   shorttermAsset = 0.0;
   midtermAsset = 0.0;
@@ -160,6 +161,10 @@ export class AssetviewService extends AbstractDashboardDataService {
     return this.accountDiffValuemap;
   }
 
+  getBudgetDiffValuemap(): any[] {
+    return this.budgetDiffValuemap;
+  }
+
   getBudgetValuemap(): any[] {
     return this.budgetValuemap;
   }
@@ -182,6 +187,10 @@ export class AssetviewService extends AbstractDashboardDataService {
 
   getBudgetAsset(): number {
     return this.budgetAsset;
+  }
+
+  getAccountAsset(): number {
+    return (this.liquidAsset + this.midtermAsset + this.shorttermAsset + this.longtermAsset);
   }
 
   private setInstrumentDetails(instrumentDetails: { [key: string]: InstrumentDetails; }) {
@@ -233,8 +242,13 @@ export class AssetviewService extends AbstractDashboardDataService {
           'name': instrumentDetails[key].valuemap['description'],
           'value': instrumentDetails[key].valuemap['value']
         });
+        this.budgetDiffValuemap.push({
+          'name': instrumentDetails[key].valuemap['description'],
+          'value': instrumentDetails[key].valuemap['valueChange']
+        });
       }
     }
+
   }
 
 

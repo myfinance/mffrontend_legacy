@@ -14,12 +14,6 @@ export class AccountValueViewComponent implements OnInit {
         "series": []
       }
     ];
-  diffvaluemap = [
-      {
-        "name": "Liquid",
-        "series": []
-      }
-    ];
   view: any[] = [600, 600];
 
   // options
@@ -34,12 +28,11 @@ export class AccountValueViewComponent implements OnInit {
   xAxisLabel = 'Wert';
   showDataLabel = true;
 
-  colorScheme = {
-    domain: ['#5AA454', '#C7B42C', '#AAAAAA']
-  };
+  colorScheme = 'horizon'
   schemeType: string = 'ordinal';
 
   isInit = false;
+  accountAsset = 0.0;
 
   constructor(private assetviewservice: AssetviewService) {
     this.assetviewservice.instrumentDetailsSubject.subscribe(
@@ -61,6 +54,7 @@ export class AccountValueViewComponent implements OnInit {
 
   setValueMap() {
     this.valuemap = this.assetviewservice.getAccountValuemap();
+    this.accountAsset = this.assetviewservice.getAccountAsset();
     this.isInit = true;
   }
 
