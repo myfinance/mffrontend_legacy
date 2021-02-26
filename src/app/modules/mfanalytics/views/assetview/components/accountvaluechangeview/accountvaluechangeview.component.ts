@@ -2,24 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AssetviewService } from '../../services/assetview.service';
 
 @Component({
-  selector: 'app-accountvalueview',
-  templateUrl: './accountvalueview.component.html',
-  styleUrls: ['./accountvalueview.component.css']
+  selector: 'app-accountvaluechangeview',
+  templateUrl: './accountvaluechangeview.component.html',
+  styleUrls: ['./accountvaluechangeview.component.css']
 })
-export class AccountValueViewComponent implements OnInit {
+export class AccountValueChangeViewComponent implements OnInit {
 
-  valuemap = [
-      {
-        "name": "Liquid",
-        "series": []
-      }
-    ];
-  diffvaluemap = [
-      {
-        "name": "Liquid",
-        "series": []
-      }
-    ];
+  valuemap = [];
   view: any[] = [600, 600];
 
   // options
@@ -29,9 +18,9 @@ export class AccountValueViewComponent implements OnInit {
   showLegend: boolean = true;
   legendPosition: string = 'right';
   showXAxisLabel: boolean = true;
-  yAxisLabel: string = 'Liquidität';
+  yAxisLabel: string = 'Konto';
   showYAxisLabel: boolean = true;
-  xAxisLabel = 'Wert';
+  xAxisLabel = 'Wertänderung';
   showDataLabel = true;
 
   colorScheme = {
@@ -60,7 +49,7 @@ export class AccountValueViewComponent implements OnInit {
   }
 
   setValueMap() {
-    this.valuemap = this.assetviewservice.getAccountValuemap();
+    this.valuemap = this.assetviewservice.getAccountDiffValuemap();
     this.isInit = true;
   }
 

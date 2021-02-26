@@ -19,6 +19,8 @@ import { InstrumentvaluedetailsviewComponent } from './views/assetview/component
 import { AssetviewService } from './views/assetview/services/assetview.service';
 import { AccountValueViewComponent } from './views/assetview/components/accountvalueview/accountvalueview.component';
 import { BudgetValueViewComponent } from './views/assetview/components/budgetvalueview/budgetvalueview.component';
+import { AccountValueChangeViewComponent } from './views/assetview/components/accountvaluechangeview/accountvaluechangeview.component';
+import { BudgetValueChangeViewComponent } from './views/assetview/components/budgetvaluechangeview/budgetvaluechangeview.component';
 
 @NgModule({
   imports: [
@@ -50,7 +52,9 @@ import { BudgetValueViewComponent } from './views/assetview/components/budgetval
     AssetviewcontrollerComponent,
     AccountValueViewComponent,
     BudgetValueViewComponent,
-    InstrumentvaluedetailsviewComponent
+    InstrumentvaluedetailsviewComponent,
+    AccountValueChangeViewComponent,
+    BudgetValueChangeViewComponent
   ],
   exports: [
     AssetviewComponent
