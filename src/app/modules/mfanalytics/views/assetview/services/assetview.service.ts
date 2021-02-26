@@ -49,6 +49,9 @@ export class AssetviewService extends AbstractDashboardDataService {
   longtermAsset = 0.0;
   budgetValuemap = [];
   budgetAsset = 0.0;
+  budgetvaluechange = 0.0;
+  accountAsset = 0.0;
+  accountValueChange = 0.0;
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -189,8 +192,16 @@ export class AssetviewService extends AbstractDashboardDataService {
     return this.budgetAsset;
   }
 
+  getBudgetValueChange(): number {
+    return this.budgetvaluechange;
+  }
+
   getAccountAsset(): number {
-    return (this.liquidAsset + this.midtermAsset + this.shorttermAsset + this.longtermAsset);
+    return this.accountAsset;
+  }
+
+  getAccountValueChange(): number {
+    return this.accountValueChange;
   }
 
   private setInstrumentDetails(instrumentDetails: { [key: string]: InstrumentDetails; }) {
@@ -199,65 +210,68 @@ export class AssetviewService extends AbstractDashboardDataService {
     this.midtermAsset = 0.0;
     this.longtermAsset = 0.0;
     this.budgetAsset = 0.0;
-    this.accountValuemap = [
-      {
-        "name": "Liquid",
-        "series": []
-      },
-      {
-        "name": "ShortTerm",
-        "series": []
-      },
-      {
-        "name": "MidTerm",
-        "series": []
-      },
-      {
-        "name": "LongTerm",
-        "series": []
-      },
-    ];
     this.budgetValuemap = [];
     this.accountDiffValuemap = [];
+    let liquiAssets = []
+    let shorttermAssets = []
+    let midtermAssets = []
+    let longtermAssets = []
+
     for (const key in instrumentDetails) {
       if (instrumentDetails[key].valuemap['liquiditytype'] === 'LIQUIDE') {
-        this.liquidAsset = + instrumentDetails[key].valuemap['value'];
-        this.setAccountDetails(instrumentDetails, key, 0);
+        this.liquidAsset = + instrumentDetails[key].valuemap['value'] + this.liquidAsset ;
+        this.setAccountDetails(instrumentDetails, key, liquiAssets, this.accountDiffValuemap);
       }
       if (instrumentDetails[key].valuemap['liquiditytype'] === 'SHORTTERM') {
-        this.shorttermAsset = + instrumentDetails[key].valuemap['value'];
-        this.setAccountDetails(instrumentDetails, key, 1);
+        this.shorttermAsset = + instrumentDetails[key].valuemap['value'] + this.shorttermAsset;
+        this.setAccountDetails(instrumentDetails, key, shorttermAssets, this.accountDiffValuemap);
       }
       if (instrumentDetails[key].valuemap['liquiditytype'] === 'MIDTERM') {
-        this.midtermAsset = + instrumentDetails[key].valuemap['value'];
-        this.setAccountDetails(instrumentDetails, key, 2);
+        this.midtermAsset = + instrumentDetails[key].valuemap['value'] + this.midtermAsset;
+        this.setAccountDetails(instrumentDetails, key, midtermAssets, this.accountDiffValuemap);
       }
       if (instrumentDetails[key].valuemap['liquiditytype'] === 'LONGTERM') {
-        this.longtermAsset = + instrumentDetails[key].valuemap['value'];
-        this.setAccountDetails(instrumentDetails, key, 3);
+        this.longtermAsset = + instrumentDetails[key].valuemap['value'] + this.longtermAsset;
+        this.setAccountDetails(instrumentDetails, key, longtermAssets, this.accountDiffValuemap);
       }
       if (instrumentDetails[key].valuemap['instrumenttype'] === 'Budget') {
+        this.setAccountDetails(instrumentDetails, key, this.budgetValuemap, this.budgetDiffValuemap);
+      }
+      if (instrumentDetails[key].valuemap['instrumenttype'] === 'AccountPortfolio') {
+        this.accountValueChange = + instrumentDetails[key].valuemap['valueChange'];
+        this.accountAsset = + instrumentDetails[key].valuemap['value'];
+      }
+      if (instrumentDetails[key].valuemap['instrumenttype'] === 'BudgetGroup') {
+        this.budgetvaluechange = + instrumentDetails[key].valuemap['valueChange'];
         this.budgetAsset = + instrumentDetails[key].valuemap['value'];
-        this.budgetValuemap.push({
-          'name': instrumentDetails[key].valuemap['description'],
-          'value': instrumentDetails[key].valuemap['value']
-        });
-        this.budgetDiffValuemap.push({
-          'name': instrumentDetails[key].valuemap['description'],
-          'value': instrumentDetails[key].valuemap['valueChange']
-        });
       }
     }
-
+    this.accountValuemap = [
+      {
+        "name": "Liquid:"+this.liquidAsset,
+        "series": liquiAssets
+      },
+      {
+        "name": "ShortTerm:"+this.shorttermAsset,
+        "series": shorttermAssets
+      },
+      {
+        "name": "MidTerm:"+this.midtermAsset,
+        "series": midtermAssets
+      },
+      {
+        "name": "LongTerm:"+this.longtermAsset,
+        "series": longtermAssets
+      },
+    ];
   }
 
-
-  private setAccountDetails(instrumentDetails: { [key: string]: InstrumentDetails; }, key: string, mapId: number) {
-    this.accountValuemap[mapId].series.push({
+  private setAccountDetails(instrumentDetails: { [key: string]: InstrumentDetails; }, key: string, assetmap: any[], valuechangemap: any[]) {
+    assetmap.push({
       'name': instrumentDetails[key].valuemap['description'],
       'value': instrumentDetails[key].valuemap['value']
     });
-    this.accountDiffValuemap.push({
+    valuechangemap.push({
       'name': instrumentDetails[key].valuemap['description'],
       'value': instrumentDetails[key].valuemap['valueChange']
     });

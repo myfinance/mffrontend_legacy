@@ -27,6 +27,7 @@ export class AccountValueChangeViewComponent implements OnInit {
   schemeType: string = 'ordinal';
 
   isInit = false;
+  accountValueChange = 0.0;
 
   constructor(private assetviewservice: AssetviewService) {
     this.assetviewservice.instrumentDetailsSubject.subscribe(
@@ -48,6 +49,7 @@ export class AccountValueChangeViewComponent implements OnInit {
 
   setValueMap() {
     this.valuemap = this.assetviewservice.getAccountDiffValuemap();
+    this.accountValueChange = this.assetviewservice.getAccountValueChange();
     this.isInit = true;
   }
 

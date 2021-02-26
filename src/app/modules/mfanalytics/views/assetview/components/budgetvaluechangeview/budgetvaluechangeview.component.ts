@@ -27,6 +27,7 @@ export class BudgetValueChangeViewComponent implements OnInit {
   schemeType: string = 'ordinal';
 
   isInit = false;
+  budgetValueChange = 0.0;
 
   constructor(private assetviewservice: AssetviewService) {
     this.assetviewservice.instrumentDetailsSubject.subscribe(
@@ -48,6 +49,7 @@ export class BudgetValueChangeViewComponent implements OnInit {
 
   setValueMap() {
     this.valuemap = this.assetviewservice.getBudgetDiffValuemap();
+    this.budgetValueChange = this.assetviewservice.getBudgetValueChange();
     this.isInit = true;
   }
 
