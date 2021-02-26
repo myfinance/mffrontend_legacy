@@ -15,10 +15,10 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { AssetviewComponent } from './views/assetview/assetview.component';
 import { InstrumentvaluehistoryComponent } from './views/assetview/components/instrumentvaluehistory/instrumentvaluehistory.component';
 import { AssetviewcontrollerComponent } from './views/assetview/components/assetviewcontroller/assetviewcontroller.component';
-import { AssetgroupviewComponent } from './views/assetview/components/assetgroupview/assetgroupview.component';
-import { AssetdetailsviewComponent } from './views/assetview/components/assetdetailsview/assetdetailsview.component';
 import { InstrumentvaluedetailsviewComponent } from './views/assetview/components/instrumentvaluedetailsview/instrumentvaluedetailsview.component';
 import { AssetviewService } from './views/assetview/services/assetview.service';
+import { AccountValueViewComponent } from './views/assetview/components/accountvalueview/accountvalueview.component';
+import { BudgetValueViewComponent } from './views/assetview/components/budgetvalueview/budgetvalueview.component';
 
 @NgModule({
   imports: [
@@ -48,8 +48,8 @@ import { AssetviewService } from './views/assetview/services/assetview.service';
     AssetviewComponent,
     InstrumentvaluehistoryComponent,
     AssetviewcontrollerComponent,
-    AssetgroupviewComponent,
-    AssetdetailsviewComponent,
+    AccountValueViewComponent,
+    BudgetValueViewComponent,
     InstrumentvaluedetailsviewComponent
   ],
   exports: [

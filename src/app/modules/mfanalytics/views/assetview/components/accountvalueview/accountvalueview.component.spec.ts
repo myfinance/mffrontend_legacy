@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssetgroupviewComponent } from './assetgroupview.component';
+import { AccountValueViewComponent } from './accountvalueview.component';
 
 describe('AssetgroupviewComponent', () => {
-  let component: AssetgroupviewComponent;
-  let fixture: ComponentFixture<AssetgroupviewComponent>;
+  let component: AccountValueViewComponent;
+  let fixture: ComponentFixture<AccountValueViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssetgroupviewComponent ]
+      declarations: [ AccountValueViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssetgroupviewComponent);
+    fixture = TestBed.createComponent(AccountValueViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

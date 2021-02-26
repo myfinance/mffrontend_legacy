@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Instrument, InstrumentListModel, DateDoubleModel} from '../../../../myfinance-tsclient-generated';
+import {Instrument, InstrumentListModel, DateDoubleModel, InstrumentDetailModel, InstrumentDetails} from '../../../../myfinance-tsclient-generated';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {HttpErrorResponse} from '@angular/common/http';
 import {Subject} from 'rxjs/Rx';
@@ -12,6 +12,7 @@ export class AssetviewService extends AbstractDashboardDataService {
 
   instruments: Array<Instrument> = new Array<Instrument>();
   instrumentSubject: Subject<any> = new Subject<any>();
+  instrumentDetailsSubject: Subject<any> = new Subject<any>();
   selectedinstrumentSubject: Subject<any> = new Subject<any>();
   selectedTenant: Instrument;
   valueCurveSubject: Subject<any> = new Subject<any>();
@@ -19,8 +20,10 @@ export class AssetviewService extends AbstractDashboardDataService {
   daterange = [new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()),
     new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())];
   private isValueCurveLoaded = false;
+  private isInstrumentDetailsLoaded = false;
   dueday: Date;
   diffday: Date;
+  instrumentDetails: InstrumentDetailModel;
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -75,10 +78,23 @@ export class AssetviewService extends AbstractDashboardDataService {
           console.error('error', errResp);
           this.dashboardService.handleDataNotLoaded(errResp);
         })
+
+    this.myFinanceService.getInstrumentValues(this.dueday, this.diffday)
+      .subscribe(
+        (values: InstrumentDetailModel) => {
+          this.instrumentDetails = values;
+          this.isInstrumentDetailsLoaded = true;
+          this.instrumentDetailsSubject.next();
+          this.checkDataLoadStatus();
+        },
+        (errResp) => {
+          console.error('error', errResp);
+          this.dashboardService.handleDataNotLoaded(errResp);
+        })
   }
 
   protected isDataLoadComplete(): boolean {
-    if (this.isInstrumentLoaded && this.isValueCurveLoaded) {
+    if (this.isInstrumentLoaded && this.isValueCurveLoaded && this.isInstrumentDetailsLoaded) {
       return true;
     } else {
       return false;
@@ -92,6 +108,14 @@ export class AssetviewService extends AbstractDashboardDataService {
 
   getIsValueCurveLoaded():boolean {
     return this.isValueCurveLoaded
+  }
+
+  getInstrumentDetails(): InstrumentDetailModel {
+    return this.instrumentDetails;
+  }
+
+  getIsInstrumentDetailsLoaded():boolean {
+    return this.isInstrumentDetailsLoaded
   }
 
   getDueday() : Date {
