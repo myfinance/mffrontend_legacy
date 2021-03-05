@@ -53,4 +53,16 @@ export class AccountValueChangeViewComponent implements OnInit {
     this.isInit = true;
   }
 
+  onSelect(data) {
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked',data['name'].substring(0,data['name'].indexOf(':')));
+    this.assetviewservice.setSelectedinstrument(data['name'].substring(0,data['name'].indexOf(':')));
+  }
+
+  onActivate() {
+  }
+
+  onDeactivate() {
+  }
+
 }

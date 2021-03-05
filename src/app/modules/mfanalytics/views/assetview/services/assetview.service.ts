@@ -14,9 +14,11 @@ export class AssetviewService extends AbstractDashboardDataService {
   instrumentSubject: Subject<any> = new Subject<any>();
   instrumentDetailsSubject: Subject<any> = new Subject<any>();
   selectedinstrumentSubject: Subject<any> = new Subject<any>();
+  selectedinstrument: number = -1;
   selectedTenant: Instrument;
   valueCurveSubject: Subject<any> = new Subject<any>();
   instrumentValues: DateDoubleModel;
+  instrumentDetailMap: {[key: string]: InstrumentDetails};
   daterange = [new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate()),
   new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())];
   private isValueCurveLoaded = false;
@@ -106,7 +108,11 @@ export class AssetviewService extends AbstractDashboardDataService {
           console.error('error', errResp);
           this.dashboardService.handleDataNotLoaded(errResp);
         })
+    this.loadInstrumentDetails();
+  }
 
+  private loadInstrumentDetails(){
+    if(this.dueday == null || this.diffday == null) return;
     this.myFinanceService.getInstrumentValues(this.dueday, this.diffday)
       .subscribe(
         (values: InstrumentDetailModel) => {
@@ -146,14 +152,26 @@ export class AssetviewService extends AbstractDashboardDataService {
     return this.dueday;
   }
   setDueday(dueday: Date) {
-    this.dueday = dueday;
+    if(dueday == null) {
+      return
+    }
+    if(this.dueday == null || dueday.getTime() !== this.dueday.getTime()){
+      this.dueday = dueday;
+      this.loadInstrumentDetails();
+    }
   }
 
   getDiffday(): Date {
     return this.diffday;
   }
   setDiffday(diffday: Date) {
-    this.diffday = diffday;
+    if(diffday == null) {
+      return
+    }
+    if(this.diffday == null || diffday.getTime() !== this.diffday.getTime()){
+      this.diffday = diffday;
+      this.loadInstrumentDetails();
+    }
   }
 
   getAccountValuemap(): any[] {
@@ -204,6 +222,15 @@ export class AssetviewService extends AbstractDashboardDataService {
     return this.accountValueChange;
   }
 
+  getInstrumentDetails(): InstrumentDetails{
+     return this.instrumentDetailMap[this.selectedinstrument];
+  }
+
+  setSelectedinstrument(instrumentId: number) {
+    this.selectedinstrument = instrumentId;
+    this.selectedinstrumentSubject.next();
+  }
+
   private setInstrumentDetails(instrumentDetails: { [key: string]: InstrumentDetails; }) {
     this.liquidAsset = 0.0;
     this.shorttermAsset = 0.0;
@@ -216,6 +243,8 @@ export class AssetviewService extends AbstractDashboardDataService {
     let shorttermAssets = []
     let midtermAssets = []
     let longtermAssets = []
+
+    this.instrumentDetailMap = instrumentDetails;
 
     for (const key in instrumentDetails) {
       if (instrumentDetails[key].valuemap['liquiditytype'] === 'LIQUIDE') {
@@ -268,11 +297,11 @@ export class AssetviewService extends AbstractDashboardDataService {
 
   private setAccountDetails(instrumentDetails: { [key: string]: InstrumentDetails; }, key: string, assetmap: any[], valuechangemap: any[]) {
     assetmap.push({
-      'name': instrumentDetails[key].valuemap['description'],
+      'name': key + ':' + instrumentDetails[key].valuemap['description'],
       'value': instrumentDetails[key].valuemap['value']
     });
     valuechangemap.push({
-      'name': instrumentDetails[key].valuemap['description'],
+      'name': key + ':' + instrumentDetails[key].valuemap['description'],
       'value': instrumentDetails[key].valuemap['valueChange']
     });
   }

@@ -47,7 +47,7 @@ export class AccountValueViewComponent implements OnInit {
   }
 
   updateValues() {
-    if (this.assetviewservice.getIsInstrumentDetailsLoaded()) {
+    if (this.assetviewservice.getIsInstrumentDetailsLoaded() && !this.isInit) {
       this.setValueMap()
     }
   }
@@ -56,6 +56,18 @@ export class AccountValueViewComponent implements OnInit {
     this.valuemap = this.assetviewservice.getAccountValuemap();
     this.accountAsset = this.assetviewservice.getAccountAsset();
     this.isInit = true;
+  }
+
+  onSelect(data) {
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked',data['name'].substring(0,data['name'].indexOf(':')));
+    this.assetviewservice.setSelectedinstrument(data['name'].substring(0,data['name'].indexOf(':')));
+  }
+
+  onActivate() {
+  }
+
+  onDeactivate() {
   }
 
 }

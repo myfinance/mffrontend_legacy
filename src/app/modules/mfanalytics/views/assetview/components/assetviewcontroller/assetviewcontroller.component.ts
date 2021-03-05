@@ -19,9 +19,21 @@ export class AssetviewcontrollerComponent implements OnInit {
 
   ngOnInit(): void {
       this.bsConfig = Object.assign({}, { containerClass: 'theme-default', dateInputFormat: 'YYYY-MM-DD'});
+      this.initDates();
+  }
+
+  private initDates() {
       var today = new Date();
-      this.duedate = new Date(today.getFullYear(), today.getMonth(), 0);
-      this.diffDate = new Date(this.duedate.getFullYear(), this.duedate.getMonth(), 0);
+      if(this.assetviewservice.getDueday() != null) {
+        this.duedate = this.assetviewservice.getDueday();
+      } else {
+        this.duedate = new Date(today.getFullYear(), today.getMonth(), 0);
+      }
+      if(this.assetviewservice.getDiffday() != null) {
+        this.diffDate = this.assetviewservice.getDiffday();
+      } else {
+        this.diffDate = new Date(this.duedate.getFullYear(), this.duedate.getMonth(), 0);
+      }
   }
 
   onDueDayChange(value: Date): void {
