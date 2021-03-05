@@ -8,7 +8,6 @@ import {DashboardModule} from '../dashboard/dashboard.module';
 import {GridsterModule} from 'angular-gridster2';
 import {BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BsDropdownModule, ButtonsModule, TabsModule } from 'ngx-bootstrap';
 import {MyFinanceDataService} from '../../shared/services/myfinance-data.service';
 import {ToastrModule} from 'ngx-toastr';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -21,6 +20,9 @@ import { AccountValueViewComponent } from './views/assetview/components/accountv
 import { BudgetValueViewComponent } from './views/assetview/components/budgetvalueview/budgetvalueview.component';
 import { AccountValueChangeViewComponent } from './views/assetview/components/accountvaluechangeview/accountvaluechangeview.component';
 import { BudgetValueChangeViewComponent } from './views/assetview/components/budgetvaluechangeview/budgetvaluechangeview.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   imports: [

@@ -15,7 +15,9 @@ import { ValuegraphComponent } from './views/transactioneditor/components/valueg
 import {TransactionService} from './views/transactioneditor/services/transaction.service';
 import {BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BsDropdownModule, ButtonsModule, TabsModule } from 'ngx-bootstrap';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { InputformselectionComponent } from './views/transactioneditor/components/inputformselection/inputformselection.component';
 import { InstrumenteditorComponent } from './views/instrumenteditor/instrumenteditor.component';
 import { InstrumentinputformComponent } from './views/instrumenteditor/components/instrumentinputform/instrumentinputform.component';

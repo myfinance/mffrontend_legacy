@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetviewService } from '../../services/assetview.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/bs-datepicker.config';
 
 @Component({
   selector: 'app-assetviewcontroller',
