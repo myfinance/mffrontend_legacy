@@ -1,1 +1,53 @@
-<p>instrumentvaluedetailsview works!</p>
+<table>
+  <tr>
+    <td>
+      Instrument: {{instrumentdescription}}<br>
+      Instrumenttyp: {{instrumentType}}<br>
+      Wert: {{value}}<br>
+      Wert Vergleichstag: {{valueDiffDate}}<br>
+      Wertänderung: {{valueChange}}<br>
+      <span *ngIf="instrumentType === 'Budget' || instrumentType === 'Giro'">
+        Durchschnittliche Ausgaben pro Monat: {{avgCashoutPerMonth}}<br>
+        Durchschnittliche Ausgaben pro Monat des letzten Jahres: {{avgCashoutLastYear}}<br>
+      </span>
+    </td>
+    <td>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Datum</th>
+            <th scope="col">Ausgabe</th>
+            <th scope="col">Betrag</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let expense of expenses">
+            <td>{{ expense[0] }}</td>
+            <td>{{ expense[1] }}</td>
+            <td>{{ expense[2] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+    <td>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Datum</th>
+            <th scope="col">Einnahme</th>
+            <th scope="col">Betrag</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let theIncome of income">
+            <td>{{ theIncome[0] }}</td>
+            <td>{{ theIncome[1] }}</td>
+            <td>{{ theIncome[2] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</table>
+
+

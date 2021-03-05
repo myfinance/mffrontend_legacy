@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "9.1.0",
     "@angular/router": "9.1.0",
     "@angular/service-worker": "9.1.0",
+    "@swimlane/ngx-charts": "13.0.2",
     "ag-grid-angular": "23.0.2",
     "ag-grid-community": "23.0.2",
     "ag-grid-enterprise": "23.0.2",
@@ -48,8 +49,7 @@
     "stacktrace-js": "2.0.2",
     "tslib": "1.11.1",
     "web-animations-js": "2.3.2",
-    "zone.js": "0.10.3",
-    "@swimlane/ngx-charts": "13.0.2"
+    "zone.js": "0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.901.0",
@@ -61,7 +61,7 @@
     "@types/moment-business": "0.1.4",
     "@types/node": "13.9.4",
     "angular-playground": "7.0.2",
-    "codelyzer": "5.2.1",
+    "codelyzer": "6.0.1",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "5.0.1",
     "karma": "4.4.1",

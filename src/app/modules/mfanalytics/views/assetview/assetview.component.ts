@@ -6,7 +6,7 @@ import { AssetviewService } from './services/assetview.service';
 @Component({
   selector: 'app-assetview',
   templateUrl: './assetview.component.html',
-  styleUrls: ['./assetview.component.css']
+  styleUrls: ['./assetview.component.scss']
 })
 export class AssetviewComponent  extends AbstractDashboard implements OnInit, OnDestroy {
 
@@ -20,36 +20,56 @@ export class AssetviewComponent  extends AbstractDashboard implements OnInit, On
       x: 0,
       y: 0,
       rows: 1,
-      cols: 1,
+      cols: 2,
       draggable: true,
       resizable: true
     },
     {
       uuid: '7f38672c-6152-11eb-ae93-0242ac130002',
       title: 'Wertentwicklung',
-      x: 1,
+      x: 2,
       y: 0,
       rows: 1,
-      cols: 5,
+      cols: 10,
       draggable: true,
       resizable: true
     },
     {
       uuid: '8d019478-6152-11eb-ae93-0242ac130002',
-      title: 'Vermögensgruppen',
+      title: 'Kontenübersicht',
       x: 0,
       y: 1,
-      rows: 1,
+      rows: 2,
+      cols: 3,
+      draggable: true,
+      resizable: true
+    },
+    {
+      uuid: '7dc9e43b-abc1-4191-9497-ad0fb24983e8',
+      title: 'Konten Wertveränderung',
+      x: 3,
+      y: 1,
+      rows: 2,
       cols: 3,
       draggable: true,
       resizable: true
     },
     {
       uuid: '972aa46c-6152-11eb-ae93-0242ac130002',
-      title: 'Vermögensdetails',
-      x: 3,
+      title: 'Budgetübersichts',
+      x: 6,
       y: 1,
-      rows: 1,
+      rows: 2,
+      cols: 3,
+      draggable: true,
+      resizable: true
+    },
+    {
+      uuid: 'ad625d6d-4ab5-475f-95c2-0e5add8b1b5b',
+      title: 'Budget Wertveränderung',
+      x: 9,
+      y: 1,
+      rows: 2,
       cols: 3,
       draggable: true,
       resizable: true
@@ -58,9 +78,9 @@ export class AssetviewComponent  extends AbstractDashboard implements OnInit, On
       uuid: '9ea794fc-6152-11eb-ae93-0242ac130002',
       title: 'Instrumentdetails',
       x: 0,
-      y: 2,
+      y: 3,
       rows: 1,
-      cols: 6,
+      cols: 12,
       draggable: true,
       resizable: true
     }

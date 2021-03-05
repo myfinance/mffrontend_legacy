@@ -8,7 +8,8 @@ import {
   Instrument,
   InstrumentListModel, InstrumentModel,
   RecurrentTransaction, RecurrentTransactionListModel,
-  TransactionListModel
+  TransactionListModel,
+  InstrumentDetailModel
 } from '../../modules/myfinance-tsclient-generated';
 import {MyFinanceWrapperService} from './my-finance-wrapper.service';
 import {DatePipe} from '@angular/common';
@@ -93,6 +94,14 @@ export class MyFinanceDataService {
 
     return this.myfinanceService.getValueMap_instrumentId_envID_startdate_enddate(
       instrumentId, this.currentEnv, this.getDateString(start), this.getDateString(end));
+  }
+
+  getValueCurveForTenant(start: Date, end: Date): Observable<DateDoubleModel> {
+
+    this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
+
+    return this.myfinanceService.getValueMap_instrumentId_envID_startdate_enddate(
+      this.configService.getCurrentTenant().instrumentid, this.currentEnv, this.getDateString(start), this.getDateString(end));
   }
 
   saveIncomeExpenses(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {
@@ -319,6 +328,13 @@ export class MyFinanceDataService {
   getIncomeBudgetForBudgetGroup(budgetGroupId: number): Observable<InstrumentModel> {
     return this.myfinanceService.getIncomeBudget_envID_budgetGroup(this.configService.getCurrentEnv(),
       budgetGroupId);
+  }
+
+  getInstrumentValues(dueDate: Date, diffDate: Date): Observable<InstrumentDetailModel> {
+    return this.myfinanceService.getAccountValueTupleMap_tenantId_envID_date_diffdate(this.configService.getCurrentTenant().instrumentid,
+      this.configService.getCurrentEnv(),
+      this.getDateString(dueDate),
+      this.getDateString(diffDate));
   }
 
   printError(errResp: HttpErrorResponse) {
