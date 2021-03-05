@@ -45,6 +45,10 @@ import { RecurrentexpensesinputComponent } from './views/recurrenttransactionedi
 import { RecurrentbudgettransferinputComponent } from './views/recurrenttransactioneditor/components/recurrentbudgettransferinput/recurrentbudgettransferinput.component';
 import { RecurrenttransferinputComponent } from './views/recurrenttransactioneditor/components/recurrenttransferinput/recurrenttransferinput.component';
 import { RecurrentincomeinputComponent } from './views/recurrenttransactioneditor/components/recurrentincomeinput/recurrentincomeinput.component';
+import { ExpensesmassloadComponent } from './views/expensesmassload/expensesmassload.component';
+import { ExpensesmassloadcontrollerComponent } from './views/expensesmassload/components/expensesmassloadcontroller/expensesmassloadcontroller.component';
+import { ExpensesmassloadeditorComponent } from './views/expensesmassload/components/expensesmassloadeditor/expensesmassloadeditor.component';
+import { ExpensesmassloadService } from './views/expensesmassload/services/expensesmassload.service';
 
 @NgModule({
   imports: [
@@ -98,14 +102,17 @@ import { RecurrentincomeinputComponent } from './views/recurrenttransactionedito
     RecurrentexpensesinputComponent,
     RecurrentbudgettransferinputComponent,
     RecurrenttransferinputComponent,
-    RecurrentincomeinputComponent],
+    RecurrentincomeinputComponent,
+    ExpensesmassloadComponent,
+    ExpensesmassloadcontrollerComponent,
+    ExpensesmassloadeditorComponent],
   exports: [
     InstrumenteditorComponent,
     TransactioneditorComponent,
     RecurrenttransactioneditorComponent
   ],
   providers: [
-    MyFinanceService, ConfigService, MyFinanceDataService, TransactionService, InstrumentService, TenantService, RecurrentTransactionService
+    MyFinanceService, ConfigService, MyFinanceDataService, TransactionService, InstrumentService, TenantService, RecurrentTransactionService, ExpensesmassloadService
   ]
 })
 export class MfAccountManagerModule { }
