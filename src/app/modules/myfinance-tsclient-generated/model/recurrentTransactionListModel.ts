@@ -12,7 +12,7 @@
 import { RecurrentTransaction } from './recurrentTransaction';
 
 
-export interface RecurrentTransactionListModel {
+export interface RecurrentTransactionListModel { 
     url: string;
     id: string;
     values: Array<RecurrentTransaction>;

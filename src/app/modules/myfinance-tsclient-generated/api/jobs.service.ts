@@ -48,7 +48,7 @@ export class JobsService {
      */
     private canConsumeForm(consumes: string[]): boolean {
         const form = 'multipart/form-data';
-        for (let consume of consumes) {
+        for (const consume of consumes) {
             if (form === consume) {
                 return true;
             }
@@ -70,12 +70,15 @@ export class JobsService {
     public vERBATIMstart_env_jobtype_params(env: string, jobtype: string, params?: BaseMFRunnerParameter, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<JobInformation>>;
     public vERBATIMstart_env_jobtype_params(env: string, jobtype: string, params?: BaseMFRunnerParameter, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<JobInformation>>;
     public vERBATIMstart_env_jobtype_params(env: string, jobtype: string, params?: BaseMFRunnerParameter, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (env === null || env === undefined) {
             throw new Error('Required parameter env was null or undefined when calling vERBATIMstart_env_jobtype_params.');
         }
+
         if (jobtype === null || jobtype === undefined) {
             throw new Error('Required parameter jobtype was null or undefined when calling vERBATIMstart_env_jobtype_params.');
         }
+
 
         let headers = this.defaultHeaders;
 
@@ -83,18 +86,18 @@ export class JobsService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<JobInformation>(`${this.basePath}/Runner/${encodeURIComponent(String(jobtype))}/${encodeURIComponent(String(env))}/start`,

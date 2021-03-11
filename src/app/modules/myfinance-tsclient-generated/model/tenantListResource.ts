@@ -11,5 +11,5 @@
  */
 
 
-export interface TenantListResource {
+export interface TenantListResource { 
 }

@@ -11,5 +11,5 @@
  */
 
 
-export interface RecurrentTransactionListResource {
+export interface RecurrentTransactionListResource { 
 }

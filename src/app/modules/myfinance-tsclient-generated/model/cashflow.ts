@@ -13,7 +13,7 @@ import { Instrument } from './instrument';
 import { Transaction } from './transaction';
 
 
-export interface Cashflow {
+export interface Cashflow { 
     cashflowid: number;
     instrument: Instrument;
     transaction?: Transaction;

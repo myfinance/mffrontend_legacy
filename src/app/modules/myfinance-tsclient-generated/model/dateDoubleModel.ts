@@ -11,7 +11,7 @@
  */
 
 
-export interface DateDoubleModel {
+export interface DateDoubleModel { 
     url: string;
     id: string;
     values: { [key: string]: number; };

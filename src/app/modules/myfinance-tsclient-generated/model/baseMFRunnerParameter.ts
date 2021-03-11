@@ -11,7 +11,7 @@
  */
 
 
-export interface BaseMFRunnerParameter {
+export interface BaseMFRunnerParameter { 
     params?: { [key: string]: any; };
     environment?: string;
 }

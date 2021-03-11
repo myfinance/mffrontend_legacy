@@ -11,5 +11,5 @@
  */
 
 
-export interface EnvironmentListResource {
+export interface EnvironmentListResource { 
 }

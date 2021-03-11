@@ -12,7 +12,7 @@
 import { StatusChange } from './statusChange';
 
 
-export interface JobInformation {
+export interface JobInformation { 
     uuid?: string;
     startTime?: string;
     status?: JobInformation.StatusEnum;
@@ -30,5 +30,5 @@ export namespace JobInformation {
         PROCESSING: 'PROCESSING' as StatusEnum,
         FINISHED: 'FINISHED' as StatusEnum,
         FAILED: 'FAILED' as StatusEnum
-    }
+    };
 }

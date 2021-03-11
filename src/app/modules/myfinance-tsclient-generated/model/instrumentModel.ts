@@ -12,7 +12,7 @@
 import { Instrument } from './instrument';
 
 
-export interface InstrumentModel {
+export interface InstrumentModel { 
     url: string;
     id: string;
     value?: Instrument;

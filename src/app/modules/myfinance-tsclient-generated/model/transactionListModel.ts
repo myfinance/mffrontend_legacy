@@ -12,7 +12,7 @@
 import { Transaction } from './transaction';
 
 
-export interface TransactionListModel {
+export interface TransactionListModel { 
     url: string;
     id: string;
     values: Array<Transaction>;

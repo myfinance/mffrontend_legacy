@@ -11,7 +11,7 @@
  */
 
 
-export interface Instrument {
+export interface Instrument { 
     instrumentid: number;
     instrumentType: Instrument.InstrumentTypeEnum;
     description: string;
@@ -46,5 +46,5 @@ export namespace Instrument {
         RealEstate: 'RealEstate' as InstrumentTypeEnum,
         Loan: 'Loan' as InstrumentTypeEnum,
         UNKNOWN: 'UNKNOWN' as InstrumentTypeEnum
-    }
+    };
 }
