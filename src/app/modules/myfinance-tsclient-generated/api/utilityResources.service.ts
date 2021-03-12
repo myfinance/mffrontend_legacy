@@ -52,7 +52,7 @@ export class UtilityResourcesService {
      */
     private canConsumeForm(consumes: string[]): boolean {
         const form = 'multipart/form-data';
-        for (let consume of consumes) {
+        for (const consume of consumes) {
             if (form === consume) {
                 return true;
             }
@@ -75,18 +75,22 @@ export class UtilityResourcesService {
     public getAccountValueTupleMap_tenantId_envID_date_diffdate(tenantId: number, envID: string, date?: string, diffdate?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentDetailModel>>;
     public getAccountValueTupleMap_tenantId_envID_date_diffdate(tenantId: number, envID: string, date?: string, diffdate?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentDetailModel>>;
     public getAccountValueTupleMap_tenantId_envID_date_diffdate(tenantId: number, envID: string, date?: string, diffdate?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (tenantId === null || tenantId === undefined) {
             throw new Error('Required parameter tenantId was null or undefined when calling getAccountValueTupleMap_tenantId_envID_date_diffdate.');
         }
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getAccountValueTupleMap_tenantId_envID_date_diffdate.');
         }
 
+
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (date !== undefined) {
+        if (date !== undefined && date !== null) {
             queryParameters = queryParameters.set('date', <any>date);
         }
-        if (diffdate !== undefined) {
+        if (diffdate !== undefined && diffdate !== null) {
             queryParameters = queryParameters.set('diffdate', <any>diffdate);
         }
 
@@ -96,13 +100,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<InstrumentDetailModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/getinstrumentvalues/${encodeURIComponent(String(tenantId))}`,
@@ -128,12 +132,14 @@ export class UtilityResourcesService {
     public getActiveInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
     public getActiveInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
     public getActiveInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getActiveInstrumentForTenantList_envID_tenant.');
         }
 
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (tenant !== undefined) {
+        if (tenant !== undefined && tenant !== null) {
             queryParameters = queryParameters.set('tenant', <any>tenant);
         }
 
@@ -143,13 +149,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<InstrumentListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/activeinstrumentsfortenant`,
@@ -175,12 +181,14 @@ export class UtilityResourcesService {
     public getInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
     public getInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
     public getInstrumentForTenantList_envID_tenant(envID: string, tenant?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getInstrumentForTenantList_envID_tenant.');
         }
 
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (tenant !== undefined) {
+        if (tenant !== undefined && tenant !== null) {
             queryParameters = queryParameters.set('tenant', <any>tenant);
         }
 
@@ -190,13 +198,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<InstrumentListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/instrumentsfortenant`,
@@ -221,6 +229,7 @@ export class UtilityResourcesService {
     public getInstrumentList_envID(envID: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
     public getInstrumentList_envID(envID: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
     public getInstrumentList_envID(envID: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getInstrumentList_envID.');
         }
@@ -231,13 +240,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<InstrumentListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/instruments`,
@@ -259,19 +268,22 @@ export class UtilityResourcesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: string, observe?: 'body', reportProgress?: boolean): Observable<InstrumentListModel>;
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe?: 'body', reportProgress?: boolean): Observable<InstrumentListModel>;
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getInstrumentPerTypeList_envID_tenant_instrumenttype.');
         }
 
+
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (tenant !== undefined) {
+        if (tenant !== undefined && tenant !== null) {
             queryParameters = queryParameters.set('tenant', <any>tenant);
         }
-        if (instrumenttype !== undefined) {
+        if (instrumenttype !== undefined && instrumenttype !== null) {
             queryParameters = queryParameters.set('instrumenttype', <any>instrumenttype);
         }
 
@@ -281,13 +293,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<InstrumentListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/instrumentspertype`,
@@ -313,12 +325,14 @@ export class UtilityResourcesService {
     public getInstrument_envID_isin(envID: string, isin?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentModel>>;
     public getInstrument_envID_isin(envID: string, isin?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentModel>>;
     public getInstrument_envID_isin(envID: string, isin?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getInstrument_envID_isin.');
         }
 
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (isin !== undefined) {
+        if (isin !== undefined && isin !== null) {
             queryParameters = queryParameters.set('isin', <any>isin);
         }
 
@@ -328,13 +342,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<InstrumentModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/getequity`,
@@ -359,6 +373,7 @@ export class UtilityResourcesService {
     public getRecurrentTransactionList_envID(envID: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RecurrentTransactionListModel>>;
     public getRecurrentTransactionList_envID(envID: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RecurrentTransactionListModel>>;
     public getRecurrentTransactionList_envID(envID: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getRecurrentTransactionList_envID.');
         }
@@ -369,13 +384,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<RecurrentTransactionListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/listRecurrentTransactions`,
@@ -399,6 +414,7 @@ export class UtilityResourcesService {
     public getTenantList_envID(envID: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
     public getTenantList_envID(envID: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
     public getTenantList_envID(envID: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getTenantList_envID.');
         }
@@ -409,13 +425,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<InstrumentListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/listTenants`,
@@ -441,15 +457,18 @@ export class UtilityResourcesService {
     public getTransactionList_envID_startdate_enddate(envID: string, startdate?: string, enddate?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TransactionListModel>>;
     public getTransactionList_envID_startdate_enddate(envID: string, startdate?: string, enddate?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TransactionListModel>>;
     public getTransactionList_envID_startdate_enddate(envID: string, startdate?: string, enddate?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getTransactionList_envID_startdate_enddate.');
         }
 
+
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (startdate !== undefined) {
+        if (startdate !== undefined && startdate !== null) {
             queryParameters = queryParameters.set('startdate', <any>startdate);
         }
-        if (enddate !== undefined) {
+        if (enddate !== undefined && enddate !== null) {
             queryParameters = queryParameters.set('enddate', <any>enddate);
         }
 
@@ -459,13 +478,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<TransactionListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/listTransactions`,
@@ -493,18 +512,22 @@ export class UtilityResourcesService {
     public getValueMap_instrumentId_envID_startdate_enddate(instrumentId: number, envID: string, startdate?: string, enddate?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DateDoubleModel>>;
     public getValueMap_instrumentId_envID_startdate_enddate(instrumentId: number, envID: string, startdate?: string, enddate?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DateDoubleModel>>;
     public getValueMap_instrumentId_envID_startdate_enddate(instrumentId: number, envID: string, startdate?: string, enddate?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (instrumentId === null || instrumentId === undefined) {
             throw new Error('Required parameter instrumentId was null or undefined when calling getValueMap_instrumentId_envID_startdate_enddate.');
         }
+
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getValueMap_instrumentId_envID_startdate_enddate.');
         }
 
+
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (startdate !== undefined) {
+        if (startdate !== undefined && startdate !== null) {
             queryParameters = queryParameters.set('startdate', <any>startdate);
         }
-        if (enddate !== undefined) {
+        if (enddate !== undefined && enddate !== null) {
             queryParameters = queryParameters.set('enddate', <any>enddate);
         }
 
@@ -514,13 +537,13 @@ export class UtilityResourcesService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
         ];
 
         return this.httpClient.get<DateDoubleModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/getvaluecurve/${encodeURIComponent(String(instrumentId))}`,

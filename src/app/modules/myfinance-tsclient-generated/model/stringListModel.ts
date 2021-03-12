@@ -11,7 +11,7 @@
  */
 
 
-export interface StringListModel {
+export interface StringListModel { 
     url: string;
     id: string;
     values: Array<string>;

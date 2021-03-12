@@ -11,5 +11,5 @@
  */
 
 
-export interface InstrumentListResource {
+export interface InstrumentListResource { 
 }

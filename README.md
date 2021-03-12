@@ -7,7 +7,7 @@ or install the complete bundle see repo mfbundle
 
 if you want to generate a new restclient for the backend connection:
  start a local backend with default credentials. open the url http://127.0.0.1:8181/dac/rest/swagger.json and copy the content in the file myfinance-tsclient-generation/swagger.json 
- run "mvn clean install in folder restclientgeneration
+ run "mvn clean install in folder restclientgeneration (!Attation: with the current generator the typescript code is not fully compatiple with angular 10: api.module needs to be reverted after generation)
 
 # development
 

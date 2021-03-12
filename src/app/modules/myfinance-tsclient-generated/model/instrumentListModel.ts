@@ -12,7 +12,7 @@
 import { Instrument } from './instrument';
 
 
-export interface InstrumentListModel {
+export interface InstrumentListModel { 
     url: string;
     id: string;
     values: Array<Instrument>;

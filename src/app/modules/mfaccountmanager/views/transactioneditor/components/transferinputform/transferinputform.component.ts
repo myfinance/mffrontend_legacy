@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Instrument} from '../../../../../myfinance-tsclient-generated';
 import {TransactionService} from '../../services/transaction.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BsDatepickerConfig} from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/bs-datepicker.config';
 
 @Component({
   selector: 'app-transferinputform',

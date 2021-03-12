@@ -13,7 +13,7 @@ import { Cashflow } from './cashflow';
 import { Trade } from './trade';
 
 
-export interface Transaction {
+export interface Transaction { 
     transactionid: number;
     description: string;
     transactiondate: string;
@@ -30,5 +30,5 @@ export namespace Transaction {
         BUDGETTRANSFER: 'BUDGETTRANSFER' as TransactionTypeEnum,
         SECURITYCASHFLOW: 'SECURITYCASHFLOW' as TransactionTypeEnum,
         TRADE: 'TRADE' as TransactionTypeEnum
-    }
+    };
 }

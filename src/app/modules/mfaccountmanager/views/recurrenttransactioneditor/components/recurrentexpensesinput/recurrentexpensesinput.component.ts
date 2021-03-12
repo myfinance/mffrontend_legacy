@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {RecurrentTransactionService} from '../../services/recurrenttransaction.service';
 import {Instrument, RecurrentTransaction} from '../../../../../myfinance-tsclient-generated';
 import RecurrentfrequenceEnum = RecurrentTransaction.RecurrentfrequenceEnum;
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/bs-datepicker.config';
 
 @Component({
   selector: 'app-recurrentexpensesinput',

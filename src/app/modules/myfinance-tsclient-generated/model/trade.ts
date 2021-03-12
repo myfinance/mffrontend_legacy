@@ -13,7 +13,7 @@ import { Instrument } from './instrument';
 import { Transaction } from './transaction';
 
 
-export interface Trade {
+export interface Trade { 
     tradeid: number;
     instrumentByDepotid: Instrument;
     instrumentByInstrumentid: Instrument;

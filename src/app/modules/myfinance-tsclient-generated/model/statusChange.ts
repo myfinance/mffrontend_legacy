@@ -11,7 +11,7 @@
  */
 
 
-export interface StatusChange {
+export interface StatusChange { 
     changeTime?: string;
     oldStatus?: StatusChange.OldStatusEnum;
     newStatus?: StatusChange.NewStatusEnum;
@@ -25,7 +25,7 @@ export namespace StatusChange {
         PROCESSING: 'PROCESSING' as OldStatusEnum,
         FINISHED: 'FINISHED' as OldStatusEnum,
         FAILED: 'FAILED' as OldStatusEnum
-    }
+    };
     export type NewStatusEnum = 'UNKNOWN' | 'QUEUED' | 'PROCESSING' | 'FINISHED' | 'FAILED';
     export const NewStatusEnum = {
         UNKNOWN: 'UNKNOWN' as NewStatusEnum,
@@ -33,5 +33,5 @@ export namespace StatusChange {
         PROCESSING: 'PROCESSING' as NewStatusEnum,
         FINISHED: 'FINISHED' as NewStatusEnum,
         FAILED: 'FAILED' as NewStatusEnum
-    }
+    };
 }

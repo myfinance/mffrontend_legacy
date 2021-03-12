@@ -12,7 +12,7 @@
 import { Instrument } from './instrument';
 
 
-export interface RecurrentTransaction {
+export interface RecurrentTransaction { 
     recurrenttransactionid: number;
     instrumentByInstrumentid2: Instrument;
     instrumentBySecurityid: Instrument;
@@ -31,5 +31,5 @@ export namespace RecurrentTransaction {
         Quaterly: 'Quaterly' as RecurrentfrequenceEnum,
         Yearly: 'Yearly' as RecurrentfrequenceEnum,
         UNKNOWN: 'UNKNOWN' as RecurrentfrequenceEnum
-    }
+    };
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {TransactionService} from '../../services/transaction.service';
 import {Instrument} from '../../../../../myfinance-tsclient-generated';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/bs-datepicker.config';
 
 @Component({
   selector: 'app-controller',
