@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExpensesmassloadService } from '../../services/expensesmassload.service';
 
 @Component({
   selector: 'app-expensesmassloadcontroller',
@@ -9,7 +10,7 @@ export class ExpensesmassloadcontrollerComponent implements OnInit {
 
   fileToUpload: File = null;
 
-  constructor() { }
+  constructor(private expensesmassloadService: ExpensesmassloadService) { }
 
   ngOnInit(): void {
   }
@@ -60,8 +61,8 @@ export class ExpensesmassloadcontrollerComponent implements OnInit {
       }
       //Push rows to array variable
       linesR.push(tarrR);
+      this.expensesmassloadService.setContent(linesR[0]);
     }
-
   }
 
 }

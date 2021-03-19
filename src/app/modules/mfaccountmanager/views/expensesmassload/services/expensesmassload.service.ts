@@ -10,6 +10,8 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
 
   instruments: Array<Instrument> = new Array<Instrument>();
   instrumentSubject: Subject<any> = new Subject<any>();
+  contentSubject: Subject<any> = new Subject<any>();
+  content = [];
 
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
@@ -59,6 +61,15 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
     } else {
       return false;
     }
+  }
+
+  setContent(content: string[]) {
+    this.content = content;
+    this.contentSubject.next();
+  }
+
+  getContent() : string[] {
+    return this.content;
   }
 
 

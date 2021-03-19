@@ -1,1 +1,18 @@
-<p>expensesmassloadeditor works!</p>
+ <div class="scrolltable">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Datum</th>
+            <th scope="col">Beschreibung</th>
+            <th scope="col">Betrag</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of content">
+            <td>{{ row[0] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
