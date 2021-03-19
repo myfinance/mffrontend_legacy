@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExpensesmassloadService } from '../../services/expensesmassload.service';
 
 @Component({
   selector: 'app-expensesmassloadeditor',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expensesmassloadeditor.component.css']
 })
 export class ExpensesmassloadeditorComponent implements OnInit {
+  content = [];
 
-  constructor() { }
+  constructor(private expensesmassloadService: ExpensesmassloadService) { }
 
   ngOnInit(): void {
+      this.expensesmassloadService.contentSubject.subscribe(
+      () => {
+        this.updateTableContent()
+      }
+    )
+  }
+
+  updateTableContent() {
+    this.content = this.expensesmassloadService.getContent();
   }
 
 }
