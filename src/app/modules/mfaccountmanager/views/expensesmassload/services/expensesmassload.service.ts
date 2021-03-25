@@ -72,6 +72,8 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
     return this.content;
   }
 
-
+  getInstruments(): Array<Instrument> {
+    return this.instruments;
+  }
 }
 
