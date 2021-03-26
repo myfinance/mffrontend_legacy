@@ -44,8 +44,4 @@ export class ExpensesmassloadeditorComponent implements OnInit {
     console.info('info2:'+this.content[1][4].description);
   }
 
-  onChange(budget, rownb) {
-      this.content[rownb-1][4] = budget;
-  }
-
 }
