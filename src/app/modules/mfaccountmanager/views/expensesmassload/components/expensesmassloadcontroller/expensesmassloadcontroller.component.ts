@@ -24,7 +24,6 @@ export class ExpensesmassloadcontrollerComponent implements OnInit {
   load() {
     //array varibales to store csv data
     let lines = []; //for headings
-    let linesR = []; // for rows
     //File reader method
     let reader: FileReader = new FileReader();
     reader.readAsText(this.fileToUpload);
@@ -43,26 +42,16 @@ export class ExpensesmassloadcontrollerComponent implements OnInit {
       //Pusd headings to array variable
       lines.push(tarr);
 
-
-      // Table Rows
-      let tarrR = [];
-
       let arrl = allTextLines.length;
       let rows = [];
       for (let i = 1; i < arrl; i++) {
         let row = allTextLines[i].split(';');
-        let minrow = [i, row[0], row[3], row[4], ''];
-        rows.push(minrow);
+        if(row != null && row[1]!=null && row[1] !== "") {
+          let minrow = [i, row[0], row[3], row[4], ''];
+          rows.push(minrow);
+        }
       }
-
-      for (let j = 0; j < arrl; j++) {
-
-        tarrR.push(rows[j]);
-
-      }
-      //Push rows to array variable
-      linesR.push(tarrR);
-      this.expensesmassloadService.setContent(linesR[0]);
+      this.expensesmassloadService.setContent(rows);
     }
   }
 

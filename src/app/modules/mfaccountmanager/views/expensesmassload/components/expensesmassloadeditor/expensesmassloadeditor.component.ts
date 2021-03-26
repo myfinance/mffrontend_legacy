@@ -35,13 +35,17 @@ export class ExpensesmassloadeditorComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.budgets = this.expensesmassloadService.getInstruments();
+    this.budgets = this.expensesmassloadService.getBudgets();
   }
 
   save() {
     console.info('test:'+this.content[0][1]);
     console.info('info:'+this.content[0][4]);
-    console.info('info2:'+this.content[1][4]);
+    console.info('info2:'+this.content[1][4].description);
+  }
+
+  onChange(budget, rownb) {
+      this.content[rownb-1][4] = budget;
   }
 
 }

@@ -3,12 +3,14 @@ import { AbstractDashboardDataService } from '../../../../../shared/services/abs
 import { InstrumentListModel, Instrument } from '../../../../myfinance-tsclient-generated';
 import { MyFinanceDataService } from '../../../../../shared/services/myfinance-data.service';
 import { DashboardService } from '../../../../dashboard/services/dashboard.service';
+import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import { Subject } from 'rxjs';
 
 @Injectable()
 export class ExpensesmassloadService extends AbstractDashboardDataService {
 
   instruments: Array<Instrument> = new Array<Instrument>();
+  budgets: Array<Instrument> = new Array<Instrument>();
   instrumentSubject: Subject<any> = new Subject<any>();
   contentSubject: Subject<any> = new Subject<any>();
   content = [];
@@ -45,6 +47,7 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
       .subscribe(
         (instruments: InstrumentListModel) => {
           this.instruments = instruments.values;
+          this.budgets = this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget);
           this.instrumentSubject.next();
           this.isInstrumentLoaded = true;
           this.checkDataLoadStatus();
@@ -65,6 +68,9 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
 
   setContent(content: string[]) {
     this.content = content;
+    if(this.content != null && this.content.length>0) {
+      this.content.forEach( i=> i[4] = this.budgets[0]);
+    }
     this.contentSubject.next();
   }
 
@@ -74,6 +80,10 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
 
   getInstruments(): Array<Instrument> {
     return this.instruments;
+  }
+
+  getBudgets(): Array<Instrument> {
+    return this.budgets;
   }
 }
 

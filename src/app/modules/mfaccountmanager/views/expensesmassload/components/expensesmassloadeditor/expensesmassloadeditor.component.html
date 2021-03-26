@@ -17,8 +17,8 @@
             <td>{{ row[2] }}</td>
             <td>{{ row[3] }}</td>
             <td>
-              <select class="btn btn-primary dropdown-toggle">
-                <option class="mydropdown-item" [ngValue]="content[row[0]][4]" *ngFor="let budget of budgets" >
+              <select class="btn btn-primary dropdown-toggle" (change)="onChange($event.target.value, row[0])">
+                <option class="mydropdown-item" *ngFor="let budget of budgets" >
                   {{budget.description}}
                 </option>
               </select>
