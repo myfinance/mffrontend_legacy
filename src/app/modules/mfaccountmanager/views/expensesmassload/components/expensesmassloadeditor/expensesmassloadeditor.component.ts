@@ -39,8 +39,8 @@ export class ExpensesmassloadeditorComponent implements OnInit {
   }
 
   save() {
-    console.info('test:'+this.content[0][1]);
-    console.info('info:'+this.content[0][4]);
+    console.info('test:'+this.content[0][4].instrumentid);
+    console.info('info:'+this.content[0][4].description);
     console.info('info2:'+this.content[1][4].description);
   }
 
