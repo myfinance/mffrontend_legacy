@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpensesmassloadService } from '../../services/expensesmassload.service';
+import { Instrument } from '../../../../../myfinance-tsclient-generated';
 
 @Component({
   selector: 'app-expensesmassloadeditor',
@@ -8,6 +9,8 @@ import { ExpensesmassloadService } from '../../services/expensesmassload.service
 })
 export class ExpensesmassloadeditorComponent implements OnInit {
   content = [];
+  budgets: Array<Instrument> = new Array<Instrument>();
+  budget: Instrument;
 
   constructor(private expensesmassloadService: ExpensesmassloadService) { }
 
@@ -17,10 +20,28 @@ export class ExpensesmassloadeditorComponent implements OnInit {
         this.updateTableContent()
       }
     )
+    if (this.expensesmassloadService.getIsInit()) {
+      this.loadData();
+    } else {
+      this.expensesmassloadService.instrumentSubject.subscribe(
+        () => {
+          this.loadData()}
+      )
+    }
   }
 
   updateTableContent() {
     this.content = this.expensesmassloadService.getContent();
+  }
+
+  private loadData(): void {
+    this.budgets = this.expensesmassloadService.getBudgets();
+  }
+
+  save() {
+    console.info('test:'+this.content[0][4].instrumentid);
+    console.info('info:'+this.content[0][4].description);
+    console.info('info2:'+this.content[1][4].description);
   }
 
 }
