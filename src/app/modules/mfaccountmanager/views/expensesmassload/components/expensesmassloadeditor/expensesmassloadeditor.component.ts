@@ -10,6 +10,7 @@ import { Instrument } from '../../../../../myfinance-tsclient-generated';
 export class ExpensesmassloadeditorComponent implements OnInit {
   content = [];
   budgets: Array<Instrument> = new Array<Instrument>();
+  budget: Instrument;
 
   constructor(private expensesmassloadService: ExpensesmassloadService) { }
 
@@ -19,11 +20,14 @@ export class ExpensesmassloadeditorComponent implements OnInit {
         this.updateTableContent()
       }
     )
-    this.expensesmassloadService.instrumentSubject.subscribe(
-      () => {
-        this.loadData();
-      }
-    )
+    if (this.expensesmassloadService.getIsInit()) {
+      this.loadData();
+    } else {
+      this.expensesmassloadService.instrumentSubject.subscribe(
+        () => {
+          this.loadData()}
+      )
+    }
   }
 
   updateTableContent() {
@@ -32,6 +36,12 @@ export class ExpensesmassloadeditorComponent implements OnInit {
 
   private loadData(): void {
     this.budgets = this.expensesmassloadService.getInstruments();
+  }
+
+  save() {
+    console.info('test:'+this.content[0][1]);
+    console.info('info:'+this.content[0][4]);
+    console.info('info2:'+this.content[1][4]);
   }
 
 }

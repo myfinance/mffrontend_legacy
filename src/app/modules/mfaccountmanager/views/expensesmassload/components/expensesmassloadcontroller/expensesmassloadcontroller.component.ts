@@ -50,8 +50,9 @@ export class ExpensesmassloadcontrollerComponent implements OnInit {
       let arrl = allTextLines.length;
       let rows = [];
       for (let i = 1; i < arrl; i++) {
-        rows.push(allTextLines[i].split(';'));
-
+        let row = allTextLines[i].split(';');
+        let minrow = [i, row[0], row[3], row[4], ''];
+        rows.push(minrow);
       }
 
       for (let j = 0; j < arrl; j++) {
