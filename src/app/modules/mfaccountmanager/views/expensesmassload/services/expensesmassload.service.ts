@@ -11,6 +11,7 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
 
   instruments: Array<Instrument> = new Array<Instrument>();
   budgets: Array<Instrument> = new Array<Instrument>();
+  giros: Array<Instrument> = new Array<Instrument>();
   instrumentSubject: Subject<any> = new Subject<any>();
   contentSubject: Subject<any> = new Subject<any>();
   content = [];
@@ -48,6 +49,7 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
         (instruments: InstrumentListModel) => {
           this.instruments = instruments.values;
           this.budgets = this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget);
+          this.giros = this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Giro);
           this.instrumentSubject.next();
           this.isInstrumentLoaded = true;
           this.checkDataLoadStatus();
@@ -84,6 +86,20 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
 
   getBudgets(): Array<Instrument> {
     return this.budgets;
+  }
+
+  getGiros(): Array<Instrument> {
+    return this.giros;
+  }
+
+  save(content: any[], giro: Instrument ) {
+    content.filter(i=>i[5]==null || i[5]==="true").forEach(element => {
+      let datestring= element[1] as string;
+      let valuestring= element[3] as string;
+      let value: number = +valuestring.replace(',', '.');
+      let theDate = new Date(datestring.substr(6,4) + "-" + datestring.substr(3,2) + "-" + datestring.substr(0,2));
+      this.myFinanceService.saveIncomeExpenses("test", giro.instrumentid, element[4].instrumentid, value, theDate);
+    });
   }
 }
 

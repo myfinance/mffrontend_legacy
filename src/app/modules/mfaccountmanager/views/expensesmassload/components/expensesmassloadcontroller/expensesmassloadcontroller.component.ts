@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpensesmassloadService } from '../../services/expensesmassload.service';
+import { Instrument } from '../../../../../myfinance-tsclient-generated';
 
 @Component({
   selector: 'app-expensesmassloadcontroller',
