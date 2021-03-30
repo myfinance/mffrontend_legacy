@@ -11,6 +11,8 @@ export class ExpensesmassloadeditorComponent implements OnInit {
   content = [];
   budgets: Array<Instrument> = new Array<Instrument>();
   budget: Instrument;
+  giros: Instrument[];
+  giro: Instrument
 
   constructor(private expensesmassloadService: ExpensesmassloadService) { }
 
@@ -36,12 +38,13 @@ export class ExpensesmassloadeditorComponent implements OnInit {
 
   private loadData(): void {
     this.budgets = this.expensesmassloadService.getBudgets();
+    this.giros = this.expensesmassloadService.getGiros();
   }
 
   save() {
-    console.info('test:'+this.content[0][4].instrumentid);
-    console.info('info:'+this.content[0][4].description);
-    console.info('info2:'+this.content[1][4].description);
+    if (this.giro != null && this.content!=null && this.content.length>0) {
+      this.expensesmassloadService.save(this.content, this.giro);
+    }
   }
 
 }
