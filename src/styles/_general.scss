@@ -33,14 +33,14 @@ html, body {
 
       .active {
         .status-cell:after {
-          font-family: FontAwesome;
+          font-family: FontAwesome, sans-serif;
           content: '\f110';
         }
       }
 
       .error {
         .status-cell:after {
-          font-family: FontAwesome;
+          font-family: FontAwesome, sans-serif;
           content: '\f071';
         }
       }
@@ -51,7 +51,7 @@ html, body {
         }
 
         .status-cell:after {
-          font-family: FontAwesome;
+          font-family: FontAwesome, sans-serif;
           content: '\f00c';
         }
       }
