@@ -7,7 +7,7 @@ import {TenantService} from '../../services/tenant.service';
   templateUrl: './tenantinputform.component.html',
   styleUrls: ['./tenantinputform.component.scss']
 })
-export class TenantinputformComponent implements OnInit, OnDestroy {
+export class TenantinputformComponent implements OnInit {
   instrumentForm: FormGroup;
 
   constructor(private tenantservice: TenantService) { }
@@ -22,8 +22,5 @@ export class TenantinputformComponent implements OnInit, OnDestroy {
   onSubmit() {
     console.log(this.instrumentForm)
       this.tenantservice.saveTenant(this.instrumentForm.value.description)
-  }
-
-  ngOnDestroy(): void {
   }
 }

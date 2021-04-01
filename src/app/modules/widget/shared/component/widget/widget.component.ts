@@ -18,8 +18,6 @@ export class WidgetComponent implements OnInit, OnDestroy {
 
   @Input() resized: Subject<any>;
 
-  constructor() { }
-
   ngOnInit() {
     if (this.resized) {
       this.resized

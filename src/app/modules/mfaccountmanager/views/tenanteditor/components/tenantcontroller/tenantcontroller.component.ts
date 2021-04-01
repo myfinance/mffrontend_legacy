@@ -7,7 +7,7 @@ import {Instrument} from '../../../../../myfinance-tsclient-generated';
   templateUrl: './tenantcontroller.component.html',
   styleUrls: ['./tenantcontroller.component.scss']
 })
-export class TenantcontrollerComponent implements OnInit, OnDestroy {
+export class TenantcontrollerComponent implements OnInit {
 
   noTenantSelected = true;
   selectedTenant: Instrument
@@ -28,18 +28,7 @@ export class TenantcontrollerComponent implements OnInit, OnDestroy {
     if (this.selectedTenant) { this.noTenantSelected = false; }
   }
 
-  new() {
-    console.log('new')
-  }
-
-  update() {
-    console.log('update')
-  }
-
   getSelectedTenantId(): number {
       if (!this.selectedTenant) { return 0; } else { return this.selectedTenant.instrumentid; }
-  }
-
-  ngOnDestroy(): void {
   }
 }

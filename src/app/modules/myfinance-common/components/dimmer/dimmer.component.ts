@@ -5,15 +5,8 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './dimmer.component.html',
   styleUrls: ['./dimmer.component.scss']
 })
-export class DimmerComponent implements OnInit {
+export class DimmerComponent {
 
   @Input()
   isDimmed
-
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

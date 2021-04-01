@@ -6,7 +6,7 @@ import {DashboardService} from "../../../../dashboard/services/dashboard.service
   templateUrl: './widget-content.component.html',
   styleUrls: ['./widget-content.component.scss']
 })
-export class WidgetContentComponent implements OnInit {
+export class WidgetContentComponent {
 
   private _title: string;
   private _hideHeader: boolean;
@@ -21,10 +21,5 @@ export class WidgetContentComponent implements OnInit {
 
   @Input()
   hideHeader
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

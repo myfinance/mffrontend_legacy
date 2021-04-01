@@ -5,11 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './error-view.component.html',
   styleUrls: ['./error-view.component.scss']
 })
-export class ErrorViewComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class ErrorViewComponent {
 }

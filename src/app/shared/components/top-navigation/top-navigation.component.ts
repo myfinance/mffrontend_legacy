@@ -7,7 +7,7 @@ import {Instrument} from '../../../modules/myfinance-tsclient-generated';
   templateUrl: './top-navigation.component.html',
   styleUrls: ['./top-navigation.component.scss']
 })
-export class TopNavigationComponent implements OnInit, OnDestroy {
+export class TopNavigationComponent implements OnInit {
 
   _isCollapsed = true;
   currentZone: string;
@@ -38,8 +38,5 @@ export class TopNavigationComponent implements OnInit, OnDestroy {
     } catch (e) {
       setTimeout(this._updateCurrentZone.bind(this), 1000);
     }
-  }
-
-  ngOnDestroy(): void {
   }
 }

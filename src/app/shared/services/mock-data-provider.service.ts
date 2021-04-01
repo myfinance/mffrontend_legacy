@@ -13,8 +13,6 @@ import {
 @Injectable()
 export class MockDataProviderService {
 
-  constructor() { }
-
   getInstruments(): Observable<InstrumentListModel> {
 
     const now: Date = new Date(Date.now());

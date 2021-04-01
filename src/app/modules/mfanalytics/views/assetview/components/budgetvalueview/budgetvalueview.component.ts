@@ -55,11 +55,4 @@ export class BudgetValueViewComponent {
     //console.log('Item clicked',data['name'].substring(0,data['name'].indexOf(':')));
     this.assetviewservice.setSelectedinstrument(data['name'].substring(0,data['name'].indexOf(':')));
   }
-
-  onActivate() {
-  }
-
-  onDeactivate() {
-  }
-
 }

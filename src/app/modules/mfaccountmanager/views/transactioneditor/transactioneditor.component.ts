@@ -8,7 +8,7 @@ import {TransactionService} from './services/transaction.service';
   templateUrl: './transactioneditor.component.html',
   styleUrls: ['./transactioneditor.component.scss']
 })
-export class TransactioneditorComponent extends AbstractDashboard implements OnInit, OnDestroy {
+export class TransactioneditorComponent extends AbstractDashboard implements OnInit {
 
   title = 'Transactions';
   view = 'fit';
@@ -88,8 +88,5 @@ export class TransactioneditorComponent extends AbstractDashboard implements OnI
       () => {
         if (this.grid) { this.grid.refresh(); }
       })
-  }
-
-  ngOnDestroy() {
   }
 }
