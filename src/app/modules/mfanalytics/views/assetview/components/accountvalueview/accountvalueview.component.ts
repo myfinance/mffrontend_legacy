@@ -6,7 +6,7 @@ import { AssetviewService } from '../../services/assetview.service';
   templateUrl: './accountvalueview.component.html',
   styleUrls: ['./accountvalueview.component.css']
 })
-export class AccountValueViewComponent implements OnInit {
+export class AccountValueViewComponent {
 
   valuemap = [
       {
@@ -41,9 +41,6 @@ export class AccountValueViewComponent implements OnInit {
       }
     )
     this.updateValues();
-  }
-
-  ngOnInit(): void {
   }
 
   updateValues() {

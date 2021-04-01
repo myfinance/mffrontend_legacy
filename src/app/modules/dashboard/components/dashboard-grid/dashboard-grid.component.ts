@@ -55,10 +55,6 @@ export class DashboardGridComponent implements DashboardGridInterface, OnInit, A
     this.resizedSubject.next({ uuid: item.widget.uuid, component: itemComponent });
   }
 
-  itemInit(item, itemComponent): void { }
-
-  itemRemoved(item, itemComponent): void { }
-
   emptyCellClick(event, item): void {
     this.dashboard.push(item);
   }
@@ -93,8 +89,6 @@ export class DashboardGridComponent implements DashboardGridInterface, OnInit, A
         },
         stop: this.eventStop.bind(this)
       },
-      itemInitCallback: this.itemInit.bind(this),
-      itemRemovedCallback: this.itemRemoved.bind(this),
       emptyCellClickCallback: this.emptyCellClick.bind(this),
       emptyCellContextMenuCallback: this.emptyCellClick.bind(this),
       emptyCellDropCallback: this.emptyCellClick.bind(this),

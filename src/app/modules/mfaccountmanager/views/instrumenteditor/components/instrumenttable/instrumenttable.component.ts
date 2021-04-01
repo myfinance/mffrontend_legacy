@@ -7,7 +7,7 @@ import { GridOptions } from 'ag-grid-community';
   templateUrl: './instrumenttable.component.html',
   styleUrls: ['./instrumenttable.component.scss']
 })
-export class InstrumenttableComponent implements OnInit, OnDestroy {
+export class InstrumenttableComponent implements OnInit {
 
 
   @Input() data: any;
@@ -59,7 +59,5 @@ export class InstrumenttableComponent implements OnInit, OnDestroy {
     if (this.instrumentservice.getIsInit()) {
       this.loadData();
     }
-  }
-  ngOnDestroy(): void {
   }
 }

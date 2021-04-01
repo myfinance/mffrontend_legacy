@@ -6,7 +6,7 @@ import {TransactionService} from '../../services/transaction.service';
   templateUrl: './valuegraph.component.html',
   styleUrls: ['./valuegraph.component.scss']
 })
-export class ValuegraphComponent implements OnInit {
+export class ValuegraphComponent {
 
   valuemap = [
     {
@@ -52,10 +52,6 @@ export class ValuegraphComponent implements OnInit {
       () => {
         this.updateValues()}
     )
-  }
-
-  ngOnInit() {
-
   }
 
   updateValues() {

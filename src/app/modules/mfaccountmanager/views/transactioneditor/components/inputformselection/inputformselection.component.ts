@@ -5,11 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './inputformselection.component.html',
   styleUrls: ['./inputformselection.component.scss']
 })
-export class InputformselectionComponent implements OnInit {
+export class InputformselectionComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

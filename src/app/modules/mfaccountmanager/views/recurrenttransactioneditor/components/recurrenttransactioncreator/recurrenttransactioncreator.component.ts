@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './recurrenttransactioncreator.component.html',
   styleUrls: ['./recurrenttransactioncreator.component.css']
 })
-export class RecurrenttransactioncreatorComponent implements OnInit {
+export class RecurrenttransactioncreatorComponent  {
 
-  constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

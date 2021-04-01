@@ -8,7 +8,7 @@ import { AssetviewService } from './services/assetview.service';
   templateUrl: './assetview.component.html',
   styleUrls: ['./assetview.component.scss']
 })
-export class AssetviewComponent  extends AbstractDashboard implements OnInit, OnDestroy {
+export class AssetviewComponent  extends AbstractDashboard implements OnInit {
 
   title = 'Transactions';
   view = 'fit';
@@ -96,8 +96,5 @@ export class AssetviewComponent  extends AbstractDashboard implements OnInit, On
       () => {
         if (this.grid) { this.grid.refresh(); }
       })
-  }
-
-  ngOnDestroy() {
   }
 }

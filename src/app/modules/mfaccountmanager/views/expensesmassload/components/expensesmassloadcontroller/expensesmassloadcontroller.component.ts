@@ -7,14 +7,11 @@ import { Instrument } from '../../../../../myfinance-tsclient-generated';
   templateUrl: './expensesmassloadcontroller.component.html',
   styleUrls: ['./expensesmassloadcontroller.component.scss']
 })
-export class ExpensesmassloadcontrollerComponent implements OnInit {
+export class ExpensesmassloadcontrollerComponent {
 
   fileToUpload: File = null;
 
   constructor(private expensesmassloadService: ExpensesmassloadService) { }
-
-  ngOnInit(): void {
-  }
 
   onFileChange(event) {
     if (event.target.files && event.target.files.length) {

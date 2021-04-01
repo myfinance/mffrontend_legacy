@@ -8,7 +8,7 @@ import {RecurrentTransactionFEModel, RecurrentTransactionService} from '../../se
   templateUrl: './recurrenttransactionview.component.html',
   styleUrls: ['./recurrenttransactionview.component.css']
 })
-export class RecurrenttransactionviewComponent implements OnInit, OnDestroy  {
+export class RecurrenttransactionviewComponent implements OnInit  {
 
   @Input() data: any;
 
@@ -76,8 +76,4 @@ export class RecurrenttransactionviewComponent implements OnInit, OnDestroy  {
       this.loadData();
     }
   }
-
-  ngOnDestroy(): void {
-  }
-
 }

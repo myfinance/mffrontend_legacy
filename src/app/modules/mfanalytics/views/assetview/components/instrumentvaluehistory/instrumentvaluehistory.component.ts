@@ -6,7 +6,7 @@ import { AssetviewService } from '../../services/assetview.service';
   templateUrl: './instrumentvaluehistory.component.html',
   styleUrls: ['./instrumentvaluehistory.component.css']
 })
-export class InstrumentvaluehistoryComponent implements OnInit {
+export class InstrumentvaluehistoryComponent {
 
   valuemap = [
     {
@@ -45,10 +45,6 @@ export class InstrumentvaluehistoryComponent implements OnInit {
       }
     )
     this.updateValues();
-  }
-
-  ngOnInit() {
-
   }
 
   updateValues() {

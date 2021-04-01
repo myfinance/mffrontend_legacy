@@ -8,7 +8,7 @@ import {TenantService} from "./services/tenant.service";
   templateUrl: './tenanteditor.component.html',
   styleUrls: ['./tenanteditor.component.scss']
 })
-export class TenanteditorComponent  extends AbstractDashboard implements OnInit, OnDestroy {
+export class TenanteditorComponent  extends AbstractDashboard implements OnInit {
 
   title = 'Transactions';
   view = 'fit';
@@ -46,8 +46,5 @@ export class TenanteditorComponent  extends AbstractDashboard implements OnInit,
       () => {
         if (this.grid) { this.grid.refresh(); }
       })
-  }
-
-  ngOnDestroy() {
   }
 }

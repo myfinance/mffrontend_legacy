@@ -8,7 +8,7 @@ import {RecurrentTransactionService} from './services/recurrenttransaction.servi
   templateUrl: './recurrenttransactioneditor.component.html',
   styleUrls: ['./recurrenttransactioneditor.component.scss']
 })
-export class RecurrenttransactioneditorComponent extends AbstractDashboard implements OnInit, OnDestroy {
+export class RecurrenttransactioneditorComponent extends AbstractDashboard implements OnInit {
 
   title = 'Recurrenttransactions';
   view = 'fit';
@@ -68,8 +68,5 @@ export class RecurrenttransactioneditorComponent extends AbstractDashboard imple
       () => {
         if (this.grid) { this.grid.refresh(); }
       })
-  }
-
-  ngOnDestroy() {
   }
 }

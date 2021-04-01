@@ -7,7 +7,7 @@ import {TenantService} from '../../services/tenant.service';
   templateUrl: './tenanttable.component.html',
   styleUrls: ['./tenanttable.component.scss']
 })
-export class TenanttableComponent implements OnInit, OnDestroy {
+export class TenanttableComponent implements OnInit {
 
 
   @Input() data: any;
@@ -60,8 +60,5 @@ export class TenanttableComponent implements OnInit, OnDestroy {
     if (this.tenantservice.getIsInit()) {
       this.loadData();
     }
-  }
-
-  ngOnDestroy(): void {
   }
 }

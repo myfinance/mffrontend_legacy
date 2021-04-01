@@ -28,7 +28,4 @@ export class InstrumentSearchComponent {
         }
       );
   }
-  select(instrument: Instrument): void{
-
-  }
 }

@@ -9,7 +9,7 @@ import {Transaction} from '../../../../../myfinance-tsclient-generated';
   templateUrl: './transactiontable.component.html',
   styleUrls: ['./transactiontable.component.scss']
 })
-export class TransactiontableComponent implements OnInit, OnDestroy  {
+export class TransactiontableComponent implements OnInit  {
 
   @Input() data: any;
 
@@ -66,8 +66,4 @@ export class TransactiontableComponent implements OnInit, OnDestroy  {
       this.loadData();
     }
   }
-
-  ngOnDestroy(): void {
-  }
-
 }

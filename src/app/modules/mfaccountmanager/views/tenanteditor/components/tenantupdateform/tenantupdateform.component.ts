@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './tenantupdateform.component.html',
   styleUrls: ['./tenantupdateform.component.scss']
 })
-export class TenantupdateformComponent  implements OnInit, OnDestroy {
+export class TenantupdateformComponent  implements OnInit {
   noTenantSelected = true;
   selectedTenant: Instrument;
   tenantForm: FormGroup;
@@ -49,9 +49,6 @@ export class TenantupdateformComponent  implements OnInit, OnDestroy {
     } else {
       console.log('untouched');
     }
-  }
-
-  ngOnDestroy(): void {
   }
 }
 

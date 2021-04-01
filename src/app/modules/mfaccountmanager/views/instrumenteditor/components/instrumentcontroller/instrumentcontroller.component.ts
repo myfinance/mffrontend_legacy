@@ -7,7 +7,7 @@ import {InstrumentService} from '../../services/instrument.service';
   templateUrl: './instrumentcontroller.component.html',
   styleUrls: ['./instrumentcontroller.component.scss']
 })
-export class InstrumentcontrollerComponent implements OnInit, OnDestroy {
+export class InstrumentcontrollerComponent implements OnInit {
 
   noInstrumentSelected = true;
   selectedInstrument: Instrument
@@ -30,8 +30,5 @@ export class InstrumentcontrollerComponent implements OnInit, OnDestroy {
 
   getSelectedInstrumentId(): number {
     if (!this.selectedInstrument) { return 0; } else { return this.selectedInstrument.instrumentid; }
-  }
-
-  ngOnDestroy(): void {
   }
 }

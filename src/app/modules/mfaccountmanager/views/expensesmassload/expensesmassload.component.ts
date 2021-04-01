@@ -8,7 +8,7 @@ import { ExpensesmassloadService } from './services/expensesmassload.service';
   templateUrl: './expensesmassload.component.html',
   styleUrls: ['./expensesmassload.component.scss']
 })
-export class ExpensesmassloadComponent extends AbstractDashboard implements OnInit, OnDestroy {
+export class ExpensesmassloadComponent extends AbstractDashboard implements OnInit {
 
   title = 'Massenupload';
   view = 'fit';
@@ -48,8 +48,5 @@ export class ExpensesmassloadComponent extends AbstractDashboard implements OnIn
       () => {
         if (this.grid) { this.grid.refresh(); }
       })
-  }
-
-  ngOnDestroy() {
   }
 }

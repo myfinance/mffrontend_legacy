@@ -8,7 +8,7 @@ import {InstrumentService} from './services/instrument.service';
   templateUrl: './instrumenteditor.component.html',
   styleUrls: ['./instrumenteditor.component.scss']
 })
-export class InstrumenteditorComponent  extends AbstractDashboard implements OnInit, OnDestroy {
+export class InstrumenteditorComponent  extends AbstractDashboard implements OnInit {
 
   title = 'Instruments';
   view = 'fit';
@@ -48,8 +48,5 @@ export class InstrumenteditorComponent  extends AbstractDashboard implements OnI
       () => {
         if (this.grid) { this.grid.refresh(); }
       })
-  }
-
-  ngOnDestroy() {
   }
 }

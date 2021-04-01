@@ -8,7 +8,7 @@ import {Instrument} from '../../../../../myfinance-tsclient-generated';
   templateUrl: './instrumentupdateform.component.html',
   styleUrls: ['./instrumentupdateform.component.scss']
 })
-export class InstrumentupdateformComponent  implements OnInit, OnDestroy {
+export class InstrumentupdateformComponent  implements OnInit {
   instrumentForm: FormGroup;
   noInstrumentSelected = true;
   selectedInstrument: Instrument;
@@ -52,8 +52,5 @@ export class InstrumentupdateformComponent  implements OnInit, OnDestroy {
     } else {
       console.log('untouched');
     }
-  }
-
-  ngOnDestroy(): void {
   }
 }

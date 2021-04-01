@@ -6,7 +6,7 @@ import { AssetviewService } from '../../services/assetview.service';
   templateUrl: './instrumentvaluedetailsview.component.html',
   styleUrls: ['./instrumentvaluedetailsview.component.css']
 })
-export class InstrumentvaluedetailsviewComponent implements OnInit {
+export class InstrumentvaluedetailsviewComponent {
 
   instrumentdescription = "no Instrument selected";
   value = 0;
@@ -24,9 +24,6 @@ export class InstrumentvaluedetailsviewComponent implements OnInit {
          this.setValues()
       }
     )
-  }
-
-  ngOnInit(): void {
   }
 
   private setValues() {

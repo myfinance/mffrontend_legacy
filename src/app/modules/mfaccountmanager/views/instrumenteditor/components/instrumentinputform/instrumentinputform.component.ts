@@ -9,7 +9,7 @@ import {Instrument} from '../../../../../myfinance-tsclient-generated';
   templateUrl: './instrumentinputform.component.html',
   styleUrls: ['./instrumentinputform.component.scss']
 })
-export class InstrumentinputformComponent implements OnInit, OnDestroy {
+export class InstrumentinputformComponent implements OnInit {
   instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.Giro, InstrumentTypeEnum.Budget];
   budgetGroups: Instrument[] = [];
   instrumentForm: FormGroup;
@@ -56,8 +56,5 @@ export class InstrumentinputformComponent implements OnInit, OnDestroy {
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.Budget && this.instrumentForm.value.budgetGroup == null) {
       return {'BudgetGroup is necessary': true};
     } else { return null; }
-  }
-
-  ngOnDestroy(): void {
   }
 }

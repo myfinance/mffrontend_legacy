@@ -6,7 +6,7 @@ import { AssetviewService } from '../../services/assetview.service';
   templateUrl: './accountvaluechangeview.component.html',
   styleUrls: ['./accountvaluechangeview.component.css']
 })
-export class AccountValueChangeViewComponent implements OnInit {
+export class AccountValueChangeViewComponent {
 
   valuemap = [];
   view: any[] = [600, 600];
@@ -36,9 +36,6 @@ export class AccountValueChangeViewComponent implements OnInit {
       }
     )
     this.updateValues();
-  }
-
-  ngOnInit(): void {
   }
 
   updateValues() {

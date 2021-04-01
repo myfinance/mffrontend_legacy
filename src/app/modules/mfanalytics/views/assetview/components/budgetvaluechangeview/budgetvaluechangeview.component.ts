@@ -6,7 +6,7 @@ import { AssetviewService } from '../../services/assetview.service';
   templateUrl: './budgetvaluechangeview.component.html',
   styleUrls: ['./budgetvaluechangeview.component.css']
 })
-export class BudgetValueChangeViewComponent implements OnInit {
+export class BudgetValueChangeViewComponent {
 
   valuemap = [];
   view: any[] = [600, 600];
@@ -36,9 +36,6 @@ export class BudgetValueChangeViewComponent implements OnInit {
       }
     )
     this.updateValues();
-  }
-
-  ngOnInit(): void {
   }
 
   updateValues() {
