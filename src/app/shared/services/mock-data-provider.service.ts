@@ -16,8 +16,8 @@ export class MockDataProviderService {
   getInstruments(): Observable<InstrumentListModel> {
 
     const now: Date = new Date(Date.now());
-    const instrument: Instrument = { instrumentid: 1, description: 'testinstrument1', treelastchanged: now, isactive: true, instrumentType: 'Equity' };
-    const instrument2: Instrument = { instrumentid: 2, description: 'testinstrument2', treelastchanged: now, isactive: true, instrumentType: 'Equity' };
+    const instrument: Instrument = { instrumentid: 1, description: 'testinstrument1', treelastchanged: now, isactive: true, instrumentType: 'EQUITY' };
+    const instrument2: Instrument = { instrumentid: 2, description: 'testinstrument2', treelastchanged: now, isactive: true, instrumentType: 'EQUITY' };
     const instruments: Instrument[] = [instrument, instrument2];
     const instrumentList: InstrumentListModel = {values: instruments, url: 'mock', id: 'mockid'};
     return Observable.of(instrumentList);
@@ -28,9 +28,9 @@ export class MockDataProviderService {
 
     const now: Date = new Date(Date.now());
     const instrument1: Instrument = {
-      instrumentid: 1, description: 'giro', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.Giro };
+      instrumentid: 1, description: 'giro', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.GIRO };
     const instrument2: Instrument = {
-      instrumentid: 2, description: 'budget', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.Budget };
+      instrumentid: 2, description: 'budget', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.BUDGET };
     const cashflow1: Cashflow = {cashflowid: 1, instrument: instrument1, value: 100};
     const cashflow2: Cashflow = {cashflowid: 2, instrument: instrument2, value: 100};
     const cashflows: Cashflow[] = [cashflow1, cashflow2];
@@ -48,9 +48,9 @@ export class MockDataProviderService {
   getRecurrentTransactions(): Observable<RecurrentTransactionListModel> {
     const now: Date = new Date(Date.now());
     const instrument1: Instrument = {
-      instrumentid: 1, description: 'giro', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.Giro };
+      instrumentid: 1, description: 'giro', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.GIRO };
     const instrument2: Instrument = {
-      instrumentid: 2, description: 'budget', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.Budget };
+      instrumentid: 2, description: 'budget', treelastchanged: now, isactive: true, instrumentType: Instrument.InstrumentTypeEnum.BUDGET };
     const transaction: RecurrentTransaction = {
       recurrenttransactionid: 1, description: 'testdauertransaction1', nexttransaction: '2019-01-01',
       instrumentByInstrumentid2: instrument1, instrumentByInstrumentid1: instrument2, recurrencytype: 1,

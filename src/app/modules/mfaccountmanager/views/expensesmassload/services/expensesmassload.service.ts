@@ -48,8 +48,8 @@ export class ExpensesmassloadService extends AbstractDashboardDataService {
       .subscribe(
         (instruments: InstrumentListModel) => {
           this.instruments = instruments.values;
-          this.budgets = this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget);
-          this.giros = this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Giro);
+          this.budgets = this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
+          this.giros = this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.GIRO);
           this.instrumentSubject.next();
           this.isInstrumentLoaded = true;
           this.checkDataLoadStatus();

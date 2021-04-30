@@ -15,7 +15,7 @@ import { TenantListResource } from './tenantListResource';
 
 
 export interface EnvironmentDataResource { 
-    instruments?: InstrumentListResource;
     recurrentTransaction?: RecurrentTransactionListResource;
+    instruments?: InstrumentListResource;
     tenants?: TenantListResource;
 }

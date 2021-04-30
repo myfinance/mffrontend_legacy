@@ -163,15 +163,15 @@ export class TransactionService extends AbstractDashboardDataService {
   }
 
   getInstruments(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Giro || i.instrumentType === InstrumentTypeEnum.Budget );
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.GIRO || i.instrumentType === InstrumentTypeEnum.BUDGET );
   }
 
   getGiros(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Giro);
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.GIRO);
   }
 
   getBudgets(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget);
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
   }
 
   setDaterange(daterange: Array<Date>) {

@@ -129,13 +129,13 @@ export class ConfigService {
       instrumentid: 1,
       description: 'tenant1',
       isactive: true,
-      instrumentType: Instrument.InstrumentTypeEnum.Tenant,
+      instrumentType: Instrument.InstrumentTypeEnum.TENANT,
       treelastchanged: new Date() };
     const instrument2: Instrument = {
       instrumentid: 2,
       description: 'tenant2',
       isactive: true,
-      instrumentType: Instrument.InstrumentTypeEnum.Tenant,
+      instrumentType: Instrument.InstrumentTypeEnum.TENANT,
       treelastchanged: new Date() };
     const tenants: Instrument[] = [instrument, instrument2];
     const envList: InstrumentListModel = {values: tenants, url: 'mock', id: 'mockid'};

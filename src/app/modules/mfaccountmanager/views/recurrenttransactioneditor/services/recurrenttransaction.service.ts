@@ -115,17 +115,17 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
   }
 
   getGiros(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Giro);
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.GIRO);
   }
 
   getBudgets(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Budget);
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
   }
 
   getExpenseBudgets(): Array<Instrument> {
     const expenseBudgets =
       this.instruments.filter(i =>
-        (i.instrumentType === InstrumentTypeEnum.Budget &&
+        (i.instrumentType === InstrumentTypeEnum.BUDGET &&
         (this.incomeBudget == null || i.instrumentid !== this.incomeBudget.instrumentid)));
     return expenseBudgets;
   }
@@ -140,7 +140,7 @@ export class RecurrentTransactionService extends AbstractDashboardDataService {
   }
 
   getBudgetGroups(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BudgetGroup );
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGETGROUP );
   }
 
   setBudgetGroupfilter(instrumentid: number) {

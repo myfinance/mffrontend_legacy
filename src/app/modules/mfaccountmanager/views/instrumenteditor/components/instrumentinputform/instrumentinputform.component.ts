@@ -10,7 +10,7 @@ import {Instrument} from '../../../../../myfinance-tsclient-generated';
   styleUrls: ['./instrumentinputform.component.scss']
 })
 export class InstrumentinputformComponent implements OnInit {
-  instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.Giro, InstrumentTypeEnum.Budget];
+  instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.GIRO, InstrumentTypeEnum.BUDGET];
   budgetGroups: Instrument[] = [];
   instrumentForm: FormGroup;
 
@@ -20,7 +20,7 @@ export class InstrumentinputformComponent implements OnInit {
   ngOnInit() {
       this.instrumentForm = this.formBuilder.group({
         description: ['', Validators.required],
-        instrumentType: [InstrumentTypeEnum.Giro, Validators.required],
+        instrumentType: [InstrumentTypeEnum.GIRO, Validators.required],
         budgetGroup: [null, [Validators.required, this.isBudgetGroupNecessary.bind(this)]]
       });
 
@@ -43,9 +43,9 @@ export class InstrumentinputformComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.Giro) {
+    if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.GIRO) {
       this.instrumentservice.saveGiro(this.instrumentForm.value.description)
-    } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.Budget) {
+    } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.BUDGET) {
       this.instrumentservice.saveBudget(this.instrumentForm.value.description, this.instrumentForm.value.budgetGroup.instrumentid)
     }
   }
@@ -53,7 +53,7 @@ export class InstrumentinputformComponent implements OnInit {
   isBudgetGroupNecessary(control: FormControl): {[s: string]: boolean} {
     if (this.instrumentForm == null) { return null; }
     if (this.instrumentForm.value == null) { return null; }
-    if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.Budget && this.instrumentForm.value.budgetGroup == null) {
+    if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.BUDGET && this.instrumentForm.value.budgetGroup == null) {
       return {'BudgetGroup is necessary': true};
     } else { return null; }
   }

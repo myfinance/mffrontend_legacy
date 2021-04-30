@@ -353,6 +353,81 @@ export class MyFinanceService {
     }
 
     /**
+     * save Income or Expense linked to an additional account
+     * 
+     * @param envID The Service Environment
+     * @param description description
+     * @param accId the accountId of the income or expense
+     * @param linkedAccId the linked accountId of the income or expense
+     * @param budgetId the budgetId of the income or expense
+     * @param value the value of the income or expense
+     * @param transactiondate the transactiondate(yyyy-mm-dd
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public addLinkedIncomeExpense_envID_description_accId_linkedAccId_budgetId_value_transactiondate(envID: string, description?: string, accId?: number, linkedAccId?: number, budgetId?: number, value?: number, transactiondate?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addLinkedIncomeExpense_envID_description_accId_linkedAccId_budgetId_value_transactiondate(envID: string, description?: string, accId?: number, linkedAccId?: number, budgetId?: number, value?: number, transactiondate?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addLinkedIncomeExpense_envID_description_accId_linkedAccId_budgetId_value_transactiondate(envID: string, description?: string, accId?: number, linkedAccId?: number, budgetId?: number, value?: number, transactiondate?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addLinkedIncomeExpense_envID_description_accId_linkedAccId_budgetId_value_transactiondate(envID: string, description?: string, accId?: number, linkedAccId?: number, budgetId?: number, value?: number, transactiondate?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling addLinkedIncomeExpense_envID_description_accId_linkedAccId_budgetId_value_transactiondate.');
+        }
+
+
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (description !== undefined && description !== null) {
+            queryParameters = queryParameters.set('description', <any>description);
+        }
+        if (accId !== undefined && accId !== null) {
+            queryParameters = queryParameters.set('accId', <any>accId);
+        }
+        if (linkedAccId !== undefined && linkedAccId !== null) {
+            queryParameters = queryParameters.set('linkedAccId', <any>linkedAccId);
+        }
+        if (budgetId !== undefined && budgetId !== null) {
+            queryParameters = queryParameters.set('budgetId', <any>budgetId);
+        }
+        if (value !== undefined && value !== null) {
+            queryParameters = queryParameters.set('value', <any>value);
+        }
+        if (transactiondate !== undefined && transactiondate !== null) {
+            queryParameters = queryParameters.set('transactiondate', <any>transactiondate);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/addLinkedIncomeExpense`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * save Price
      * 
      * @param envID The Service Environment
@@ -406,6 +481,80 @@ export class MyFinanceService {
         ];
 
         return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/addPrice`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * save Realestate
+     * 
+     * @param envID The Service Environment
+     * @param description description
+     * @param tenantId the Id of the tenant which the realestate is attached to
+     * @param valueBudgetId the budget to add the value of the realestate
+     * @param yieldgoal all yieldgoals with valid from date
+     * @param realEstateProfit all realEstateProfits with valid from date
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(envID: string, description?: string, tenantId?: number, valueBudgetId?: number, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(envID: string, description?: string, tenantId?: number, valueBudgetId?: number, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(envID: string, description?: string, tenantId?: number, valueBudgetId?: number, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(envID: string, description?: string, tenantId?: number, valueBudgetId?: number, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit.');
+        }
+
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (description !== undefined && description !== null) {
+            queryParameters = queryParameters.set('description', <any>description);
+        }
+        if (tenantId !== undefined && tenantId !== null) {
+            queryParameters = queryParameters.set('tenantId', <any>tenantId);
+        }
+        if (valueBudgetId !== undefined && valueBudgetId !== null) {
+            queryParameters = queryParameters.set('valueBudgetId', <any>valueBudgetId);
+        }
+        if (yieldgoal) {
+            yieldgoal.forEach((element) => {
+                queryParameters = queryParameters.append('yieldgoal', <any>element);
+            })
+        }
+        if (realEstateProfit) {
+            realEstateProfit.forEach((element) => {
+                queryParameters = queryParameters.append('realEstateProfit', <any>element);
+            })
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/addRealestate`,
             null,
             {
                 params: queryParameters,
@@ -1161,10 +1310,10 @@ export class MyFinanceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe?: 'body', reportProgress?: boolean): Observable<InstrumentListModel>;
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
-    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN', observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'GIRO' | 'MONEYATCALL' | 'TIMEDEPOSIT' | 'BUILDINGSAVINGACCOUNT' | 'BUDGET' | 'TENANT' | 'ACCOUNTPORTFOLIO' | 'ARTIFICALPORTFOLIO' | 'BUDGETGROUP' | 'DEPOT' | 'BUILDINGSAVING' | 'CURRENCY' | 'EQUITY' | 'FONDS' | 'ETF' | 'INDEX' | 'BOND' | 'LIFEINSURANCE' | 'DEPRECATIONOBJECT' | 'REALESTATE' | 'LOAN' | 'BUDGETPORTFOLIO' | 'UNKNOWN', observe?: 'body', reportProgress?: boolean): Observable<InstrumentListModel>;
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'GIRO' | 'MONEYATCALL' | 'TIMEDEPOSIT' | 'BUILDINGSAVINGACCOUNT' | 'BUDGET' | 'TENANT' | 'ACCOUNTPORTFOLIO' | 'ARTIFICALPORTFOLIO' | 'BUDGETGROUP' | 'DEPOT' | 'BUILDINGSAVING' | 'CURRENCY' | 'EQUITY' | 'FONDS' | 'ETF' | 'INDEX' | 'BOND' | 'LIFEINSURANCE' | 'DEPRECATIONOBJECT' | 'REALESTATE' | 'LOAN' | 'BUDGETPORTFOLIO' | 'UNKNOWN', observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentListModel>>;
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'GIRO' | 'MONEYATCALL' | 'TIMEDEPOSIT' | 'BUILDINGSAVINGACCOUNT' | 'BUDGET' | 'TENANT' | 'ACCOUNTPORTFOLIO' | 'ARTIFICALPORTFOLIO' | 'BUDGETGROUP' | 'DEPOT' | 'BUILDINGSAVING' | 'CURRENCY' | 'EQUITY' | 'FONDS' | 'ETF' | 'INDEX' | 'BOND' | 'LIFEINSURANCE' | 'DEPRECATIONOBJECT' | 'REALESTATE' | 'LOAN' | 'BUDGETPORTFOLIO' | 'UNKNOWN', observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentListModel>>;
+    public getInstrumentPerTypeList_envID_tenant_instrumenttype(envID: string, tenant?: number, instrumenttype?: 'GIRO' | 'MONEYATCALL' | 'TIMEDEPOSIT' | 'BUILDINGSAVINGACCOUNT' | 'BUDGET' | 'TENANT' | 'ACCOUNTPORTFOLIO' | 'ARTIFICALPORTFOLIO' | 'BUDGETGROUP' | 'DEPOT' | 'BUILDINGSAVING' | 'CURRENCY' | 'EQUITY' | 'FONDS' | 'ETF' | 'INDEX' | 'BOND' | 'LIFEINSURANCE' | 'DEPRECATIONOBJECT' | 'REALESTATE' | 'LOAN' | 'BUDGETPORTFOLIO' | 'UNKNOWN', observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (envID === null || envID === undefined) {
             throw new Error('Required parameter envID was null or undefined when calling getInstrumentPerTypeList_envID_tenant_instrumenttype.');
@@ -1541,6 +1690,80 @@ export class MyFinanceService {
         ];
 
         return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/updateInstrument`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * update Realestate
+     * 
+     * @param envID The Service Environment
+     * @param realestateIdId the Id of the RealEstate
+     * @param description description
+     * @param yieldgoal all yieldgoals with valid from date
+     * @param realEstateProfit all realEstateProfits with valid from date
+     * @param isactive isactive
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateRealestate_envID_realestateIdId_description_yieldgoal_realEstateProfit_isactive(envID: string, realestateIdId?: number, description?: string, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, isactive?: boolean, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateRealestate_envID_realestateIdId_description_yieldgoal_realEstateProfit_isactive(envID: string, realestateIdId?: number, description?: string, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, isactive?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateRealestate_envID_realestateIdId_description_yieldgoal_realEstateProfit_isactive(envID: string, realestateIdId?: number, description?: string, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, isactive?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateRealestate_envID_realestateIdId_description_yieldgoal_realEstateProfit_isactive(envID: string, realestateIdId?: number, description?: string, yieldgoal?: Array<string>, realEstateProfit?: Array<string>, isactive?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling updateRealestate_envID_realestateIdId_description_yieldgoal_realEstateProfit_isactive.');
+        }
+
+
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (realestateIdId !== undefined && realestateIdId !== null) {
+            queryParameters = queryParameters.set('realestateIdId', <any>realestateIdId);
+        }
+        if (description !== undefined && description !== null) {
+            queryParameters = queryParameters.set('description', <any>description);
+        }
+        if (yieldgoal) {
+            yieldgoal.forEach((element) => {
+                queryParameters = queryParameters.append('yieldgoal', <any>element);
+            })
+        }
+        if (realEstateProfit) {
+            realEstateProfit.forEach((element) => {
+                queryParameters = queryParameters.append('realEstateProfit', <any>element);
+            })
+        }
+        if (isactive !== undefined && isactive !== null) {
+            queryParameters = queryParameters.set('isactive', <any>isactive);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/updateRealestate`,
             null,
             {
                 params: queryParameters,

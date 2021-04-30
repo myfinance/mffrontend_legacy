@@ -22,29 +22,30 @@ export interface Instrument {
     businesskey?: string;
 }
 export namespace Instrument {
-    export type InstrumentTypeEnum = 'Giro' | 'MoneyAtCall' | 'TimeDeposit' | 'BuildingsavingAccount' | 'Budget' | 'Tenant' | 'AccountPortfolio' | 'ArtificialPortfolio' | 'BudgetGroup' | 'Depot' | 'Buildingsaving' | 'Currency' | 'Equity' | 'Fonds' | 'ETF' | 'Index' | 'Bond' | 'LifeInsurance' | 'DepreciationObject' | 'RealEstate' | 'Loan' | 'UNKNOWN';
+    export type InstrumentTypeEnum = 'GIRO' | 'MONEYATCALL' | 'TIMEDEPOSIT' | 'BUILDINGSAVINGACCOUNT' | 'BUDGET' | 'TENANT' | 'ACCOUNTPORTFOLIO' | 'ARTIFICALPORTFOLIO' | 'BUDGETGROUP' | 'DEPOT' | 'BUILDINGSAVING' | 'CURRENCY' | 'EQUITY' | 'FONDS' | 'ETF' | 'INDEX' | 'BOND' | 'LIFEINSURANCE' | 'DEPRECATIONOBJECT' | 'REALESTATE' | 'LOAN' | 'BUDGETPORTFOLIO' | 'UNKNOWN';
     export const InstrumentTypeEnum = {
-        Giro: 'Giro' as InstrumentTypeEnum,
-        MoneyAtCall: 'MoneyAtCall' as InstrumentTypeEnum,
-        TimeDeposit: 'TimeDeposit' as InstrumentTypeEnum,
-        BuildingsavingAccount: 'BuildingsavingAccount' as InstrumentTypeEnum,
-        Budget: 'Budget' as InstrumentTypeEnum,
-        Tenant: 'Tenant' as InstrumentTypeEnum,
-        AccountPortfolio: 'AccountPortfolio' as InstrumentTypeEnum,
-        ArtificialPortfolio: 'ArtificialPortfolio' as InstrumentTypeEnum,
-        BudgetGroup: 'BudgetGroup' as InstrumentTypeEnum,
-        Depot: 'Depot' as InstrumentTypeEnum,
-        Buildingsaving: 'Buildingsaving' as InstrumentTypeEnum,
-        Currency: 'Currency' as InstrumentTypeEnum,
-        Equity: 'Equity' as InstrumentTypeEnum,
-        Fonds: 'Fonds' as InstrumentTypeEnum,
+        GIRO: 'GIRO' as InstrumentTypeEnum,
+        MONEYATCALL: 'MONEYATCALL' as InstrumentTypeEnum,
+        TIMEDEPOSIT: 'TIMEDEPOSIT' as InstrumentTypeEnum,
+        BUILDINGSAVINGACCOUNT: 'BUILDINGSAVINGACCOUNT' as InstrumentTypeEnum,
+        BUDGET: 'BUDGET' as InstrumentTypeEnum,
+        TENANT: 'TENANT' as InstrumentTypeEnum,
+        ACCOUNTPORTFOLIO: 'ACCOUNTPORTFOLIO' as InstrumentTypeEnum,
+        ARTIFICALPORTFOLIO: 'ARTIFICALPORTFOLIO' as InstrumentTypeEnum,
+        BUDGETGROUP: 'BUDGETGROUP' as InstrumentTypeEnum,
+        DEPOT: 'DEPOT' as InstrumentTypeEnum,
+        BUILDINGSAVING: 'BUILDINGSAVING' as InstrumentTypeEnum,
+        CURRENCY: 'CURRENCY' as InstrumentTypeEnum,
+        EQUITY: 'EQUITY' as InstrumentTypeEnum,
+        FONDS: 'FONDS' as InstrumentTypeEnum,
         ETF: 'ETF' as InstrumentTypeEnum,
-        Index: 'Index' as InstrumentTypeEnum,
-        Bond: 'Bond' as InstrumentTypeEnum,
-        LifeInsurance: 'LifeInsurance' as InstrumentTypeEnum,
-        DepreciationObject: 'DepreciationObject' as InstrumentTypeEnum,
-        RealEstate: 'RealEstate' as InstrumentTypeEnum,
-        Loan: 'Loan' as InstrumentTypeEnum,
+        INDEX: 'INDEX' as InstrumentTypeEnum,
+        BOND: 'BOND' as InstrumentTypeEnum,
+        LIFEINSURANCE: 'LIFEINSURANCE' as InstrumentTypeEnum,
+        DEPRECATIONOBJECT: 'DEPRECATIONOBJECT' as InstrumentTypeEnum,
+        REALESTATE: 'REALESTATE' as InstrumentTypeEnum,
+        LOAN: 'LOAN' as InstrumentTypeEnum,
+        BUDGETPORTFOLIO: 'BUDGETPORTFOLIO' as InstrumentTypeEnum,
         UNKNOWN: 'UNKNOWN' as InstrumentTypeEnum
     };
 }

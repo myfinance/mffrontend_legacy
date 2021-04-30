@@ -62,7 +62,7 @@ export class TenantService extends AbstractDashboardDataService {
   }
 
   getTenants(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.Tenant);
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.TENANT);
   }
 
   saveTenant(desc: string) {
