@@ -14,7 +14,7 @@ export class InstrumentinputformComponent implements OnInit {
   budgetGroups: Instrument[] = [];
   budgets: Instrument[] = [];
   instrumentForm: FormGroup;
-
+  valueCalculationData: { valDate: Date, yieldgoal: number, profit: number }[] = [{ "valDate": new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), "yieldgoal": 0.0, "profit": 0.0 }];
 
   constructor(private formBuilder: FormBuilder, private instrumentservice: InstrumentService) { }
 
@@ -72,5 +72,9 @@ export class InstrumentinputformComponent implements OnInit {
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.REALESTATE && this.instrumentForm.value.budget == null) {
       return {'ValueBudget is necessary': true};
     } else { return null; }
+  }
+
+  addValueCalculationData() {
+    this.valueCalculationData.push({ "valDate": new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), "yieldgoal": 0.0, "profit": 0.0 });
   }
 }

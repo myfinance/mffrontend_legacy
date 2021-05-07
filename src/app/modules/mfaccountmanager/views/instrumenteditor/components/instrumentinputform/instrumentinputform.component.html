@@ -36,6 +36,27 @@
     <span *ngIf="!instrumentForm.get('budget').valid && instrumentForm.get('budget').touched">
       Bitte geben Sie ein Budget für den Immobilienwert ein!
     </span>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Datum</th>
+          <th scope="col">Renditeziel</th>
+          <th scope="col">Monatlicher Profit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of valueCalculationData">
+          <td><input type="text" align="right" value="{{ entry.valDate }}"
+            placeholder="Datepicker"
+            class="myformcontrol"
+            [bsConfig]="bsConfig"
+            bsDatepicker/></td>
+          <td><input class="form-control" value="{{ entry.yieldgoal }}"/></td>
+          <td><input class="form-control" value="{{ entry.profit }}"/></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="addValueCalculationData()">Neuer Immobilienwert</button>
   </div>
 
   <button class="btn btn-primary" type="submit">Speichern</button>
