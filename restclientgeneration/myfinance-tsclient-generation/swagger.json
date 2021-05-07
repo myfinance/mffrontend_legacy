@@ -1,0 +1,2331 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Dac Service REST API",
+      "version": "1.1",
+      "title": "Dac Services",
+      "contact": {
+        "name": "HF"
+      },
+      "license": {
+        "name": "Apache 2.0 License",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "basePath": "/dac/rest",
+    "tags": [
+      {
+        "name": "MyFinance"
+      },
+      {
+        "name": "UtilityResources"
+      },
+      {
+        "name": "MyFinanceRunner"
+      },
+      {
+        "name": "Jobs"
+      },
+      {
+        "name": "Hello"
+      }
+    ],
+    "paths": {
+      "/myfinance/environments/list": {
+        "get": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "List Environments",
+          "description": "",
+          "operationId": "getEnvironmentList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/StringListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/instruments": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "List Data",
+          "description": "",
+          "operationId": "getInstrumentList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/instrumentsfortenant": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "List Data",
+          "description": "",
+          "operationId": "getInstrumentForTenantList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "tenant",
+              "in": "query",
+              "description": "tenant id",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/activeinstrumentsfortenant": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "List Data",
+          "description": "",
+          "operationId": "getActiveInstrumentForTenantList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "tenant",
+              "in": "query",
+              "description": "tenant id",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/incomebudgetforbudgetgroup": {
+        "get": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "get Data",
+          "description": "",
+          "operationId": "getIncomeBudget",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "budgetGroup",
+              "in": "query",
+              "description": "budgetGroup id",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/instrumentspertype": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "List Data",
+          "description": "",
+          "operationId": "getInstrumentPerTypeList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "tenant",
+              "in": "query",
+              "description": "tenant id",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "instrumenttype",
+              "in": "query",
+              "description": "instrumenttype",
+              "required": false,
+              "type": "string",
+              "enum": [
+                "GIRO",
+                "MONEYATCALL",
+                "TIMEDEPOSIT",
+                "BUILDINGSAVINGACCOUNT",
+                "BUDGET",
+                "TENANT",
+                "ACCOUNTPORTFOLIO",
+                "ARTIFICALPORTFOLIO",
+                "BUDGETGROUP",
+                "DEPOT",
+                "BUILDINGSAVING",
+                "CURRENCY",
+                "EQUITY",
+                "FONDS",
+                "ETF",
+                "INDEX",
+                "BOND",
+                "LIFEINSURANCE",
+                "DEPRECATIONOBJECT",
+                "REALESTATE",
+                "LOAN",
+                "BUDGETPORTFOLIO",
+                "UNKNOWN"
+              ]
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/listRecurrentTransactions": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "List Data",
+          "description": "",
+          "operationId": "getRecurrentTransactionList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/RecurrentTransactionListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/getvaluecurve/{instrumentId}": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "Map Data",
+          "description": "",
+          "operationId": "getValueMap",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "instrumentId",
+              "in": "path",
+              "description": "the instrumentId",
+              "required": true,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "startdate",
+              "in": "query",
+              "description": "startdate in Format yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "enddate",
+              "in": "query",
+              "description": "enddate in Format yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/DateDoubleModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/getinstrumentvalues/{tenantId}": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "Map Data",
+          "description": "",
+          "operationId": "getAccountValueTupleMap",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "tenantId",
+              "in": "path",
+              "description": "the tenantId",
+              "required": true,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "date",
+              "in": "query",
+              "description": "date in Format yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "diffdate",
+              "in": "query",
+              "description": "date for value diff in Format yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentDetailModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/importprices": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "importprices",
+          "description": "",
+          "operationId": "importPrices",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Prices imported"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/bookRecurrentTransactions": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "bookRecurrentTransactions",
+          "description": "",
+          "operationId": "bookRecurrentTransactions",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "book RecurrentTransactions"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/getequity": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "get Data",
+          "description": "",
+          "operationId": "getInstrument",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "isin",
+              "in": "query",
+              "description": "the isin",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/listTenants": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "List Data",
+          "description": "",
+          "operationId": "getTenantList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/InstrumentListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addEquity": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Instrument",
+          "description": "",
+          "operationId": "addEquity",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "isin",
+              "in": "query",
+              "description": "the isin",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addCurrency": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Instrument",
+          "description": "",
+          "operationId": "addCurrency",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "currencyCode",
+              "in": "query",
+              "description": "the currencyCode",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addPrice": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Price",
+          "description": "",
+          "operationId": "addPrice",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "currencyCode",
+              "in": "query",
+              "description": "the currencyCode",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "isin",
+              "in": "query",
+              "description": "the isin",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "dayofprice",
+              "in": "query",
+              "description": "the dayofprice(yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "description": "value",
+              "required": false,
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/fillpricehistory": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "fillpricehistory",
+          "description": "",
+          "operationId": "fillPricesHistory",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "sourceId",
+              "in": "query",
+              "description": "the sourceId",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "isin",
+              "in": "query",
+              "description": "the isin",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addBudget": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "add Budget",
+          "description": "",
+          "operationId": "addBudget",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "budgetGroupId",
+              "in": "query",
+              "description": "the Id of the budgetGroup which the budget is attached to",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addTenant": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Tenant",
+          "description": "",
+          "operationId": "addTenant",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/updateInstrument": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "update Instrument",
+          "description": "",
+          "operationId": "updateInstrument",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "query",
+              "description": "id",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "isactive",
+              "in": "query",
+              "description": "isactive",
+              "required": false,
+              "type": "boolean"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "updated"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addGiro": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Giro",
+          "description": "",
+          "operationId": "addGiro",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "tenantId",
+              "in": "query",
+              "description": "the Id of the tenant which the giro is attached to",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addRealestate": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Realestate",
+          "description": "",
+          "operationId": "addRealestate",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "tenantId",
+              "in": "query",
+              "description": "the Id of the tenant which the realestate is attached to",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "valueBudgetId",
+              "in": "query",
+              "description": "the budget to add the value of the realestate",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "yieldgoal",
+              "in": "query",
+              "description": "all yieldgoals with valid from date",
+              "required": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "collectionFormat": "multi"
+            },
+            {
+              "name": "realEstateProfit",
+              "in": "query",
+              "description": "all realEstateProfits with valid from date",
+              "required": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "collectionFormat": "multi"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/updateRealestate": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "update Realestate",
+          "description": "",
+          "operationId": "updateRealestate",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "realestateIdId",
+              "in": "query",
+              "description": "the Id of the RealEstate",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "yieldgoal",
+              "in": "query",
+              "description": "all yieldgoals with valid from date",
+              "required": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "collectionFormat": "multi"
+            },
+            {
+              "name": "realEstateProfit",
+              "in": "query",
+              "description": "all realEstateProfits with valid from date",
+              "required": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "collectionFormat": "multi"
+            },
+            {
+              "name": "isactive",
+              "in": "query",
+              "description": "isactive",
+              "required": false,
+              "type": "boolean"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "updated"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addIncomeExpense": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Income or Expense",
+          "description": "",
+          "operationId": "addIncomeExpense",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "accId",
+              "in": "query",
+              "description": "the accountId of the income or expense",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "budgetId",
+              "in": "query",
+              "description": "the budgetId of the income or expense",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "description": "the value of the income or expense",
+              "required": false,
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "name": "transactiondate",
+              "in": "query",
+              "description": "the transactiondate(yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addLinkedIncomeExpense": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Income or Expense linked to an additional account",
+          "description": "",
+          "operationId": "addLinkedIncomeExpense",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "accId",
+              "in": "query",
+              "description": "the accountId of the income or expense",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "linkedAccId",
+              "in": "query",
+              "description": "the linked accountId of the income or expense",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "budgetId",
+              "in": "query",
+              "description": "the budgetId of the income or expense",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "description": "the value of the income or expense",
+              "required": false,
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "name": "transactiondate",
+              "in": "query",
+              "description": "the transactiondate(yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/updateTransaction": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "update Transaction",
+          "description": "",
+          "operationId": "updateTransaction",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "query",
+              "description": "id",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "description": "the value of the income or expense",
+              "required": false,
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "name": "transactiondate",
+              "in": "query",
+              "description": "the transactiondate(yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "updated"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addTransfer": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Transfer or BudgetTransfer",
+          "description": "",
+          "operationId": "addTransfer",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "srcId",
+              "in": "query",
+              "description": "the instrumentId of the source",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "trgId",
+              "in": "query",
+              "description": "the instrumentId of the target",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "description": "the value of the income or expense",
+              "required": false,
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "name": "transactiondate",
+              "in": "query",
+              "description": "the transactiondate(yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addRecurrentTransfer": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save RecurrentTransfer",
+          "description": "",
+          "operationId": "addRecurrentTransfer",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "srcId",
+              "in": "query",
+              "description": "the instrumentId of the source",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "trgId",
+              "in": "query",
+              "description": "the instrumentId of the target",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "recurrentFrequency",
+              "in": "query",
+              "description": "the frequency of the recurrent transaction",
+              "required": false,
+              "type": "string",
+              "enum": [
+                "Monthly",
+                "Quaterly",
+                "Yearly",
+                "UNKNOWN"
+              ]
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "description": "the value of the income or expense",
+              "required": false,
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "name": "transactiondate",
+              "in": "query",
+              "description": "the transactiondate(yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/updateRecurrentTransaction": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "update recurrent Transaction",
+          "description": "",
+          "operationId": "updateRecurrentTransaction",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "query",
+              "description": "id",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "description",
+              "in": "query",
+              "description": "description",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "description": "the value of the income or expense",
+              "required": false,
+              "type": "number",
+              "format": "double"
+            },
+            {
+              "name": "nexttransaction",
+              "in": "query",
+              "description": "the transactiondate(yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "updated"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/delTransfer": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "delete Transfer",
+          "description": "",
+          "operationId": "delTransfer",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "transactionId",
+              "in": "query",
+              "description": "transactionId",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "deleted"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/delRecurrentTransfer": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "delete Recurrent Transfer",
+          "description": "",
+          "operationId": "delRecurrentTransfer",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "recurrentTransactionId",
+              "in": "query",
+              "description": "recurrentTransactionId",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "deleted"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/listTransactions": {
+        "get": {
+          "tags": [
+            "UtilityResources",
+            "MyFinance"
+          ],
+          "summary": "List Data",
+          "description": "",
+          "operationId": "getTransactionList",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "startdate",
+              "in": "query",
+              "description": "startdate in Format yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "enddate",
+              "in": "query",
+              "description": "enddate in Format yyyy-mm-dd",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/TransactionListModel"
+              }
+            }
+          }
+        }
+      },
+      "/myfinance/environments/{envID}/addSymbol": {
+        "post": {
+          "tags": [
+            "MyFinance"
+          ],
+          "summary": "save Instrument",
+          "description": "",
+          "operationId": "addSymbol",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "isin",
+              "in": "query",
+              "description": "the isin",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "symbol",
+              "in": "query",
+              "description": "symbol",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "currencycode",
+              "in": "query",
+              "description": "the code of the currency in which the security is traded in the exchange referenced by the symbol",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "envID",
+              "in": "path",
+              "description": "The Service Environment",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "added"
+            },
+            "500": {
+              "description": "Something wrong in Server"
+            }
+          }
+        }
+      },
+      "/Runner/{jobtype}/{env}/start": {
+        "post": {
+          "tags": [
+            "Jobs",
+            "MyFinanceRunner"
+          ],
+          "summary": "execute myfinance launcher",
+          "description": "Execute myfinance Core Launcher",
+          "operationId": "VERBATIMstart",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "env",
+              "in": "path",
+              "description": "The env",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "params",
+              "description": "Parameter",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/BaseMFRunnerParameter"
+              }
+            },
+            {
+              "name": "jobtype",
+              "in": "path",
+              "description": "launching md jobs z.b. de.hf.dac.myfinance.importer.Import",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Job Submitted",
+              "schema": {
+                "$ref": "#/definitions/JobInformation"
+              }
+            }
+          }
+        }
+      },
+      "/Runner/list": {
+        "get": {
+          "tags": [
+            "MyFinanceRunner"
+          ],
+          "summary": "list known cops jobs",
+          "description": "List all JobInformation",
+          "operationId": "VERBATIMlist",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": "List of known jobs",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Runner/status/{uuid}": {
+        "get": {
+          "tags": [
+            "MyFinanceRunner"
+          ],
+          "summary": "get status of cops jobs",
+          "description": "JobInformation of actual Job",
+          "operationId": "VERBATIMstatus",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "uuid",
+              "in": "path",
+              "description": "uuid of job",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Status of one Job",
+              "schema": {
+                "$ref": "#/definitions/JobInformation"
+              }
+            }
+          }
+        }
+      },
+      "/hello": {
+        "get": {
+          "tags": [
+            "Hello"
+          ],
+          "operationId": "getHello",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "headers": {
+                
+              },
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "/hello/list": {
+        "get": {
+          "tags": [
+            "Hello"
+          ],
+          "operationId": "getProducts",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "headers": {
+                
+              },
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "EnvironmentListResource": {
+        "type": "object"
+      },
+      "StringListModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "values"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "EnvironmentDataResource": {
+        "type": "object",
+        "properties": {
+          "instruments": {
+            "$ref": "#/definitions/InstrumentListResource"
+          },
+          "recurrentTransaction": {
+            "$ref": "#/definitions/RecurrentTransactionListResource"
+          },
+          "tenants": {
+            "$ref": "#/definitions/TenantListResource"
+          }
+        }
+      },
+      "InstrumentListResource": {
+        "type": "object"
+      },
+      "RecurrentTransactionListResource": {
+        "type": "object"
+      },
+      "TenantListResource": {
+        "type": "object"
+      },
+      "Instrument": {
+        "type": "object",
+        "required": [
+          "description",
+          "instrumentType",
+          "instrumentid",
+          "isactive",
+          "treelastchanged"
+        ],
+        "properties": {
+          "instrumentid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "instrumentType": {
+            "type": "string",
+            "enum": [
+              "GIRO",
+              "MONEYATCALL",
+              "TIMEDEPOSIT",
+              "BUILDINGSAVINGACCOUNT",
+              "BUDGET",
+              "TENANT",
+              "ACCOUNTPORTFOLIO",
+              "ARTIFICALPORTFOLIO",
+              "BUDGETGROUP",
+              "DEPOT",
+              "BUILDINGSAVING",
+              "CURRENCY",
+              "EQUITY",
+              "FONDS",
+              "ETF",
+              "INDEX",
+              "BOND",
+              "LIFEINSURANCE",
+              "DEPRECATIONOBJECT",
+              "REALESTATE",
+              "LOAN",
+              "BUDGETPORTFOLIO",
+              "UNKNOWN"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "isactive": {
+            "type": "boolean"
+          },
+          "maturitydate": {
+            "type": "string",
+            "format": "date"
+          },
+          "closingdate": {
+            "type": "string",
+            "format": "date"
+          },
+          "treelastchanged": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "businesskey": {
+            "type": "string"
+          }
+        }
+      },
+      "InstrumentListModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "values"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Instrument"
+            }
+          }
+        }
+      },
+      "InstrumentModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/definitions/Instrument"
+          }
+        }
+      },
+      "RecurrentTransaction": {
+        "type": "object",
+        "required": [
+          "description",
+          "instrumentByInstrumentid1",
+          "instrumentByInstrumentid2",
+          "instrumentBySecurityid",
+          "nexttransaction",
+          "recurrencytype",
+          "recurrentfrequence",
+          "recurrentfrequenceId",
+          "recurrenttransactionid",
+          "value"
+        ],
+        "properties": {
+          "recurrenttransactionid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "instrumentByInstrumentid2": {
+            "$ref": "#/definitions/Instrument"
+          },
+          "instrumentBySecurityid": {
+            "$ref": "#/definitions/Instrument"
+          },
+          "instrumentByInstrumentid1": {
+            "$ref": "#/definitions/Instrument"
+          },
+          "recurrencytype": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "nexttransaction": {
+            "type": "string",
+            "format": "date"
+          },
+          "recurrentfrequenceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recurrentfrequence": {
+            "type": "string",
+            "enum": [
+              "Monthly",
+              "Quaterly",
+              "Yearly",
+              "UNKNOWN"
+            ]
+          }
+        }
+      },
+      "RecurrentTransactionListModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "values"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RecurrentTransaction"
+            }
+          }
+        }
+      },
+      "DateDoubleModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "values"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "InstrumentDetailModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "values"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/InstrumentDetails"
+            }
+          }
+        }
+      },
+      "InstrumentDetails": {
+        "type": "object",
+        "properties": {
+          "valuemap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "expensesLastMonth": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "incomeLastMonth": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Cashflow": {
+        "type": "object",
+        "required": [
+          "cashflowid",
+          "instrument",
+          "value"
+        ],
+        "properties": {
+          "cashflowid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "instrument": {
+            "$ref": "#/definitions/Instrument"
+          },
+          "transaction": {
+            "$ref": "#/definitions/Transaction"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Trade": {
+        "type": "object",
+        "required": [
+          "amount",
+          "instrumentByDepotid",
+          "instrumentByInstrumentid",
+          "tradeid",
+          "transaction"
+        ],
+        "properties": {
+          "tradeid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "instrumentByDepotid": {
+            "$ref": "#/definitions/Instrument"
+          },
+          "instrumentByInstrumentid": {
+            "$ref": "#/definitions/Instrument"
+          },
+          "transaction": {
+            "$ref": "#/definitions/Transaction"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "required": [
+          "cashflows",
+          "description",
+          "lastchanged",
+          "transactionType",
+          "transactiondate",
+          "transactionid"
+        ],
+        "properties": {
+          "transactionid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "transactiondate": {
+            "type": "string",
+            "format": "date"
+          },
+          "lastchanged": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trades": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/definitions/Trade"
+            }
+          },
+          "cashflows": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/definitions/Cashflow"
+            }
+          },
+          "transactionType": {
+            "type": "string",
+            "enum": [
+              "INCOMEEXPENSES",
+              "TRANSFER",
+              "BUDGETTRANSFER",
+              "SECURITYCASHFLOW",
+              "TRADE"
+            ]
+          }
+        }
+      },
+      "TransactionListModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "values"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        }
+      },
+      "JobInformation": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "QUEUED",
+              "PROCESSING",
+              "FINISHED",
+              "FAILED"
+            ]
+          },
+          "statusChangeHistory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/StatusChange"
+            }
+          },
+          "payload": {
+            "type": "object"
+          },
+          "result": {
+            "type": "object"
+          },
+          "statusMessageCollector": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/StatusChange"
+            }
+          },
+          "endTime": {
+            "type": "string"
+          }
+        }
+      },
+      "StatusChange": {
+        "type": "object",
+        "properties": {
+          "changeTime": {
+            "type": "string"
+          },
+          "oldStatus": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "QUEUED",
+              "PROCESSING",
+              "FINISHED",
+              "FAILED"
+            ]
+          },
+          "newStatus": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "QUEUED",
+              "PROCESSING",
+              "FINISHED",
+              "FAILED"
+            ]
+          },
+          "changeInformation": {
+            "type": "string"
+          }
+        }
+      },
+      "BaseMFRunnerParameter": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "environment": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
