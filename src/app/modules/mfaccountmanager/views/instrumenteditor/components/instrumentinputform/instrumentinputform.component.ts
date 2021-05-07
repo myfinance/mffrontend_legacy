@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {InstrumentService} from '../../services/instrument.service';
 import {Instrument} from '../../../../../myfinance-tsclient-generated';
@@ -14,7 +14,7 @@ export class InstrumentinputformComponent implements OnInit {
   budgetGroups: Instrument[] = [];
   budgets: Instrument[] = [];
   instrumentForm: FormGroup;
-  valueCalculationData: { valDate: Date, yieldgoal: number, profit: number }[] = [{ "valDate": new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), "yieldgoal": 0.0, "profit": 0.0 }];
+  valcaldata: FormArray;
 
   constructor(private formBuilder: FormBuilder, private instrumentservice: InstrumentService) { }
 
@@ -23,7 +23,8 @@ export class InstrumentinputformComponent implements OnInit {
         description: ['', Validators.required],
         instrumentType: [InstrumentTypeEnum.GIRO, Validators.required],
         budgetGroup: [null, [Validators.required, this.isBudgetGroupNecessary.bind(this)]],
-        budget: [null, [Validators.required, this.isValueBudgetNecessary.bind(this)]]
+        budget: [null, [Validators.required, this.isValueBudgetNecessary.bind(this)]],
+        valcaldata: this.formBuilder.array([this.createItem()])
       });
 
     if (this.instrumentservice.getIsInit()) {
@@ -55,6 +56,8 @@ export class InstrumentinputformComponent implements OnInit {
       this.instrumentservice.saveGiro(this.instrumentForm.value.description)
     } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.BUDGET) {
       this.instrumentservice.saveBudget(this.instrumentForm.value.description, this.instrumentForm.value.budgetGroup.instrumentid)
+    } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.REALESTATE) {
+      console.log("yieldgoal:"+this.instrumentForm.get('valcaldata')['controls'][0].value.yieldgoal);
     }
   }
 
@@ -75,6 +78,15 @@ export class InstrumentinputformComponent implements OnInit {
   }
 
   addValueCalculationData() {
-    this.valueCalculationData.push({ "valDate": new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), "yieldgoal": 0.0, "profit": 0.0 });
+    this.valcaldata = this.instrumentForm.get('valcaldata') as FormArray;
+    this.valcaldata.push(this.createItem());
+  }
+
+  createItem(): FormGroup {
+    return this.formBuilder.group({
+      valDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
+      yieldgoal: 0.0,
+      profit: 0.0
+    });
   }
 }

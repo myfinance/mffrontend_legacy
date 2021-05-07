@@ -45,19 +45,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let entry of valueCalculationData">
-          <td><input type="text" align="right" value="{{ entry.valDate }}"
+        <tr formArrayName="valcaldata" *ngFor="let entry of instrumentForm.get('valcaldata')['controls']; let i = index">
+          <div [formGroupName]="i">
+          <td><input type="text" align="right" formControlName="valDate"
             placeholder="Datepicker"
             class="myformcontrol"
             [bsConfig]="bsConfig"
             bsDatepicker/></td>
-          <td><input class="form-control" value="{{ entry.yieldgoal }}"/></td>
-          <td><input class="form-control" value="{{ entry.profit }}"/></td>
+          <td><input class="form-control" formControlName="yieldgoal"/></td>
+          <td><input class="form-control" formControlName="profit"/></td>
+        </div>
         </tr>
       </tbody>
     </table>
     <button class="btn btn-primary" (click)="addValueCalculationData()">Neuer Immobilienwert</button>
   </div>
-
   <button class="btn btn-primary" type="submit">Speichern</button>
 </form>
