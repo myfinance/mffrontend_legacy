@@ -27,14 +27,14 @@
   </div>
 
   <div class="form-group" *ngIf="instrumentForm.get('instrumentType').value === 'REALESTATE'">
-    <p>Budget Group:</p>
-    <select class="btn btn-primary dropdown-toggle" formControlName="budgetGroup">
-      <option class="mydropdown-item" *ngFor="let budgetGroup of budgetGroups" >
-        {{budgetGroup.description}}
+    <p>Budget für Immobilienwert:</p>
+    <select class="btn btn-primary dropdown-toggle" formControlName="budget">
+      <option class="mydropdown-item" *ngFor="let budget of budgets" >
+        {{budget.description}}
       </option>
     </select>
-    <span *ngIf="!instrumentForm.get('budgetGroup').valid && instrumentForm.get('budgetGroup').touched">
-      Bitte geben Sie eine Budgetgruppe für das Instrument ein!
+    <span *ngIf="!instrumentForm.get('budget').valid && instrumentForm.get('budget').touched">
+      Bitte geben Sie ein Budget für den Immobilienwert ein!
     </span>
   </div>
 
