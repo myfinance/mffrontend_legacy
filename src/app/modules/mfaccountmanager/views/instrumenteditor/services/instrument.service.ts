@@ -69,6 +69,10 @@ export class InstrumentService extends AbstractDashboardDataService {
     return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGETGROUP);
   }
 
+  getBudgets(): Array<Instrument> {
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
+  }
+
 
   saveGiro(desc: string) {
     this.myFinanceService.saveGiro(desc);

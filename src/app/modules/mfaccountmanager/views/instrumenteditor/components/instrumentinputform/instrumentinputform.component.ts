@@ -12,6 +12,7 @@ import {Instrument} from '../../../../../myfinance-tsclient-generated';
 export class InstrumentinputformComponent implements OnInit {
   instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.GIRO, InstrumentTypeEnum.BUDGET, InstrumentTypeEnum.REALESTATE];
   budgetGroups: Instrument[] = [];
+  budgets: Instrument[] = [];
   instrumentForm: FormGroup;
 
 
@@ -21,7 +22,8 @@ export class InstrumentinputformComponent implements OnInit {
       this.instrumentForm = this.formBuilder.group({
         description: ['', Validators.required],
         instrumentType: [InstrumentTypeEnum.GIRO, Validators.required],
-        budgetGroup: [null, [Validators.required, this.isBudgetGroupNecessary.bind(this)]]
+        budgetGroup: [null, [Validators.required, this.isBudgetGroupNecessary.bind(this)]],
+        budget: [null, [Validators.required, this.isValueBudgetNecessary.bind(this)]]
       });
 
     if (this.instrumentservice.getIsInit()) {
@@ -40,6 +42,12 @@ export class InstrumentinputformComponent implements OnInit {
     if (this.budgetGroups.length > 0) {
       this.instrumentForm.controls['budgetGroup'].setValue(this.budgetGroups[0], {onlySelf: true});
     }
+
+    this.budgets = this.instrumentservice.getBudgets();
+
+    if (this.budgets.length > 0) {
+      this.instrumentForm.controls['budget'].setValue(this.budgets[0], {onlySelf: true});
+    }
   }
 
   onSubmit() {
@@ -55,6 +63,14 @@ export class InstrumentinputformComponent implements OnInit {
     if (this.instrumentForm.value == null) { return null; }
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.BUDGET && this.instrumentForm.value.budgetGroup == null) {
       return {'BudgetGroup is necessary': true};
+    } else { return null; }
+  }
+
+  isValueBudgetNecessary(control: FormControl): {[s: string]: boolean} {
+    if (this.instrumentForm == null) { return null; }
+    if (this.instrumentForm.value == null) { return null; }
+    if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.REALESTATE && this.instrumentForm.value.budget == null) {
+      return {'ValueBudget is necessary': true};
     } else { return null; }
   }
 }
