@@ -10,7 +10,7 @@ import {Instrument} from '../../../../../myfinance-tsclient-generated';
   styleUrls: ['./instrumentinputform.component.scss']
 })
 export class InstrumentinputformComponent implements OnInit {
-  instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.GIRO, InstrumentTypeEnum.BUDGET];
+  instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.GIRO, InstrumentTypeEnum.BUDGET, InstrumentTypeEnum.REALESTATE];
   budgetGroups: Instrument[] = [];
   instrumentForm: FormGroup;
 
