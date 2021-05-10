@@ -36,28 +36,28 @@
     <span *ngIf="!instrumentForm.get('budget').valid && instrumentForm.get('budget').touched">
       Bitte geben Sie ein Budget für den Immobilienwert ein!
     </span>
-    <table class="table table-striped">
+    <BR>
+    <b>Immobilienwert:</b>
+    <table>
       <thead>
         <tr>
-          <th scope="col">Datum</th>
-          <th scope="col">Renditeziel</th>
-          <th scope="col">Monatlicher Profit</th>
+          <th width="250">Wertdatum</th>
+          <th width="250">Zielrendite(z.B. 0.04 für 4 %)</th>
+          <th width="250">Monantlicher Gewinn</th>
         </tr>
       </thead>
-      <tbody>
-        <tr formArrayName="valcaldata" *ngFor="let entry of instrumentForm.get('valcaldata')['controls']; let i = index">
-          <div [formGroupName]="i">
-          <td><input type="text" align="right" formControlName="valDate"
+    </table>
+      <div class="table table-striped" formArrayName="valcaldata" *ngFor="let entry of instrumentForm.get('valcaldata')['controls']; let i = index">
+        <table [formGroupName]="i">
+         <td width="250"><input type="text" align="right" formControlName="valDate"
             placeholder="Datepicker"
             class="myformcontrol"
             [bsConfig]="bsConfig"
             bsDatepicker/></td>
-          <td><input class="form-control" formControlName="yieldgoal"/></td>
-          <td><input class="form-control" formControlName="profit"/></td>
-        </div>
-        </tr>
-      </tbody>
-    </table>
+          <td width="250"><input class="form-control" formControlName="yieldgoal"/></td>
+          <td width="250"><input class="form-control" formControlName="profit"/></td>
+        </table>
+      </div>
     <button class="btn btn-primary" (click)="addValueCalculationData()">Neuer Immobilienwert</button>
   </div>
   <button class="btn btn-primary" type="submit">Speichern</button>

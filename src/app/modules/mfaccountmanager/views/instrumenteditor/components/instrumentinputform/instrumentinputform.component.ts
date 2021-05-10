@@ -58,6 +58,7 @@ export class InstrumentinputformComponent implements OnInit {
       this.instrumentservice.saveBudget(this.instrumentForm.value.description, this.instrumentForm.value.budgetGroup.instrumentid)
     } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.REALESTATE) {
       console.log("yieldgoal:"+this.instrumentForm.get('valcaldata')['controls'][0].value.yieldgoal);
+      console.log("einträge:"+this.instrumentForm.get('valcaldata')['controls'].length);
     }
   }
 
