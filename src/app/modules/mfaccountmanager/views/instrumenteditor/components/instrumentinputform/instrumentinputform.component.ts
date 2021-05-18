@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {InstrumentService} from '../../services/instrument.service';
 import {Instrument} from '../../../../../myfinance-tsclient-generated';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-instrumentinputform',
@@ -57,8 +58,14 @@ export class InstrumentinputformComponent implements OnInit {
     } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.BUDGET) {
       this.instrumentservice.saveBudget(this.instrumentForm.value.description, this.instrumentForm.value.budgetGroup.instrumentid)
     } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.REALESTATE) {
-      console.log("yieldgoal:"+this.instrumentForm.get('valcaldata')['controls'][0].value.yieldgoal);
-      console.log("einträge:"+this.instrumentForm.get('valcaldata')['controls'].length);
+      let yieldgoals: string[] = [];
+      let profits: string[] = [];
+      this.instrumentForm.get('valcaldata')['controls'].forEach(element => {
+        let valdate = moment(element.value.valDate).format('YYYY-MM-DD');
+        yieldgoals.push(element.value.yieldgoal + "," + valdate);
+        profits.push(element.value.profit + "," + valdate);
+      });
+      this.instrumentservice.saveRealEstate(this.instrumentForm.value.description, this.instrumentForm.value.budget.instrumentid, yieldgoals, profits);
     }
   }
 

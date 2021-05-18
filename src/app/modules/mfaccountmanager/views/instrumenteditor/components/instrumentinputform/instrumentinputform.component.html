@@ -17,7 +17,7 @@
   <div class="form-group" *ngIf="instrumentForm.get('instrumentType').value === 'BUDGET'">
     <p>Budget Group:</p>
     <select class="btn btn-primary dropdown-toggle" formControlName="budgetGroup">
-      <option class="mydropdown-item" *ngFor="let budgetGroup of budgetGroups" >
+      <option class="mydropdown-item" [ngValue]="budgetGroup" *ngFor="let budgetGroup of budgetGroups" >
         {{budgetGroup.description}}
       </option>
     </select>
@@ -29,7 +29,7 @@
   <div class="form-group" *ngIf="instrumentForm.get('instrumentType').value === 'REALESTATE'">
     <p>Budget für Immobilienwert:</p>
     <select class="btn btn-primary dropdown-toggle" formControlName="budget">
-      <option class="mydropdown-item" *ngFor="let budget of budgets" >
+      <option class="mydropdown-item" [ngValue]="budget" *ngFor="let budget of budgets" >
         {{budget.description}}
       </option>
     </select>
