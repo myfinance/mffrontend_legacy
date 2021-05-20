@@ -69,6 +69,10 @@ export class InstrumentService extends AbstractDashboardDataService {
     return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGETGROUP);
   }
 
+  getBudgets(): Array<Instrument> {
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
+  }
+
 
   saveGiro(desc: string) {
     this.myFinanceService.saveGiro(desc);
@@ -80,6 +84,14 @@ export class InstrumentService extends AbstractDashboardDataService {
 
   saveBudget(desc: string, budgetGroupId: number) {
     this.myFinanceService.saveBudget(desc, budgetGroupId)
+  }
+
+  saveRealEstate(desc: string, valueBudgetId: number, yieldgoals: string[], profits: string[]) {
+    this.myFinanceService.saveRealEstate(desc, valueBudgetId, yieldgoals, profits);
+  }
+
+  updateRealEstate(instrumentId: number, desc: string, yieldgoals: string[], profits: string[], isActive: boolean) {
+    this.myFinanceService.updateRealEstate(instrumentId, desc, isActive, yieldgoals, profits);
   }
 
   setSelectedInstrument(instrument: Instrument) {

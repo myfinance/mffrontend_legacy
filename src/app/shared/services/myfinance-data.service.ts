@@ -284,6 +284,30 @@ export class MyFinanceDataService {
       })
   }
 
+  saveRealEstate(desc: string, valueBudgetId: number, yieldgoals: string[], profits: string[]) {
+    this.myfinanceService.addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(
+      this.currentEnv, desc, this.configService.getCurrentTenant().instrumentid, valueBudgetId, yieldgoals, profits).subscribe(
+      () => {
+        this.instrumentSubject.next();
+        this.printSuccess('Immobilie gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      })
+  }
+
+  updateRealEstate(id: number, desc: string, isActive: boolean, yieldgoals: string[], profits: string[]) {
+    this.myfinanceService.updateRealestate_envID_realestateIdId_description_yieldgoal_realEstateProfit_isactive(
+      this.currentEnv, id, desc, yieldgoals, profits, isActive).subscribe(
+      () => {
+        this.instrumentSubject.next();
+        this.printSuccess('Immobilie aktualisiert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      })
+  }
+
   getInstruments(): Observable<InstrumentListModel> {
 
     if (this.configService.get('currentZone').identifier.match('mock')) {

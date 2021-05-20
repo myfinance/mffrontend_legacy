@@ -4,7 +4,7 @@
     <label>Beschreibung:</label>
     <input class="form-control" formControlName="description"/>
     <span *ngIf="!instrumentForm.get('description').valid && instrumentForm.get('description').touched">
-      Bitte geben Sie eine Beschriebung für das Instrument ein!
+      Bitte geben Sie eine Beschreibung für das Instrument ein!
     </span>
   </div>
   <div class="form-group">
@@ -13,6 +13,30 @@
       <option [value]="true" [selected]="this.instrumentForm.get('active')==true">Aktiv</option>
       <option [value]="false" [selected]="this.instrumentForm.get('active')==false">Inaktiv</option>
     </select>
+  </div>
+  <div class="form-group" *ngIf="!noInstrumentSelected && selectedInstrument.instrumentType === 'REALESTATE'">
+    <b>Immobilienwert:</b>
+    <table>
+      <thead>
+        <tr>
+          <th width="250">Wertdatum</th>
+          <th width="250">Zielrendite(z.B. 0.04 für 4 %)</th>
+          <th width="250">Monantlicher Gewinn</th>
+        </tr>
+      </thead>
+    </table>
+      <div class="table table-striped" formArrayName="valcaldata" *ngFor="let entry of instrumentForm.get('valcaldata')['controls']; let i = index">
+        <table [formGroupName]="i">
+         <td width="250"><input type="text" align="right" formControlName="valDate"
+            placeholder="Datepicker"
+            class="myformcontrol"
+            [bsConfig]="bsConfig"
+            bsDatepicker/></td>
+          <td width="250"><input class="form-control" formControlName="yieldgoal"/></td>
+          <td width="250"><input class="form-control" formControlName="profit"/></td>
+        </table>
+      </div>
+      <button class="btn btn-primary" type=button (click)="addValueCalculationData()">Neuer Immobilienwert</button>
   </div>
   <button class="btn btn-primary" type="submit">Speichern</button>
 </form>
