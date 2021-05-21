@@ -22,6 +22,7 @@ import { DateDoubleModel } from '../model/dateDoubleModel';
 import { InstrumentDetailModel } from '../model/instrumentDetailModel';
 import { InstrumentListModel } from '../model/instrumentListModel';
 import { InstrumentModel } from '../model/instrumentModel';
+import { InstrumentPropertyListModel } from '../model/instrumentPropertyListModel';
 import { RecurrentTransactionListModel } from '../model/recurrentTransactionListModel';
 import { StringListModel } from '../model/stringListModel';
 import { TransactionListModel } from '../model/transactionListModel';
@@ -1345,6 +1346,55 @@ export class MyFinanceService {
         ];
 
         return this.httpClient.get<InstrumentListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/instrumentspertype`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * List Data
+     * 
+     * @param envID The Service Environment
+     * @param instrumentid instrument id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getInstrumentPropertyList_envID_instrumentid(envID: string, instrumentid?: number, observe?: 'body', reportProgress?: boolean): Observable<InstrumentPropertyListModel>;
+    public getInstrumentPropertyList_envID_instrumentid(envID: string, instrumentid?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InstrumentPropertyListModel>>;
+    public getInstrumentPropertyList_envID_instrumentid(envID: string, instrumentid?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InstrumentPropertyListModel>>;
+    public getInstrumentPropertyList_envID_instrumentid(envID: string, instrumentid?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling getInstrumentPropertyList_envID_instrumentid.');
+        }
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (instrumentid !== undefined && instrumentid !== null) {
+            queryParameters = queryParameters.set('instrumentid', <any>instrumentid);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<InstrumentPropertyListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/instrumentsproperties`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
