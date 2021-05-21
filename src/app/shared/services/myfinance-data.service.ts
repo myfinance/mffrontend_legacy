@@ -9,7 +9,8 @@ import {
   InstrumentListModel, InstrumentModel,
   RecurrentTransaction, RecurrentTransactionListModel,
   TransactionListModel,
-  InstrumentDetailModel
+  InstrumentDetailModel,
+  InstrumentPropertyListModel
 } from '../../modules/myfinance-tsclient-generated';
 import {MyFinanceWrapperService} from './my-finance-wrapper.service';
 import {DatePipe} from '@angular/common';
@@ -337,6 +338,12 @@ export class MyFinanceDataService {
 
     return this.myfinanceService.getActiveInstrumentForTenantList_envID_tenant(this.configService.getCurrentEnv(),
       this.configService.getCurrentTenant().instrumentid);
+  }
+
+  getInstrumentProperties(instrumentId: number): Observable<InstrumentPropertyListModel> {
+    this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
+
+    return this.myfinanceService.getInstrumentPropertyList_envID_instrumentid(this.configService.getCurrentEnv(), instrumentId);
   }
 
   getInstrumentsPerType(instrumentType: InstrumentTypeEnum): Observable<InstrumentListModel> {

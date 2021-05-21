@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Instrument, InstrumentListModel} from '../../../../myfinance-tsclient-generated';
+import {Instrument, InstrumentListModel, InstrumentPropertyListModel} from '../../../../myfinance-tsclient-generated';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {Subject} from 'rxjs/Rx';
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
@@ -13,6 +13,7 @@ export class InstrumentService extends AbstractDashboardDataService {
   instrumentSubject: Subject<any> = new Subject<any>();
   selectedinstrumentSubject: Subject<any> = new Subject<any>();
   selectedInstrument: Instrument;
+  instrumentProperies: {valDate: Date, yieldGoal: number, profit:number}[];
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -64,6 +65,24 @@ export class InstrumentService extends AbstractDashboardDataService {
   getInstruments(): Array<Instrument> {
     return this.instruments;
   }
+
+  getInstrumentProperties(instrumentId: number) {
+    this.myFinanceService.getInstrumentProperties
+    .subscribe(
+      (instrumentProperties: InstrumentPropertyListModel) => {
+        this.instruments = instrumentProperties.values;
+        this.instrumentSubject.next();
+        this.isInstrumentLoaded = true;
+        this.checkDataLoadStatus();
+      },
+      (errResp) => {
+        this.myFinanceService.printError(errResp);
+        this.dashboardService.handleDataNotLoaded(errResp);
+
+      });
+  }
+
+  private transformInstru
 
   getBudgetGroups(): Array<Instrument> {
     return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGETGROUP);
