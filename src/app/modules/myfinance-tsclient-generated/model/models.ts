@@ -9,6 +9,8 @@ export * from './instrumentDetails';
 export * from './instrumentListModel';
 export * from './instrumentListResource';
 export * from './instrumentModel';
+export * from './instrumentProperties';
+export * from './instrumentPropertyListModel';
 export * from './jobInformation';
 export * from './recurrentTransaction';
 export * from './recurrentTransactionListModel';
