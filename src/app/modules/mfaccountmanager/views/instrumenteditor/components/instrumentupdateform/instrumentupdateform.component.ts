@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {InstrumentService} from '../../services/instrument.service';
+import {InstrumentService, RealestateProperties} from '../../services/instrument.service';
 import {Instrument} from '../../../../../myfinance-tsclient-generated';
 import * as moment from 'moment';
 
@@ -28,6 +28,13 @@ export class InstrumentupdateformComponent  implements OnInit {
         this.updateSelectedInstrument()
       }
     )
+    this.instrumentservice.instrumentPropertySubject.subscribe(
+      () => {
+        if(!this.noInstrumentSelected && this.selectedInstrument.instrumentType === 'REALESTATE') {
+          this.updateValCalcData(this.instrumentservice.getRealestateProperties());
+        }
+      }
+    )
   }
 
   updateSelectedInstrument() {
@@ -36,6 +43,7 @@ export class InstrumentupdateformComponent  implements OnInit {
       this.noInstrumentSelected = false;
       this.instrumentForm.get('description').setValue(this.selectedInstrument.description);
       this.instrumentForm.get('active').setValue(this.selectedInstrument.isactive);
+      this.instrumentservice.loadInstrumentProperties(this.selectedInstrument.instrumentid)
     }
 
   }
@@ -84,5 +92,21 @@ export class InstrumentupdateformComponent  implements OnInit {
   addValueCalculationData() {
     this.valcaldata = this.instrumentForm.get('valcaldata') as FormArray;
     this.valcaldata.push(this.createItem());
+  }
+
+  rmValueCalculationData() {
+    this.valcaldata = this.instrumentForm.get('valcaldata') as FormArray;
+    this.valcaldata.removeAt(this.valcaldata.length);
+    this.valcaldata.markAsTouched();
+  }
+
+  updateValCalcData(realestateProperties: RealestateProperties[]){
+    this.valcaldata = this.instrumentForm.get('valcaldata') as FormArray;
+    this.valcaldata.clear();
+    realestateProperties.forEach(i=> this.valcaldata.push(this.formBuilder.group({
+      valDate: i.valdate,
+      yieldgoal: i.yieldgoal,
+      profit: i.profit
+    })));
   }
 }
