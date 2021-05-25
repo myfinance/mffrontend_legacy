@@ -170,6 +170,10 @@ export class TransactionService extends AbstractDashboardDataService {
     return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.GIRO);
   }
 
+  getLinkableAccounts(): Array<Instrument> {
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.REALESTATE);
+  }
+
   getBudgets(): Array<Instrument> {
     return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
   }
@@ -227,8 +231,12 @@ export class TransactionService extends AbstractDashboardDataService {
     this.transactionFilterSubject.next();
   }
 
-  saveIncomeExpenses(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {
-    this.myFinanceService.saveIncomeExpenses(desc, srcInstrumentId, trgInstrumentId, value, transactionDate);
+  saveIncomeExpenses(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date, isLinked: Boolean, linkedAccId: number) {
+    if(isLinked) {
+      this.myFinanceService.saveLinkedIncomeExpenses(desc, srcInstrumentId, linkedAccId, trgInstrumentId, value, transactionDate);
+    } else if(!isLinked){
+      this.myFinanceService.saveIncomeExpenses(desc, srcInstrumentId, trgInstrumentId, value, transactionDate);
+    }
   }
 
   saveTransfer(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {

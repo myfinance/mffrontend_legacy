@@ -12,6 +12,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/bs-datepicker.confi
 export class IncomeexpensesinputformComponent implements OnInit {
 
   giros: Instrument[];
+  linkableAccounts: Instrument[];
   budgets: Instrument[];
   giroDefault: Instrument;
   budgetDefault: Instrument;
@@ -26,6 +27,8 @@ export class IncomeexpensesinputformComponent implements OnInit {
       description: ['', Validators.required],
       giro: ['', Validators.required],
       budget: ['', Validators.required],
+      isLinked: ['false', Validators.required],
+      linkedAccount: ['', Validators.required],
       value: [0, Validators.required],
       transactionDate: [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()), Validators.required],
     });
@@ -44,15 +47,23 @@ export class IncomeexpensesinputformComponent implements OnInit {
     this.giroDefault = this.giros[0];
     this.budgets = this.transactionservice.getBudgets();
     this.budgetDefault = this.budgets[0];
+    this.linkableAccounts =  this.transactionservice.getLinkableAccounts();
   }
 
   onSubmit() {
     console.log(this.incomeExpensesForm)
+    let linkedAccId: number = 0;
+    if(this.incomeExpensesForm.value.linkedAccount!=null) {
+      linkedAccId=this.incomeExpensesForm.value.linkedAccount.instrumentid;
+    }
     this.transactionservice.saveIncomeExpenses(this.incomeExpensesForm.value.description,
       this.incomeExpensesForm.value.giro.instrumentid,
       this.incomeExpensesForm.value.budget.instrumentid,
       this.incomeExpensesForm.value.value,
-      this.incomeExpensesForm.value.transactionDate);
+      this.incomeExpensesForm.value.transactionDate,
+      this.incomeExpensesForm.value.isLinked == "true",
+      linkedAccId
+      );
     this.incomeExpensesForm.reset();
   }
 }

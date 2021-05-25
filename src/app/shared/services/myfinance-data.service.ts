@@ -124,6 +124,26 @@ export class MyFinanceDataService {
     );
   }
 
+  saveLinkedIncomeExpenses(desc: string, accId: number, linkedAccId: number, budgetId: number, value: number, transactionDate: Date) {
+
+    this.myfinanceService.addLinkedIncomeExpense_envID_description_accId_linkedAccId_budgetId_value_transactiondate(
+      this.currentEnv,
+      desc,
+      accId,
+      linkedAccId,
+      budgetId,
+      value,
+      moment(transactionDate).format('YYYY-MM-DD')).subscribe(
+      () => {
+        this.transactionSubject.next();
+        this.printSuccess('Transaktion gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
   saveTransfer(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date) {
 
     this.myfinanceService.addTransfer_envID_description_srcId_trgId_value_transactiondate(
