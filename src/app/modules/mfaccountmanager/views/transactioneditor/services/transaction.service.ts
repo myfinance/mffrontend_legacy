@@ -232,10 +232,10 @@ export class TransactionService extends AbstractDashboardDataService {
   }
 
   saveIncomeExpenses(desc: string, srcInstrumentId: number, trgInstrumentId: number, value: number, transactionDate: Date, isLinked: Boolean, linkedAccId: number) {
-    if(!isLinked) {
-      this.myFinanceService.saveIncomeExpenses(desc, srcInstrumentId, trgInstrumentId, value, transactionDate);
-    } else {
+    if(isLinked) {
       this.myFinanceService.saveLinkedIncomeExpenses(desc, srcInstrumentId, linkedAccId, trgInstrumentId, value, transactionDate);
+    } else if(!isLinked){
+      this.myFinanceService.saveIncomeExpenses(desc, srcInstrumentId, trgInstrumentId, value, transactionDate);
     }
   }
 

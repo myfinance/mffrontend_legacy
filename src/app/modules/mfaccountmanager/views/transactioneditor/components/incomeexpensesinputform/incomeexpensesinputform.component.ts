@@ -52,7 +52,7 @@ export class IncomeexpensesinputformComponent implements OnInit {
 
   onSubmit() {
     console.log(this.incomeExpensesForm)
-    let linkedAccId: number;
+    let linkedAccId: number = 0;
     if(this.incomeExpensesForm.value.linkedAccount!=null) {
       linkedAccId=this.incomeExpensesForm.value.linkedAccount.instrumentid;
     }
@@ -61,7 +61,7 @@ export class IncomeexpensesinputformComponent implements OnInit {
       this.incomeExpensesForm.value.budget.instrumentid,
       this.incomeExpensesForm.value.value,
       this.incomeExpensesForm.value.transactionDate,
-      this.incomeExpensesForm.value.isLinked,
+      this.incomeExpensesForm.value.isLinked == "true",
       linkedAccId
       );
     this.incomeExpensesForm.reset();
