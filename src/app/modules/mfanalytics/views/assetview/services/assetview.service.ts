@@ -263,14 +263,14 @@ export class AssetviewService extends AbstractDashboardDataService {
         this.longtermAsset = + instrumentDetails[key].valuemap['value'] + this.longtermAsset;
         this.setAccountDetails(instrumentDetails, key, longtermAssets, this.accountDiffValuemap);
       }
-      if (instrumentDetails[key].valuemap['instrumenttype'] === 'Budget') {
+      if (instrumentDetails[key].valuemap['instrumenttype'] === 'BUDGET') {
         this.setAccountDetails(instrumentDetails, key, this.budgetValuemap, this.budgetDiffValuemap);
       }
-      if (instrumentDetails[key].valuemap['instrumenttype'] === 'AccountPortfolio') {
+      if (instrumentDetails[key].valuemap['instrumenttype'] === 'ACCOUNTPORTFOLIO') {
         this.accountValueChange = + instrumentDetails[key].valuemap['valueChange'];
         this.accountAsset = + instrumentDetails[key].valuemap['value'];
       }
-      if (instrumentDetails[key].valuemap['instrumenttype'] === 'BudgetGroup') {
+      if (instrumentDetails[key].valuemap['instrumenttype'] === 'BUDGETPORTFOLIO') {
         this.budgetvaluechange = + instrumentDetails[key].valuemap['valueChange'];
         this.budgetAsset = + instrumentDetails[key].valuemap['value'];
       }
