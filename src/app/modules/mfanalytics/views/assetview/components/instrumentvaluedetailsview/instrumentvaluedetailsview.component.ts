@@ -33,7 +33,7 @@ export class InstrumentvaluedetailsviewComponent {
     this.valueChange = +this.assetviewservice.getInstrumentDetails().valuemap['valueChange'];
     this.instrumentType = this.assetviewservice.getInstrumentDetails().valuemap['instrumenttype'];
 
-    if(this.instrumentType === 'Budget' || this.instrumentType === 'Giro') {
+    if(this.instrumentType === 'BUDGET' || this.instrumentType === 'GIRO') {
       this.avgCashoutPerMonth = +this.assetviewservice.getInstrumentDetails().valuemap['avgCashoutPerMonth'];
       this.avgCashoutLastYear = +this.assetviewservice.getInstrumentDetails().valuemap['avgCashoutLastYear'];
       this.expenses=this.assetviewservice.getInstrumentDetails().expensesLastMonth;
