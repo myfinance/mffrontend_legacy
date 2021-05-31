@@ -1,7 +1,4 @@
 
-import {InstrumentSearchComponent} from './instrument-search/instrument-search.component';
-
-import {InstrumentCardComponent} from './instrument-search/instrument-card.component';
 import {AppRoutesModule} from './app.routes';
 import {NotFoundViewComponent} from './views/not-found-view/not-found-view.component';
 import {ErrorViewComponent} from './views/error-view/error-view.component';
@@ -50,8 +47,6 @@ export function initConfiguration(configService: ConfigService): Function {
     AppComponent,
     NotFoundViewComponent,
     ErrorViewComponent,
-    InstrumentSearchComponent,
-    InstrumentCardComponent,
     HomeComponent,
     TopNavigationComponent,
     BasicLayoutComponent,

@@ -2,7 +2,6 @@
  * Created by hf on 19.05.2017.
  */
 import { Routes, RouterModule } from '@angular/router';
-import {InstrumentSearchComponent} from './instrument-search/instrument-search.component';
 import {NotFoundViewComponent} from './views/not-found-view/not-found-view.component';
 import {ErrorViewComponent} from './views/error-view/error-view.component';
 import {HomeComponent} from './views/home/home.component';
@@ -57,10 +56,6 @@ const APP_ROUTES: Routes = [
        {
         path: 'assetview',
         component: AssetviewComponent
-      },
-      {
-        path: 'instrument-search',
-        component: InstrumentSearchComponent
       },
       {
         path: 'dashboards', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
