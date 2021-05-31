@@ -140,6 +140,10 @@ export class InstrumentService extends AbstractDashboardDataService {
     this.myFinanceService.updateRealEstate(instrumentId, desc, isActive, yieldgoals, profits);
   }
 
+  saveCurrency(desc: string, currencyCode: string) {
+    this.myFinanceService.saveCurrency(desc, currencyCode);
+  }
+
   setSelectedInstrument(instrument: Instrument) {
     this.selectedInstrument = instrument;
     this.selectedinstrumentSubject.next()

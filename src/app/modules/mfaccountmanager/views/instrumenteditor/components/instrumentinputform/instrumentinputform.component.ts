@@ -11,7 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./instrumentinputform.component.scss']
 })
 export class InstrumentinputformComponent implements OnInit {
-  instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.GIRO, InstrumentTypeEnum.BUDGET, InstrumentTypeEnum.REALESTATE];
+  instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.GIRO, InstrumentTypeEnum.BUDGET, InstrumentTypeEnum.REALESTATE, InstrumentTypeEnum.CURRENCY];
   budgetGroups: Instrument[] = [];
   budgets: Instrument[] = [];
   instrumentForm: FormGroup;
@@ -25,6 +25,7 @@ export class InstrumentinputformComponent implements OnInit {
         instrumentType: [InstrumentTypeEnum.GIRO, Validators.required],
         budgetGroup: [null, [Validators.required, this.isBudgetGroupNecessary.bind(this)]],
         budget: [null, [Validators.required, this.isValueBudgetNecessary.bind(this)]],
+        currencycode: ['', [Validators.required, this.isCurrencyCodeNecessary.bind(this)]],
         valcaldata: this.formBuilder.array([this.createItem()])
       });
 
@@ -67,6 +68,8 @@ export class InstrumentinputformComponent implements OnInit {
         profits.push(element.value.profit + "," + valdate);
       });
       this.instrumentservice.saveRealEstate(this.instrumentForm.value.description, this.instrumentForm.value.budget.instrumentid, yieldgoals, profits);
+    } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.CURRENCY) {
+      this.instrumentservice.saveCurrency(this.instrumentForm.value.description, this.instrumentForm.value.currencycode)
     }
   }
 
@@ -83,6 +86,14 @@ export class InstrumentinputformComponent implements OnInit {
     if (this.instrumentForm.value == null) { return null; }
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.REALESTATE && this.instrumentForm.value.budget == null) {
       return {'ValueBudget is necessary': true};
+    } else { return null; }
+  }
+
+  isCurrencyCodeNecessary(control: FormControl): {[s: string]: boolean} {
+    if (this.instrumentForm == null) { return null; }
+    if (this.instrumentForm.value == null) { return null; }
+    if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.CURRENCY && this.instrumentForm.value.currencycode == null) {
+      return {'CurrencyCode is necessary': true};
     } else { return null; }
   }
 

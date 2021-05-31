@@ -305,6 +305,18 @@ export class MyFinanceDataService {
       })
   }
 
+  saveCurrency(desc: string, currencyCode: string) {
+    this.myfinanceService.addCurrency_envID_currencyCode_description(
+      this.currentEnv, currencyCode, desc).subscribe(
+      () => {
+        this.instrumentSubject.next();
+        this.printSuccess('Währung gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      })
+  }
+
   saveRealEstate(desc: string, valueBudgetId: number, yieldgoals: string[], profits: string[]) {
     this.myfinanceService.addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(
       this.currentEnv, desc, this.configService.getCurrentTenant().instrumentid, valueBudgetId, yieldgoals, profits).subscribe(
