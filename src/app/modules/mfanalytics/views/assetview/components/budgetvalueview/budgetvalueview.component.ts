@@ -9,7 +9,7 @@ import { AssetviewService } from '../../services/assetview.service';
 export class BudgetValueViewComponent {
 
   valuemap = [];
-  view: any[] = [600, 600];
+  view: any[] = [600, 500];
 
   // options
   showXAxis: boolean = true;

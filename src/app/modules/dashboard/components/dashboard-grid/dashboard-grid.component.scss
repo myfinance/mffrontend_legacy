@@ -1,7 +1,7 @@
 :host {
   display: flex;
   flex-flow: column;
-
+  
   @media (min-width: 640px) {
     height: 100%;
   }
@@ -16,5 +16,9 @@
     right: 10px;
     z-index: 10000;
     cursor: move;
+  }
+
+  .drag-content {
+    overflow: auto;
   }
 }
