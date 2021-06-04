@@ -12,7 +12,7 @@ import {TenanteditorComponent} from './modules/mfaccountmanager/views/tenantedit
 import {RecurrenttransactioneditorComponent} from './modules/mfaccountmanager/views/recurrenttransactioneditor/recurrenttransactioneditor.component';
 import { AssetviewComponent } from './modules/mfanalytics/views/assetview/assetview.component';
 import { ExpensesmassloadComponent } from './modules/mfaccountmanager/views/expensesmassload/expensesmassload.component';
-import { InstrumentconfiguratorComponent } from './modules/mfmarketdata/views/instrumentconfigurator/instrumentconfigurator.component';
+import { MarketDataConfiguratorComponent } from './modules/mfmarketdata/views/instrumentconfigurator/marketdataconfigurator.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -60,7 +60,7 @@ const APP_ROUTES: Routes = [
       },
       {
         path: 'marketdataconfigview',
-        component: InstrumentconfiguratorComponent
+        component: MarketDataConfiguratorComponent
       },
       {
         path: 'dashboards', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)

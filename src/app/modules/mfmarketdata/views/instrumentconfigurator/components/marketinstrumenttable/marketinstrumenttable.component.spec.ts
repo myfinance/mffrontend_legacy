@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InstrumenttableComponent } from './instrumenttable.component';
+import { InstrumenttableComponent } from './marketinstrumenttable.component';
 
 describe('InstrumenttableComponent', () => {
   let component: InstrumenttableComponent;

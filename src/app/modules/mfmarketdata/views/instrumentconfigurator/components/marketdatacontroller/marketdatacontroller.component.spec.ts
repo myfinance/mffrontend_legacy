@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InstrumentcontrollerComponent } from './instrumentcontroller.component';
+import { InstrumentcontrollerComponent } from './marketdatacontroller.component';
 
 describe('InstrumentcontrollerComponent', () => {
   let component: InstrumentcontrollerComponent;

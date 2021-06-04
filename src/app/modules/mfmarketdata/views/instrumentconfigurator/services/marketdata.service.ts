@@ -41,7 +41,7 @@ export class MarketDataService extends AbstractDashboardDataService {
   protected loadData(): void {
     this.dashboardService.handleDataPreparing();
 
-    this.myFinanceService.getInstrumentsForTenant()
+    this.myFinanceService.getInstruments()
       .subscribe(
         (instruments: InstrumentListModel) => {
           this.instruments = instruments.values;
@@ -82,20 +82,8 @@ export class MarketDataService extends AbstractDashboardDataService {
       });
   }
 
-  getBudgetGroups(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGETGROUP);
-  }
-
-  getBudgets(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
-  }
-
   updateInstrument(instrumentId: number, desc: string, isActive: boolean) {
     this.myFinanceService.updateInstrument(instrumentId, desc, isActive, 'Instrument aktualisiert')
-  }
-
-  updateRealEstate(instrumentId: number, desc: string, yieldgoals: string[], profits: string[], isActive: boolean) {
-    this.myFinanceService.updateRealEstate(instrumentId, desc, isActive, yieldgoals, profits);
   }
 
   saveCurrency(desc: string, currencyCode: string) {

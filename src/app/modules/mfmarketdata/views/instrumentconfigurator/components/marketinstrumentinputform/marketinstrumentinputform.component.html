@@ -1,0 +1,32 @@
+<form [formGroup]="instrumentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <p>InstrumentType:</p>
+      <select class="btn btn-primary dropdown-toggle" formControlName="instrumentType">
+        <option class="mydropdown-item" [ngValue]="instrumentType" *ngFor="let instrumentType of instrumentTypes" >
+          {{instrumentType}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Beschreibung:</label>
+      <input class="form-control" formControlName="description"/>
+      <span *ngIf="!instrumentForm.get('description').valid && instrumentForm.get('description').touched">
+        Bitte geben Sie eine Beschriebung für das Instrument ein!
+      </span>
+    </div>
+
+  
+    <div class="form-group" *ngIf="instrumentForm.get('instrumentType').value === 'CURRENCY'">
+      <p>Währungscode:</p>
+      <input class="form-control" formControlName="currencycode"/>
+      <span *ngIf="!instrumentForm.get('currencycode').valid && instrumentForm.get('currencycode').touched">
+        Bitte geben Sie einen Währungscode für das Instrument ein!
+      </span>
+    </div>
+  
+
+    <button class="btn btn-primary" type="submit">Speichern</button>
+    
+  </form>
+  
+  

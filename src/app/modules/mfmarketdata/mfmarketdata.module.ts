@@ -8,16 +8,17 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GridsterModule } from 'angular-gridster2';
 import { WidgetModule } from '../widget/widget.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
-import { InstrumentconfiguratorComponent } from './views/instrumentconfigurator/instrumentconfigurator.component';
-import { InstrumentcontrollerComponent } from './views/instrumentconfigurator/components/instrumentcontroller/instrumentcontroller.component';
-import { InstrumentinputformComponent } from './views/instrumentconfigurator/components/instrumentinputform/instrumentinputform.component';
-import { InstrumenttableComponent } from './views/instrumentconfigurator/components/instrumenttable/instrumenttable.component';
-import { InstrumentupdateformComponent } from './views/instrumentconfigurator/components/instrumentupdateform/instrumentupdateform.component';
+import { MarketDataConfiguratorComponent } from './views/instrumentconfigurator/marketdataconfigurator.component';
+import { MarketInstrumentInputformComponent } from './views/instrumentconfigurator/components/marketinstrumentinputform/marketinstrumentinputform.component';
+import { MarketInstrumentTableComponent } from './views/instrumentconfigurator/components/marketinstrumenttable/marketinstrumenttable.component';
+import { MarketInstrumentUpdateformComponent } from './views/instrumentconfigurator/components/marketinstrumentupdateform/marketinstrumentupdateform.component';
 import { MarketDataService } from './views/instrumentconfigurator/services/marketdata.service';
+import { MarketDataControllerComponent } from './views/instrumentconfigurator/components/marketdatacontroller/marketdatacontroller.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 
@@ -28,6 +29,8 @@ import { MarketDataService } from './views/instrumentconfigurator/services/marke
     GridsterModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    TabsModule.forRoot(),
     NgxChartsModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
@@ -42,7 +45,7 @@ import { MarketDataService } from './views/instrumentconfigurator/services/marke
       }
     })
   ],
-  declarations: [InstrumentconfiguratorComponent, InstrumentcontrollerComponent, InstrumentinputformComponent, InstrumenttableComponent, InstrumentupdateformComponent],
+  declarations: [MarketDataConfiguratorComponent, MarketDataControllerComponent, MarketInstrumentInputformComponent, MarketInstrumentTableComponent, MarketInstrumentUpdateformComponent],
   exports: [
   ],
   providers: [

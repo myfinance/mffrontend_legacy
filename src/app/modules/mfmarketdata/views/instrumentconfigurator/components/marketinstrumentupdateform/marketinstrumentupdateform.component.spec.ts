@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InstrumentupdateformComponent } from './instrumentupdateform.component';
+import { InstrumentupdateformComponent } from './marketinstrumentupdateform.component';
 
 describe('InstrumentupdateformComponent', () => {
   let component: InstrumentupdateformComponent;

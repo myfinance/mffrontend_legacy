@@ -5,11 +5,11 @@ import { MarketDataService } from './services/marketdata.service';
 
 
 @Component({
-  selector: 'app-instrumentconfigurator',
-  templateUrl: './instrumentconfigurator.component.html',
-  styleUrls: ['./instrumentconfigurator.component.css']
+  selector: 'app-marketdataconfigurator',
+  templateUrl: './marketdataconfigurator.component.html',
+  styleUrls: ['./marketdataconfigurator.component.scss']
 })
-export class InstrumentconfiguratorComponent extends AbstractDashboard implements OnInit {
+export class MarketDataConfiguratorComponent extends AbstractDashboard implements OnInit {
 
   title = 'Instruments';
   view = 'fit';
