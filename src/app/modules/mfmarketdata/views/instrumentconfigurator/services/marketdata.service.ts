@@ -65,7 +65,7 @@ export class MarketDataService extends AbstractDashboardDataService {
   }
 
   getInstruments(): Array<Instrument> {
-    return this.instruments;
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.CURRENCY || i.instrumentType === InstrumentTypeEnum.EQUITY);
   }
 
   loadInstrumentProperties(instrumentId: number) : void{

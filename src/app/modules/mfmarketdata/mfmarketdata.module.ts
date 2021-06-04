@@ -19,6 +19,7 @@ import { MarketInstrumentUpdateformComponent } from './views/instrumentconfigura
 import { MarketDataService } from './views/instrumentconfigurator/services/marketdata.service';
 import { MarketDataControllerComponent } from './views/instrumentconfigurator/components/marketdatacontroller/marketdatacontroller.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 
@@ -32,6 +33,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ReactiveFormsModule,
     TabsModule.forRoot(),
     NgxChartsModule,
+    NgxDatatableModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
