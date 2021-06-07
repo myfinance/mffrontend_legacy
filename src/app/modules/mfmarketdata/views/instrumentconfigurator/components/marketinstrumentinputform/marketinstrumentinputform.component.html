@@ -23,6 +23,14 @@
         Bitte geben Sie einen Währungscode für das Instrument ein!
       </span>
     </div>
+
+    <div class="form-group" *ngIf="instrumentForm.get('instrumentType').value === 'EQUITY'">
+      <p>ISIN:</p>
+      <input class="form-control" formControlName="isin"/>
+      <span *ngIf="!instrumentForm.get('isin').valid && instrumentForm.get('isin').touched">
+        Bitte geben Sie eine ISIN für das Instrument ein!
+      </span>
+    </div>
   
 
     <button class="btn btn-primary" type="submit">Speichern</button>

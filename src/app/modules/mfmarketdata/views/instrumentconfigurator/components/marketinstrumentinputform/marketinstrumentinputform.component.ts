@@ -20,7 +20,8 @@ export class MarketInstrumentInputformComponent implements OnInit {
       this.instrumentForm = this.formBuilder.group({
         description: ['', Validators.required],
         instrumentType: [InstrumentTypeEnum.EQUITY, Validators.required],
-        currencycode: ['', [Validators.required, this.isCurrencyCodeNecessary.bind(this)]]
+        currencycode: ['', [Validators.required, this.isCurrencyCodeNecessary.bind(this)]],
+        isin: ['', [Validators.required, this.isISINNecessary.bind(this)]]
       });
 
     if (this.marketdataservice.getIsInit()) {
@@ -39,6 +40,8 @@ export class MarketInstrumentInputformComponent implements OnInit {
   onSubmit() {
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.CURRENCY) {
       this.marketdataservice.saveCurrency(this.instrumentForm.value.description, this.instrumentForm.value.currencycode)
+    } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.EQUITY) {
+      this.marketdataservice.saveEquity(this.instrumentForm.value.description, this.instrumentForm.value.isin)
     }
   }
 
@@ -47,6 +50,14 @@ export class MarketInstrumentInputformComponent implements OnInit {
     if (this.instrumentForm.value == null) { return null; }
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.CURRENCY && this.instrumentForm.value.currencycode == null) {
       return {'CurrencyCode is necessary': true};
+    } else { return null; }
+  }
+
+  isISINNecessary(control: FormControl): {[s: string]: boolean} {
+    if (this.instrumentForm == null) { return null; }
+    if (this.instrumentForm.value == null) { return null; }
+    if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.EQUITY && this.instrumentForm.value.isin == null) {
+      return {'Isin is necessary': true};
     } else { return null; }
   }
 }

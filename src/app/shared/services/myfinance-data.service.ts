@@ -317,6 +317,18 @@ export class MyFinanceDataService {
       })
   }
 
+  saveEquity(desc: string, isin: string) {
+    this.myfinanceService.addEquity_envID_isin_description(
+      this.currentEnv, isin, desc).subscribe(
+      () => {
+        this.instrumentSubject.next();
+        this.printSuccess('Aktie gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      })
+  }
+
   saveRealEstate(desc: string, valueBudgetId: number, yieldgoals: string[], profits: string[]) {
     this.myfinanceService.addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(
       this.currentEnv, desc, this.configService.getCurrentTenant().instrumentid, valueBudgetId, yieldgoals, profits).subscribe(
