@@ -45,13 +45,11 @@ export class MarketInstrumentInputformComponent implements OnInit {
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.CURRENCY) {
       this.marketdataservice.saveCurrency(this.instrumentForm.value.description, this.instrumentForm.value.currencycode)
     } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.EQUITY) {
-      //this.marketdataservice.saveEquity(this.instrumentForm.value.description, this.instrumentForm.value.isin)
+      let symbols: string[] = [];
       this.instrumentForm.get('symbols')['controls'].forEach(element => {
-        //this.marketdataservice.saveSymbol()
-        //console.info('symbol:'+element.value.symbol);
-        //console.info('currency:'+element.value.currency.businesskey);
+        symbols.push(element.value.symbol+','+element.value.currency.businesskey);
       });
-      
+      this.marketdataservice.saveEquity(this.instrumentForm.value.description, this.instrumentForm.value.isin, symbols)
     }
   }
 

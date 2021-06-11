@@ -317,20 +317,9 @@ export class MyFinanceDataService {
       })
   }
 
-  saveSymbol(isin: string, symbol: string, currencyCode: string) {
-    this.myfinanceService.addSymbol_envID_isin_symbol_currencycode(
-      this.currentEnv, isin, symbol, currencyCode).subscribe(
-      () => {
-        this.printSuccess('Symbol gespeichert');
-      },
-      (errResp) => {
-        this.printError(errResp);
-      })
-  }
-
-  saveEquity(desc: string, isin: string) {
-    this.myfinanceService.addEquity_envID_isin_description(
-      this.currentEnv, isin, desc).subscribe(
+  saveEquity(desc: string, isin: string, symbols: string[]) {
+    this.myfinanceService.addFullEquity_envID_isin_description_symbols(
+      this.currentEnv, isin, desc, symbols).subscribe(
       () => {
         this.instrumentSubject.next();
         this.printSuccess('Aktie gespeichert');
