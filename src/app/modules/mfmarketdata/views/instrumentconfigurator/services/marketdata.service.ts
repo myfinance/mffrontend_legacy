@@ -68,6 +68,10 @@ export class MarketDataService extends AbstractDashboardDataService {
     return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.CURRENCY || i.instrumentType === InstrumentTypeEnum.EQUITY);
   }
 
+  getCurrencies(): Array<Instrument> {
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.CURRENCY);
+  }
+
   loadInstrumentProperties(instrumentId: number) : void{
     this.myFinanceService.getInstrumentProperties(instrumentId)
     .subscribe(
@@ -92,6 +96,10 @@ export class MarketDataService extends AbstractDashboardDataService {
 
   saveEquity(desc: string, isin: string) {
     this.myFinanceService.saveEquity(desc, isin);
+  }
+
+  saveSymbol(isin: string, symbol:string, currencyCode: string) {
+    this.myFinanceService.saveSymbol(isin, symbol, currencyCode);
   }
 
   setSelectedInstrument(instrument: Instrument) {

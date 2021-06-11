@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {Instrument} from '../../../../../myfinance-tsclient-generated';
 import { MarketDataService } from '../../services/marketdata.service';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
@@ -13,6 +13,8 @@ export class MarketInstrumentInputformComponent implements OnInit {
 
   instrumentTypes: InstrumentTypeEnum[] = [InstrumentTypeEnum.CURRENCY, InstrumentTypeEnum.EQUITY];
   instrumentForm: FormGroup;
+  symbols: FormArray;
+  currencies: Instrument[];
 
   constructor(private formBuilder: FormBuilder, private marketdataservice: MarketDataService) { }
 
@@ -21,7 +23,8 @@ export class MarketInstrumentInputformComponent implements OnInit {
         description: ['', Validators.required],
         instrumentType: [InstrumentTypeEnum.EQUITY, Validators.required],
         currencycode: ['', [Validators.required, this.isCurrencyCodeNecessary.bind(this)]],
-        isin: ['', [Validators.required, this.isISINNecessary.bind(this)]]
+        isin: ['', [Validators.required, this.isISINNecessary.bind(this)]],
+        symbols: this.formBuilder.array([])
       });
 
     if (this.marketdataservice.getIsInit()) {
@@ -35,13 +38,20 @@ export class MarketInstrumentInputformComponent implements OnInit {
   }
 
   loadData(): void {
+    this.currencies = this.marketdataservice.getCurrencies();
   }
 
   onSubmit() {
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.CURRENCY) {
       this.marketdataservice.saveCurrency(this.instrumentForm.value.description, this.instrumentForm.value.currencycode)
     } else if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.EQUITY) {
-      this.marketdataservice.saveEquity(this.instrumentForm.value.description, this.instrumentForm.value.isin)
+      //this.marketdataservice.saveEquity(this.instrumentForm.value.description, this.instrumentForm.value.isin)
+      this.instrumentForm.get('symbols')['controls'].forEach(element => {
+        //this.marketdataservice.saveSymbol()
+        //console.info('symbol:'+element.value.symbol);
+        //console.info('currency:'+element.value.currency.businesskey);
+      });
+      
     }
   }
 
@@ -59,6 +69,18 @@ export class MarketInstrumentInputformComponent implements OnInit {
     if (this.instrumentForm.value.instrumentType === InstrumentTypeEnum.EQUITY && this.instrumentForm.value.isin == null) {
       return {'Isin is necessary': true};
     } else { return null; }
+  }
+
+  addSymbol() {
+    this.symbols = this.instrumentForm.get('symbols') as FormArray;
+    this.symbols.push(this.createItem());
+  }
+
+  createItem(): FormGroup {
+    return this.formBuilder.group({
+      symbol: '',
+      currency: ''
+    });
   }
 }
 

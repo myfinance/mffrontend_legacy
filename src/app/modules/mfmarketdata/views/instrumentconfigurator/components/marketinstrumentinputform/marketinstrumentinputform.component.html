@@ -30,6 +30,26 @@
       <span *ngIf="!instrumentForm.get('isin').valid && instrumentForm.get('isin').touched">
         Bitte geben Sie eine ISIN für das Instrument ein!
       </span>
+      <b>Handelsplatz (Erforderlich um aktuelle Marktdaten zu erhalten):</b>
+      <table>
+        <thead>
+          <tr>
+            <th width="250">Symbol</th>
+            <th width="250">Währung</th>
+          </tr>
+        </thead>
+      </table>
+        <div class="table table-striped" formArrayName="symbols" *ngFor="let entry of instrumentForm.get('symbols')['controls']; let i = index">
+          <table [formGroupName]="i">
+            <td width="250"><input class="form-control" formControlName="symbol"/></td>
+            <td width="250"><select class="btn btn-primary dropdown-toggle" formControlName="currency">
+              <option class="mydropdown-item" [ngValue]="cur" *ngFor="let cur of currencies" >
+                {{cur.description}}
+              </option>
+            </select></td>
+          </table>
+        </div>
+        <button class="btn btn-primary" type=button (click)="addSymbol()">Neuer Handelsplatz</button>      
     </div>
   
 
