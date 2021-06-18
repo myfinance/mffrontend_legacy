@@ -28,8 +28,8 @@
           <table [formGroupName]="i">
             <td width="250"><input class="form-control" formControlName="symbol"/></td>
             <td width="250"><select class="btn btn-primary dropdown-toggle" formControlName="currency">
-              <option class="mydropdown-item" [ngValue]="cur" *ngFor="let cur of currencies" >
-                {{cur.description}}
+              <option class="mydropdown-item" [ngValue]="currency" *ngFor="let currency of currencies" >
+                {{currency.description}}
               </option>
             </select></td>
           </table>

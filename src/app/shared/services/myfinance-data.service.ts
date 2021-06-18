@@ -10,7 +10,8 @@ import {
   RecurrentTransaction, RecurrentTransactionListModel,
   TransactionListModel,
   InstrumentDetailModel,
-  InstrumentPropertyListModel
+  InstrumentPropertyListModel,
+  SymbolListModel
 } from '../../modules/myfinance-tsclient-generated';
 import {MyFinanceWrapperService} from './my-finance-wrapper.service';
 import {DatePipe} from '@angular/common';
@@ -388,6 +389,12 @@ export class MyFinanceDataService {
     this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
 
     return this.myfinanceService.getInstrumentPropertyList_envID_instrumentid(this.configService.getCurrentEnv(), instrumentId);
+  }
+
+  getInstrumentSymbols(isin: string): Observable<SymbolListModel> {
+    this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
+
+    return this.myfinanceService.getSymbolsForEquityList_envID_isin(this.configService.getCurrentEnv(), isin);
   }
 
   getInstrumentsPerType(instrumentType: InstrumentTypeEnum): Observable<InstrumentListModel> {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Instrument, InstrumentListModel, InstrumentProperties, InstrumentPropertyListModel} from '../../../../myfinance-tsclient-generated';
+import {Instrument, InstrumentListModel, InstrumentProperties, InstrumentPropertyListModel, SecuritySymbols, SymbolListModel} from '../../../../myfinance-tsclient-generated';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {Subject} from 'rxjs/Rx';
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
@@ -16,6 +16,8 @@ export class MarketDataService extends AbstractDashboardDataService {
   selectedinstrumentSubject: Subject<any> = new Subject<any>();
   selectedInstrument: Instrument;
   instrumentProperies: InstrumentProperties[];
+  symbols: SecuritySymbols[];
+  symbolSubject: Subject<any> = new Subject<any>();
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -105,5 +107,23 @@ export class MarketDataService extends AbstractDashboardDataService {
 
   getSelectedInstrument(): Instrument {
     return this.selectedInstrument
+  }
+
+  getInstrumentSymbols(): SecuritySymbols[] {
+    return this.symbols;
+  }
+
+  loadInstrumentSymbols(isin: string) : void{
+    this.myFinanceService.getInstrumentSymbols(isin)
+    .subscribe(
+      (symbol: SymbolListModel) => {
+        this.symbols = symbol.values;
+        this.symbolSubject.next();
+      },
+      (errResp) => {
+        this.myFinanceService.printError(errResp);
+        this.dashboardService.handleDataNotLoaded(errResp);
+
+      });
   }
 }

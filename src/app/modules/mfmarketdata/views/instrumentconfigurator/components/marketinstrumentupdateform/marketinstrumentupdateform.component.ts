@@ -39,6 +39,11 @@ export class MarketInstrumentUpdateformComponent implements OnInit {
         this.loadData();
       }
     )
+    this.marketdataservice.symbolSubject.subscribe(
+      () => {
+        this.updateSymbols();
+      }
+    )
   }
 
   loadData(): void {
@@ -52,7 +57,7 @@ export class MarketInstrumentUpdateformComponent implements OnInit {
       this.instrumentForm.get('description').setValue(this.selectedInstrument.description);
       this.instrumentForm.get('active').setValue(this.selectedInstrument.isactive);
       if (this.selectedInstrument.instrumentType === InstrumentTypeEnum.EQUITY) {
-        //this.instrumentservice.loadInstrumentProperties(this.selectedInstrument.instrumentid)
+        this.marketdataservice.loadInstrumentSymbols(this.selectedInstrument.businesskey)
       }
     }
 
@@ -70,13 +75,25 @@ export class MarketInstrumentUpdateformComponent implements OnInit {
     });
   }
 
+  updateSymbols() {
+
+    this.symbols = this.instrumentForm.get('symbols') as FormArray;
+    this.symbols.clear();
+    let symbols = this.marketdataservice.getInstrumentSymbols();
+    symbols.forEach(i=> this.symbols.push(this.formBuilder.group({
+      symbol: i.symbol,
+      currency: i.currency.description
+    })));
+  }
+
   onSubmit() {
     if (this.selectedInstrument.instrumentType === InstrumentTypeEnum.CURRENCY) {
       this.marketdataservice.updateInstrument(this.selectedInstrument.instrumentid, this.instrumentForm.value.description, true);
     } else if (this.selectedInstrument.instrumentType === InstrumentTypeEnum.EQUITY) {
       let symbols: string[] = [];
-      this.instrumentForm.get('symbols')['controls'].forEach(element => {
-        symbols.push(element.value.symbol+','+element.value.currency.businesskey);
+      this.instrumentForm.get('symbols')['controls'].forEach(
+        element => {
+          symbols.push(element.value.symbol+','+element.value.currency.businesskey);
       });
       this.marketdataservice.saveEquity(this.instrumentForm.value.description, this.selectedInstrument.businesskey, symbols);
     }

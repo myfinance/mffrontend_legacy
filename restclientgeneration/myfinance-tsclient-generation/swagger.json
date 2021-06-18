@@ -1,4 +1,3 @@
-
 {
   "swagger": "2.0",
   "info": {
@@ -32,25 +31,39 @@
     }
   ],
   "paths": {
-    "/myfinance/environments/list": {
+    "/myfinance/environments/{envID}/getsymbols": {
       "get": {
         "tags": [
+          "UtilityResources",
           "MyFinance"
         ],
-        "summary": "List Environments",
+        "summary": "List Data",
         "description": "",
-        "operationId": "getEnvironmentList",
+        "operationId": "getSymbolsForEquityList",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          
+          {
+            "name": "isin",
+            "in": "query",
+            "description": "isin",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/StringListModel"
+              "$ref": "#/definitions/SymbolListModel"
             }
           }
         }
@@ -161,6 +174,351 @@
             "schema": {
               "$ref": "#/definitions/InstrumentListModel"
             }
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/instrumentsproperties": {
+      "get": {
+        "tags": [
+          "UtilityResources",
+          "MyFinance"
+        ],
+        "summary": "List Data",
+        "description": "",
+        "operationId": "getInstrumentPropertyList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "instrumentid",
+            "in": "query",
+            "description": "instrument id",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/InstrumentPropertyListModel"
+            }
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/incomebudgetforbudgetgroup": {
+      "get": {
+        "tags": [
+          "MyFinance"
+        ],
+        "summary": "get Data",
+        "description": "",
+        "operationId": "getIncomeBudget",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "budgetGroup",
+            "in": "query",
+            "description": "budgetGroup id",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/InstrumentModel"
+            }
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/instrumentspertype": {
+      "get": {
+        "tags": [
+          "UtilityResources",
+          "MyFinance"
+        ],
+        "summary": "List Data",
+        "description": "",
+        "operationId": "getInstrumentPerTypeList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tenant",
+            "in": "query",
+            "description": "tenant id",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "instrumenttype",
+            "in": "query",
+            "description": "instrumenttype",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "GIRO",
+              "MONEYATCALL",
+              "TIMEDEPOSIT",
+              "BUILDINGSAVINGACCOUNT",
+              "BUDGET",
+              "TENANT",
+              "ACCOUNTPORTFOLIO",
+              "ARTIFICALPORTFOLIO",
+              "BUDGETGROUP",
+              "DEPOT",
+              "BUILDINGSAVING",
+              "CURRENCY",
+              "EQUITY",
+              "FONDS",
+              "ETF",
+              "INDEX",
+              "BOND",
+              "LIFEINSURANCE",
+              "DEPRECATIONOBJECT",
+              "REALESTATE",
+              "LOAN",
+              "BUDGETPORTFOLIO",
+              "UNKNOWN"
+            ]
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/InstrumentListModel"
+            }
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/listRecurrentTransactions": {
+      "get": {
+        "tags": [
+          "UtilityResources",
+          "MyFinance"
+        ],
+        "summary": "List Data",
+        "description": "",
+        "operationId": "getRecurrentTransactionList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RecurrentTransactionListModel"
+            }
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/getvaluecurve/{instrumentId}": {
+      "get": {
+        "tags": [
+          "UtilityResources",
+          "MyFinance"
+        ],
+        "summary": "Map Data",
+        "description": "",
+        "operationId": "getValueMap",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "instrumentId",
+            "in": "path",
+            "description": "the instrumentId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startdate",
+            "in": "query",
+            "description": "startdate in Format yyyy-mm-dd",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "enddate",
+            "in": "query",
+            "description": "enddate in Format yyyy-mm-dd",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DateDoubleModel"
+            }
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/getinstrumentvalues/{tenantId}": {
+      "get": {
+        "tags": [
+          "UtilityResources",
+          "MyFinance"
+        ],
+        "summary": "Map Data",
+        "description": "",
+        "operationId": "getAccountValueTupleMap",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "the tenantId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "date in Format yyyy-mm-dd",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "diffdate",
+            "in": "query",
+            "description": "date for value diff in Format yyyy-mm-dd",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/InstrumentDetailModel"
+            }
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/importprices": {
+      "post": {
+        "tags": [
+          "MyFinance"
+        ],
+        "summary": "importprices",
+        "description": "",
+        "operationId": "importPrices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Prices imported"
+          },
+          "500": {
+            "description": "Something wrong in Server"
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/bookRecurrentTransactions": {
+      "post": {
+        "tags": [
+          "MyFinance"
+        ],
+        "summary": "bookRecurrentTransactions",
+        "description": "",
+        "operationId": "bookRecurrentTransactions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "book RecurrentTransactions"
+          },
+          "500": {
+            "description": "Something wrong in Server"
           }
         }
       }
@@ -914,351 +1272,6 @@
         }
       }
     },
-    "/myfinance/environments/{envID}/instrumentsproperties": {
-      "get": {
-        "tags": [
-          "UtilityResources",
-          "MyFinance"
-        ],
-        "summary": "List Data",
-        "description": "",
-        "operationId": "getInstrumentPropertyList",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "instrumentid",
-            "in": "query",
-            "description": "instrument id",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/InstrumentPropertyListModel"
-            }
-          }
-        }
-      }
-    },
-    "/myfinance/environments/{envID}/incomebudgetforbudgetgroup": {
-      "get": {
-        "tags": [
-          "MyFinance"
-        ],
-        "summary": "get Data",
-        "description": "",
-        "operationId": "getIncomeBudget",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "budgetGroup",
-            "in": "query",
-            "description": "budgetGroup id",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/InstrumentModel"
-            }
-          }
-        }
-      }
-    },
-    "/myfinance/environments/{envID}/instrumentspertype": {
-      "get": {
-        "tags": [
-          "UtilityResources",
-          "MyFinance"
-        ],
-        "summary": "List Data",
-        "description": "",
-        "operationId": "getInstrumentPerTypeList",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "tenant",
-            "in": "query",
-            "description": "tenant id",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "instrumenttype",
-            "in": "query",
-            "description": "instrumenttype",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "GIRO",
-              "MONEYATCALL",
-              "TIMEDEPOSIT",
-              "BUILDINGSAVINGACCOUNT",
-              "BUDGET",
-              "TENANT",
-              "ACCOUNTPORTFOLIO",
-              "ARTIFICALPORTFOLIO",
-              "BUDGETGROUP",
-              "DEPOT",
-              "BUILDINGSAVING",
-              "CURRENCY",
-              "EQUITY",
-              "FONDS",
-              "ETF",
-              "INDEX",
-              "BOND",
-              "LIFEINSURANCE",
-              "DEPRECATIONOBJECT",
-              "REALESTATE",
-              "LOAN",
-              "BUDGETPORTFOLIO",
-              "UNKNOWN"
-            ]
-          },
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/InstrumentListModel"
-            }
-          }
-        }
-      }
-    },
-    "/myfinance/environments/{envID}/listRecurrentTransactions": {
-      "get": {
-        "tags": [
-          "UtilityResources",
-          "MyFinance"
-        ],
-        "summary": "List Data",
-        "description": "",
-        "operationId": "getRecurrentTransactionList",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/RecurrentTransactionListModel"
-            }
-          }
-        }
-      }
-    },
-    "/myfinance/environments/{envID}/getvaluecurve/{instrumentId}": {
-      "get": {
-        "tags": [
-          "UtilityResources",
-          "MyFinance"
-        ],
-        "summary": "Map Data",
-        "description": "",
-        "operationId": "getValueMap",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "instrumentId",
-            "in": "path",
-            "description": "the instrumentId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "startdate",
-            "in": "query",
-            "description": "startdate in Format yyyy-mm-dd",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "enddate",
-            "in": "query",
-            "description": "enddate in Format yyyy-mm-dd",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/DateDoubleModel"
-            }
-          }
-        }
-      }
-    },
-    "/myfinance/environments/{envID}/getinstrumentvalues/{tenantId}": {
-      "get": {
-        "tags": [
-          "UtilityResources",
-          "MyFinance"
-        ],
-        "summary": "Map Data",
-        "description": "",
-        "operationId": "getAccountValueTupleMap",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "tenantId",
-            "in": "path",
-            "description": "the tenantId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "date",
-            "in": "query",
-            "description": "date in Format yyyy-mm-dd",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "diffdate",
-            "in": "query",
-            "description": "date for value diff in Format yyyy-mm-dd",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/InstrumentDetailModel"
-            }
-          }
-        }
-      }
-    },
-    "/myfinance/environments/{envID}/importprices": {
-      "post": {
-        "tags": [
-          "MyFinance"
-        ],
-        "summary": "importprices",
-        "description": "",
-        "operationId": "importPrices",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Prices imported"
-          },
-          "500": {
-            "description": "Something wrong in Server"
-          }
-        }
-      }
-    },
-    "/myfinance/environments/{envID}/bookRecurrentTransactions": {
-      "post": {
-        "tags": [
-          "MyFinance"
-        ],
-        "summary": "bookRecurrentTransactions",
-        "description": "",
-        "operationId": "bookRecurrentTransactions",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "envID",
-            "in": "path",
-            "description": "The Service Environment",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "book RecurrentTransactions"
-          },
-          "500": {
-            "description": "Something wrong in Server"
-          }
-        }
-      }
-    },
     "/myfinance/environments/{envID}/addLinkedIncomeExpense": {
       "post": {
         "tags": [
@@ -1776,6 +1789,30 @@
         }
       }
     },
+    "/myfinance/environments/list": {
+      "get": {
+        "tags": [
+          "MyFinance"
+        ],
+        "summary": "List Environments",
+        "description": "",
+        "operationId": "getEnvironmentList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StringListModel"
+            }
+          }
+        }
+      }
+    },
     "/Runner/{jobtype}/{env}/start": {
       "post": {
         "tags": [
@@ -1935,42 +1972,17 @@
     }
   },
   "definitions": {
-    "EnvironmentListResource": {
-      "type": "object"
-    },
-    "StringListModel": {
-      "type": "object",
-      "required": [
-        "id",
-        "url",
-        "values"
-      ],
-      "properties": {
-        "url": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "EnvironmentDataResource": {
       "type": "object",
       "properties": {
         "instruments": {
           "$ref": "#/definitions/InstrumentListResource"
         },
-        "tenants": {
-          "$ref": "#/definitions/TenantListResource"
-        },
         "recurrentTransaction": {
           "$ref": "#/definitions/RecurrentTransactionListResource"
+        },
+        "tenants": {
+          "$ref": "#/definitions/TenantListResource"
         }
       }
     },
@@ -2048,6 +2060,48 @@
         }
       }
     },
+    "SecuritySymbols": {
+      "type": "object",
+      "required": [
+        "currency",
+        "symbol",
+        "symbolid"
+      ],
+      "properties": {
+        "symbolid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "currency": {
+          "$ref": "#/definitions/Instrument"
+        }
+      }
+    },
+    "SymbolListModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "url",
+        "values"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecuritySymbols"
+          }
+        }
+      }
+    },
     "InstrumentListModel": {
       "type": "object",
       "required": [
@@ -2067,24 +2121,6 @@
           "items": {
             "$ref": "#/definitions/Instrument"
           }
-        }
-      }
-    },
-    "InstrumentModel": {
-      "type": "object",
-      "required": [
-        "id",
-        "url"
-      ],
-      "properties": {
-        "url": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/Instrument"
         }
       }
     },
@@ -2146,6 +2182,24 @@
           "items": {
             "$ref": "#/definitions/InstrumentProperties"
           }
+        }
+      }
+    },
+    "InstrumentModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/Instrument"
         }
       }
     },
@@ -2429,6 +2483,31 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Transaction"
+          }
+        }
+      }
+    },
+    "EnvironmentListResource": {
+      "type": "object"
+    },
+    "StringListModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "url",
+        "values"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
