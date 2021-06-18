@@ -20,6 +20,8 @@ import { MarketDataService } from './views/instrumentconfigurator/services/marke
 import { MarketDataControllerComponent } from './views/instrumentconfigurator/components/marketdatacontroller/marketdatacontroller.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MarketdataeditorComponent } from './views/instrumentconfigurator/components/marketdataeditor/marketdataeditor.component';
+import { MarketdatapriceviewComponent } from './views/instrumentconfigurator/components/marketdatapriceview/marketdatapriceview.component';
 
 
 
@@ -47,7 +49,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
       }
     })
   ],
-  declarations: [MarketDataConfiguratorComponent, MarketDataControllerComponent, MarketInstrumentInputformComponent, MarketInstrumentTableComponent, MarketInstrumentUpdateformComponent],
+  declarations: [MarketDataConfiguratorComponent, MarketDataControllerComponent, MarketInstrumentInputformComponent, MarketInstrumentTableComponent, MarketInstrumentUpdateformComponent, MarketdataeditorComponent, MarketdatapriceviewComponent],
   exports: [
   ],
   providers: [
