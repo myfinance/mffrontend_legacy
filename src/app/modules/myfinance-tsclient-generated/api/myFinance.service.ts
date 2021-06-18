@@ -25,6 +25,7 @@ import { InstrumentModel } from '../model/instrumentModel';
 import { InstrumentPropertyListModel } from '../model/instrumentPropertyListModel';
 import { RecurrentTransactionListModel } from '../model/recurrentTransactionListModel';
 import { StringListModel } from '../model/stringListModel';
+import { SymbolListModel } from '../model/symbolListModel';
 import { TransactionListModel } from '../model/transactionListModel';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -174,7 +175,7 @@ export class MyFinanceService {
     }
 
     /**
-     * save Instrument
+     * save Equity
      * 
      * @param envID The Service Environment
      * @param isin the isin
@@ -217,6 +218,68 @@ export class MyFinanceService {
         ];
 
         return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/addEquity`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * save Equity with symbols
+     * 
+     * @param envID The Service Environment
+     * @param isin the isin
+     * @param description description
+     * @param symbols symbols
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public addFullEquity_envID_isin_description_symbols(envID: string, isin?: string, description?: string, symbols?: Array<string>, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addFullEquity_envID_isin_description_symbols(envID: string, isin?: string, description?: string, symbols?: Array<string>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addFullEquity_envID_isin_description_symbols(envID: string, isin?: string, description?: string, symbols?: Array<string>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addFullEquity_envID_isin_description_symbols(envID: string, isin?: string, description?: string, symbols?: Array<string>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling addFullEquity_envID_isin_description_symbols.');
+        }
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (isin !== undefined && isin !== null) {
+            queryParameters = queryParameters.set('isin', <any>isin);
+        }
+        if (description !== undefined && description !== null) {
+            queryParameters = queryParameters.set('description', <any>description);
+        }
+        if (symbols) {
+            symbols.forEach((element) => {
+                queryParameters = queryParameters.append('symbols', <any>element);
+            })
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/addFullEquity`,
             null,
             {
                 params: queryParameters,
@@ -1499,6 +1562,55 @@ export class MyFinanceService {
      * List Data
      * 
      * @param envID The Service Environment
+     * @param isin isin
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSymbolsForEquityList_envID_isin(envID: string, isin?: string, observe?: 'body', reportProgress?: boolean): Observable<SymbolListModel>;
+    public getSymbolsForEquityList_envID_isin(envID: string, isin?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SymbolListModel>>;
+    public getSymbolsForEquityList_envID_isin(envID: string, isin?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SymbolListModel>>;
+    public getSymbolsForEquityList_envID_isin(envID: string, isin?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling getSymbolsForEquityList_envID_isin.');
+        }
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (isin !== undefined && isin !== null) {
+            queryParameters = queryParameters.set('isin', <any>isin);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<SymbolListModel>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/getsymbols`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * List Data
+     * 
+     * @param envID The Service Environment
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -1683,6 +1795,56 @@ export class MyFinanceService {
         return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/importprices`,
             null,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * remove symbols
+     * 
+     * @param envID The Service Environment
+     * @param isin the isin
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public rmSymbols_envID_isin(envID: string, isin?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public rmSymbols_envID_isin(envID: string, isin?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public rmSymbols_envID_isin(envID: string, isin?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public rmSymbols_envID_isin(envID: string, isin?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (envID === null || envID === undefined) {
+            throw new Error('Required parameter envID was null or undefined when calling rmSymbols_envID_isin.');
+        }
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (isin !== undefined && isin !== null) {
+            queryParameters = queryParameters.set('isin', <any>isin);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/myfinance/environments/${encodeURIComponent(String(envID))}/rmSymbols`,
+            null,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

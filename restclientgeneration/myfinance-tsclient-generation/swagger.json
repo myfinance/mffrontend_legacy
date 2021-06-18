@@ -31,25 +31,39 @@
     }
   ],
   "paths": {
-    "/myfinance/environments/list": {
+    "/myfinance/environments/{envID}/getsymbols": {
       "get": {
         "tags": [
+          "UtilityResources",
           "MyFinance"
         ],
-        "summary": "List Environments",
+        "summary": "List Data",
         "description": "",
-        "operationId": "getEnvironmentList",
+        "operationId": "getSymbolsForEquityList",
         "produces": [
           "application/json"
         ],
         "parameters": [
-          
+          {
+            "name": "isin",
+            "in": "query",
+            "description": "isin",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/StringListModel"
+              "$ref": "#/definitions/SymbolListModel"
             }
           }
         }
@@ -583,7 +597,7 @@
         "tags": [
           "MyFinance"
         ],
-        "summary": "save Instrument",
+        "summary": "save Equity",
         "description": "",
         "operationId": "addEquity",
         "produces": [
@@ -615,6 +629,98 @@
         "responses": {
           "204": {
             "description": "added"
+          },
+          "500": {
+            "description": "Something wrong in Server"
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/addFullEquity": {
+      "post": {
+        "tags": [
+          "MyFinance"
+        ],
+        "summary": "save Equity with symbols",
+        "description": "",
+        "operationId": "addFullEquity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "isin",
+            "in": "query",
+            "description": "the isin",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "symbols",
+            "in": "query",
+            "description": "symbols",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "added"
+          },
+          "500": {
+            "description": "Something wrong in Server"
+          }
+        }
+      }
+    },
+    "/myfinance/environments/{envID}/rmSymbols": {
+      "post": {
+        "tags": [
+          "MyFinance"
+        ],
+        "summary": "remove symbols",
+        "description": "",
+        "operationId": "rmSymbols",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "isin",
+            "in": "query",
+            "description": "the isin",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "envID",
+            "in": "path",
+            "description": "The Service Environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "removed"
           },
           "500": {
             "description": "Something wrong in Server"
@@ -1683,6 +1789,30 @@
         }
       }
     },
+    "/myfinance/environments/list": {
+      "get": {
+        "tags": [
+          "MyFinance"
+        ],
+        "summary": "List Environments",
+        "description": "",
+        "operationId": "getEnvironmentList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StringListModel"
+            }
+          }
+        }
+      }
+    },
     "/Runner/{jobtype}/{env}/start": {
       "post": {
         "tags": [
@@ -1842,31 +1972,6 @@
     }
   },
   "definitions": {
-    "EnvironmentListResource": {
-      "type": "object"
-    },
-    "StringListModel": {
-      "type": "object",
-      "required": [
-        "id",
-        "url",
-        "values"
-      ],
-      "properties": {
-        "url": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "EnvironmentDataResource": {
       "type": "object",
       "properties": {
@@ -1952,6 +2057,48 @@
         },
         "businesskey": {
           "type": "string"
+        }
+      }
+    },
+    "SecuritySymbols": {
+      "type": "object",
+      "required": [
+        "currency",
+        "symbol",
+        "symbolid"
+      ],
+      "properties": {
+        "symbolid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "currency": {
+          "$ref": "#/definitions/Instrument"
+        }
+      }
+    },
+    "SymbolListModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "url",
+        "values"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecuritySymbols"
+          }
         }
       }
     },
@@ -2336,6 +2483,31 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Transaction"
+          }
+        }
+      }
+    },
+    "EnvironmentListResource": {
+      "type": "object"
+    },
+    "StringListModel": {
+      "type": "object",
+      "required": [
+        "id",
+        "url",
+        "values"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }

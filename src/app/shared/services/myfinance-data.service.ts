@@ -10,7 +10,8 @@ import {
   RecurrentTransaction, RecurrentTransactionListModel,
   TransactionListModel,
   InstrumentDetailModel,
-  InstrumentPropertyListModel
+  InstrumentPropertyListModel,
+  SymbolListModel
 } from '../../modules/myfinance-tsclient-generated';
 import {MyFinanceWrapperService} from './my-finance-wrapper.service';
 import {DatePipe} from '@angular/common';
@@ -305,6 +306,30 @@ export class MyFinanceDataService {
       })
   }
 
+  saveCurrency(desc: string, currencyCode: string) {
+    this.myfinanceService.addCurrency_envID_currencyCode_description(
+      this.currentEnv, currencyCode, desc).subscribe(
+      () => {
+        this.instrumentSubject.next();
+        this.printSuccess('Währung gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      })
+  }
+
+  saveEquity(desc: string, isin: string, symbols: string[]) {
+    this.myfinanceService.addFullEquity_envID_isin_description_symbols(
+      this.currentEnv, isin, desc, symbols).subscribe(
+      () => {
+        this.instrumentSubject.next();
+        this.printSuccess('Aktie gespeichert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      })
+  }
+
   saveRealEstate(desc: string, valueBudgetId: number, yieldgoals: string[], profits: string[]) {
     this.myfinanceService.addRealestate_envID_description_tenantId_valueBudgetId_yieldgoal_realEstateProfit(
       this.currentEnv, desc, this.configService.getCurrentTenant().instrumentid, valueBudgetId, yieldgoals, profits).subscribe(
@@ -364,6 +389,12 @@ export class MyFinanceDataService {
     this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
 
     return this.myfinanceService.getInstrumentPropertyList_envID_instrumentid(this.configService.getCurrentEnv(), instrumentId);
+  }
+
+  getInstrumentSymbols(isin: string): Observable<SymbolListModel> {
+    this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
+
+    return this.myfinanceService.getSymbolsForEquityList_envID_isin(this.configService.getCurrentEnv(), isin);
   }
 
   getInstrumentsPerType(instrumentType: InstrumentTypeEnum): Observable<InstrumentListModel> {

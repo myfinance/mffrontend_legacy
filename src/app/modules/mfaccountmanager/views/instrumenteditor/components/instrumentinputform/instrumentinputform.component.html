@@ -26,6 +26,14 @@
     </span>
   </div>
 
+  <div class="form-group" *ngIf="instrumentForm.get('instrumentType').value === 'CURRENCY'">
+    <p>Währungscode:</p>
+    <input class="form-control" formControlName="currencycode"/>
+    <span *ngIf="!instrumentForm.get('currencycode').valid && instrumentForm.get('currencycode').touched">
+      Bitte geben Sie einen Währungscode für das Instrument ein!
+    </span>
+  </div>
+
   <div class="form-group" *ngIf="instrumentForm.get('instrumentType').value === 'REALESTATE'">
     <p>Budget für Immobilienwert:</p>
     <select class="btn btn-primary dropdown-toggle" formControlName="budget">

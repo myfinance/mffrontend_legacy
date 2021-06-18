@@ -1,24 +1,14 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Instrument, InstrumentListModel, InstrumentProperties, InstrumentPropertyListModel} from '../../../../myfinance-tsclient-generated';
+import {Instrument, InstrumentListModel, InstrumentProperties, InstrumentPropertyListModel, SecuritySymbols, SymbolListModel} from '../../../../myfinance-tsclient-generated';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {Subject} from 'rxjs/Rx';
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
 
-export class RealestateProperties {
-  constructor(valdate: Date, yieldgoal: number, profit: number) {
-    this.valdate=valdate;
-    this.yieldgoal=yieldgoal;
-    this.profit=profit;
-  }
-  valdate: Date; 
-  yieldgoal: number; 
-  profit: number;
-}
 
 @Injectable()
-export class InstrumentService extends AbstractDashboardDataService {
+export class MarketDataService extends AbstractDashboardDataService {
 
   instruments: Array<Instrument> = new Array<Instrument>();
   instrumentSubject: Subject<any> = new Subject<any>();
@@ -26,6 +16,8 @@ export class InstrumentService extends AbstractDashboardDataService {
   selectedinstrumentSubject: Subject<any> = new Subject<any>();
   selectedInstrument: Instrument;
   instrumentProperies: InstrumentProperties[];
+  symbols: SecuritySymbols[];
+  symbolSubject: Subject<any> = new Subject<any>();
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -51,7 +43,7 @@ export class InstrumentService extends AbstractDashboardDataService {
   protected loadData(): void {
     this.dashboardService.handleDataPreparing();
 
-    this.myFinanceService.getInstrumentsForTenant()
+    this.myFinanceService.getInstruments()
       .subscribe(
         (instruments: InstrumentListModel) => {
           this.instruments = instruments.values;
@@ -75,7 +67,11 @@ export class InstrumentService extends AbstractDashboardDataService {
   }
 
   getInstruments(): Array<Instrument> {
-    return this.instruments;
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.CURRENCY || i.instrumentType === InstrumentTypeEnum.EQUITY);
+  }
+
+  getCurrencies(): Array<Instrument> {
+    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.CURRENCY);
   }
 
   loadInstrumentProperties(instrumentId: number) : void{
@@ -92,56 +88,16 @@ export class InstrumentService extends AbstractDashboardDataService {
       });
   }
 
-  getRealestateProperties(): RealestateProperties[] {
-    var realestateProperties: RealestateProperties[] = [];
-    let currentDate: Date = null;
-    let currentYieldGoal: number = 0.0;
-    let currentProfit: number = 0.0;
-
-    this.instrumentProperies.sort((a,b)=>new Date(a.validfrom).getTime()-new Date(b.validfrom).getTime()).forEach((item => {   
-      currentDate = new Date(item.validfrom);
-      if(item.propertyname === "YIELDGOAL") {
-        currentYieldGoal = +item.value;
-      } else if(item.propertyname === "REALESTATEPROFITS") {
-        currentProfit = +item.value;
-      }
-      realestateProperties = realestateProperties.filter(e => e.valdate.getTime() != currentDate.getTime());
-      realestateProperties.push(new RealestateProperties(currentDate, currentYieldGoal, currentProfit));
-    } ));
-    return realestateProperties;
-  }
-
-  getBudgetGroups(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGETGROUP);
-  }
-
-  getBudgets(): Array<Instrument> {
-    return this.instruments.filter(i => i.instrumentType === InstrumentTypeEnum.BUDGET);
-  }
-
-
-  saveGiro(desc: string) {
-    this.myFinanceService.saveGiro(desc);
-  }
-
   updateInstrument(instrumentId: number, desc: string, isActive: boolean) {
     this.myFinanceService.updateInstrument(instrumentId, desc, isActive, 'Instrument aktualisiert')
   }
 
-  saveBudget(desc: string, budgetGroupId: number) {
-    this.myFinanceService.saveBudget(desc, budgetGroupId)
-  }
-
-  saveRealEstate(desc: string, valueBudgetId: number, yieldgoals: string[], profits: string[]) {
-    this.myFinanceService.saveRealEstate(desc, valueBudgetId, yieldgoals, profits);
-  }
-
-  updateRealEstate(instrumentId: number, desc: string, yieldgoals: string[], profits: string[], isActive: boolean) {
-    this.myFinanceService.updateRealEstate(instrumentId, desc, isActive, yieldgoals, profits);
-  }
-
   saveCurrency(desc: string, currencyCode: string) {
     this.myFinanceService.saveCurrency(desc, currencyCode);
+  }
+
+  saveEquity(desc: string, isin: string, symbols: string[]) {
+    this.myFinanceService.saveEquity(desc, isin, symbols);
   }
 
   setSelectedInstrument(instrument: Instrument) {
@@ -151,5 +107,23 @@ export class InstrumentService extends AbstractDashboardDataService {
 
   getSelectedInstrument(): Instrument {
     return this.selectedInstrument
+  }
+
+  getInstrumentSymbols(): SecuritySymbols[] {
+    return this.symbols;
+  }
+
+  loadInstrumentSymbols(isin: string) : void{
+    this.myFinanceService.getInstrumentSymbols(isin)
+    .subscribe(
+      (symbol: SymbolListModel) => {
+        this.symbols = symbol.values;
+        this.symbolSubject.next();
+      },
+      (errResp) => {
+        this.myFinanceService.printError(errResp);
+        this.dashboardService.handleDataNotLoaded(errResp);
+
+      });
   }
 }

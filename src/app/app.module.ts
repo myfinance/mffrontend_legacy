@@ -28,6 +28,7 @@ import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import {WidgetModule} from './modules/widget/widget.module';
 import { MfAnalyticsModule } from './modules/mfanalytics/mfanalytics.module';
+import { MfmarketdataModule } from './modules/mfmarketdata/mfmarketdata.module';
 
 LicenseManager.setLicenseKey('Comparex_AG_on_behalf_of_DZ_BANK_AG_MultiApp_5Devs3_October_2020__MTYwMTY3OTYwMDAwMA==c1b2f2c21c08f4ac19ee3cf66789c865');
 registerLocaleData(localeDe);
@@ -60,6 +61,7 @@ export function initConfiguration(configService: ConfigService): Function {
     MyFinanceCommonModule,
     MfAccountManagerModule,
     MfAnalyticsModule,
+    MfmarketdataModule,
     ApiModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),

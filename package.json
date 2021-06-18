@@ -23,6 +23,7 @@
     "@angular/router": "10.0.14",
     "@angular/service-worker": "10.0.14",
     "@swimlane/ngx-charts": "16.0.0",
+    "@swimlane/ngx-datatable": "18.0.0",
     "ag-grid-angular": "25.1.0",
     "ag-grid-community": "25.1.0",
     "ag-grid-enterprise": "25.1.0",
