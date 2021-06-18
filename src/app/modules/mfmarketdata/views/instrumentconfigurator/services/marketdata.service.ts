@@ -100,6 +100,10 @@ export class MarketDataService extends AbstractDashboardDataService {
     this.myFinanceService.saveEquity(desc, isin, symbols);
   }
 
+  importPrices() {
+    this.myFinanceService.importPrices();
+  }
+
   setSelectedInstrument(instrument: Instrument) {
     this.selectedInstrument = instrument;
     this.selectedinstrumentSubject.next()
