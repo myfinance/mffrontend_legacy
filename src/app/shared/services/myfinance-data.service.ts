@@ -208,6 +208,19 @@ export class MyFinanceDataService {
     );
   }
 
+  importPrices() {
+
+    this.myfinanceService.importPrices_envID(this.currentEnv).subscribe(
+      () => {
+        this.recurrentTransactionSubject.next();
+        this.printSuccess('Preise importiert aktualisiert');
+      },
+      (errResp) => {
+        this.printError(errResp);
+      }
+    );
+  }
+
   deleteRecurrentTransfer(transactionId: number) {
 
     this.myfinanceService.delRecurrentTransfer_envID_recurrentTransactionId(

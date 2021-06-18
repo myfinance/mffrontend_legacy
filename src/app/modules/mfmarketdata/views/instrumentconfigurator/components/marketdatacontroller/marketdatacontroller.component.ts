@@ -13,4 +13,8 @@ export class MarketDataControllerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onImportStart(): void {
+    this.marketdataservice.importPrices();
+  }
+
 }
