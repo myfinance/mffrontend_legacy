@@ -1,1 +1,43 @@
-<p>instrumentupdateform works!</p>
+<form [formGroup]="instrumentForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>Beschreibung:</label>
+      <input class="form-control" formControlName="description"/>
+      <span *ngIf="!instrumentForm.get('description').valid && instrumentForm.get('description').touched">
+        Bitte geben Sie eine Beschriebung für das Instrument ein!
+      </span>
+    </div>
+
+  
+    <div class="form-group" *ngIf="!noInstrumentSelected && selectedInstrument.instrumentType === 'CURRENCY'">
+      <p>Währungscode:{{selectedInstrument.businesskey}}</p>
+    </div>
+
+    <div class="form-group" *ngIf="!noInstrumentSelected && selectedInstrument.instrumentType === 'EQUITY'">
+      <p>ISIN:{{selectedInstrument.businesskey}}</p>
+      <b>Handelsplatz (Erforderlich um aktuelle Marktdaten zu erhalten):</b>
+      <table>
+        <thead>
+          <tr>
+            <th width="250">Symbol</th>
+            <th width="250">Währung</th>
+          </tr>
+        </thead>
+      </table>
+        <div class="table table-striped" formArrayName="symbols" *ngFor="let entry of instrumentForm.get('symbols')['controls']; let i = index">
+          <table [formGroupName]="i">
+            <td width="250"><input class="form-control" formControlName="symbol"/></td>
+            <td width="250"><select class="btn btn-primary dropdown-toggle" formControlName="currency">
+              <option class="mydropdown-item" [ngValue]="cur" *ngFor="let cur of currencies" >
+                {{cur.description}}
+              </option>
+            </select></td>
+          </table>
+        </div>
+        <button class="btn btn-primary" type=button (click)="addSymbol()">Neuer Handelsplatz</button>      
+    </div>
+  
+
+    <button class="btn btn-primary" type="submit">Speichern</button>
+    
+  </form>

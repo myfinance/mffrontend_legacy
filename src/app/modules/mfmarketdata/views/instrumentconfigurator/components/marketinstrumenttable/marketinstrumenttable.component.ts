@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectionType } from '@swimlane/ngx-datatable';
 import { Instrument } from '../../../../../myfinance-tsclient-generated';
 import { MarketDataService } from '../../services/marketdata.service';
 
 @Component({
   selector: 'app-marketinstrumenttable',
   templateUrl: './marketinstrumenttable.component.html',
-  styleUrls: ['./marketinstrumenttable.component.css']
+  styleUrls: ['./marketinstrumenttable.component.scss']
 })
 export class MarketInstrumentTableComponent implements OnInit {
 
@@ -16,6 +17,9 @@ export class MarketInstrumentTableComponent implements OnInit {
     { prop: 'treelastchanged', name:'Zuletzt geändert' },
     { prop: 'instrumentType', name:'InstrumentType' },
   ];
+
+  selected:Instrument[] = []
+  SelectionType = SelectionType;
 
   constructor(private marketdataservice: MarketDataService){
 
@@ -31,6 +35,10 @@ export class MarketInstrumentTableComponent implements OnInit {
 
   private loadData(): void {
     this.rows = this.marketdataservice.getInstruments();
+  }
+
+  onSelect({ selected }) {
+    this.marketdataservice.setSelectedInstrument(selected[0]);
   }
 
 }
