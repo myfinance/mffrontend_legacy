@@ -1,7 +1,18 @@
 <div>
   <button class="btn btn-primary" (click)="onImportStart()">Preisimport starten</button>
-    <tabset class="mytab">
-      <tab heading="Neues Instrument erstellen"><app-marketinstrumentinputform></app-marketinstrumentinputform></tab>
-      <tab heading="Instrument ändern" [disabled]="noInstrumentSelected"><app-marketinstrumentupdateform></app-marketinstrumentupdateform></tab>
-    </tabset>
+
+  <div class="form-group">
+    <label>Startdatum:</label><br>
+    <input type="text" align="right"
+      placeholder="Datepicker"
+      class="myformcontrol"
+      bsDatepicker [(ngModel)]="startdate" (bsValueChange)="onStartDateChange($event)" [bsConfig]="bsConfig" placement="right top" style="width: 210px;"/>
+  </div>
+  <div class="form-group">
+    <label>Enddatum:</label><br>
+    <input type="text" align="right"
+      placeholder="Datepicker"
+      class="myformcontrol"
+      bsDatepicker [(ngModel)]="enddate" (bsValueChange)="onEndDateChange($event)" [bsConfig]="bsConfig" placement="right top" style="width: 210px;"/>
+  </div>
   </div>

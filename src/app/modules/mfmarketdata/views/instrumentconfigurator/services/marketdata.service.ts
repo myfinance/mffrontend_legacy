@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DashboardService} from '../../../../dashboard/services/dashboard.service';
 import {MyFinanceDataService} from '../../../../../shared/services/myfinance-data.service';
-import {Instrument, InstrumentListModel, InstrumentProperties, InstrumentPropertyListModel, SecuritySymbols, SymbolListModel} from '../../../../myfinance-tsclient-generated';
+import {DateDoubleModel, Instrument, InstrumentListModel, InstrumentProperties, InstrumentPropertyListModel, SecuritySymbols, SymbolListModel} from '../../../../myfinance-tsclient-generated';
 import InstrumentTypeEnum = Instrument.InstrumentTypeEnum;
 import {Subject} from 'rxjs/Rx';
 import {AbstractDashboardDataService} from '../../../../../shared/services/abstract-dashboard-data.service';
@@ -18,6 +18,11 @@ export class MarketDataService extends AbstractDashboardDataService {
   instrumentProperies: InstrumentProperties[];
   symbols: SecuritySymbols[];
   symbolSubject: Subject<any> = new Subject<any>();
+  valueCurveSubject: Subject<any> = new Subject<any>();
+  private isValueCurveLoaded = false;
+  instrumentValues: DateDoubleModel;
+  startdate = new Date(new Date().getFullYear(), new Date().getMonth() - 6, new Date().getDate());
+  enddate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
   constructor(protected myFinanceService: MyFinanceDataService, public dashboardService: DashboardService) {
     super(myFinanceService, dashboardService);
@@ -107,6 +112,54 @@ export class MarketDataService extends AbstractDashboardDataService {
   setSelectedInstrument(instrument: Instrument) {
     this.selectedInstrument = instrument;
     this.selectedinstrumentSubject.next()
+    this.loadValueCurve(instrument);
+  }
+
+  loadValueCurve(instrument: Instrument) {
+    this.myFinanceService.getValueCurve(instrument.instrumentid, this.startdate, this.enddate)
+    .subscribe(
+      (values: DateDoubleModel) => {
+        this.instrumentValues = values;
+        this.isValueCurveLoaded = true;
+        this.valueCurveSubject.next();
+      },
+      (errResp) => {
+        this.myFinanceService.printError(errResp);
+        this.dashboardService.handleDataNotLoaded(errResp);
+
+      });
+  }
+
+  getStartDate(): Date {
+    return this.startdate;
+  }
+
+  setStartDate(startdate: Date) {
+    if(startdate == null) {
+      return
+    }
+    if(this.startdate == null || startdate.getTime() !== this.startdate.getTime()){
+      this.startdate = startdate;
+      if(this.selectedInstrument!=null) {
+        this.loadValueCurve(this.selectedInstrument);
+      }
+    }
+  }
+
+  getEndDate(): Date {
+    return this.enddate;
+  }
+
+  setEndDate(enddate: Date) {
+    if(enddate == null) {
+      return
+    }
+    if(this.enddate == null || enddate.getTime() !== this.enddate.getTime()){
+      this.enddate = enddate;
+      if(this.selectedInstrument!=null) {
+        this.loadValueCurve(this.selectedInstrument);
+      }
+    }
   }
 
   getSelectedInstrument(): Instrument {
@@ -129,5 +182,14 @@ export class MarketDataService extends AbstractDashboardDataService {
         this.dashboardService.handleDataNotLoaded(errResp);
 
       });
+  }
+
+  getIsValueCurveLoaded(): boolean {
+    return this.isValueCurveLoaded
+  }
+
+  getValueCurve(): DateDoubleModel {
+
+    return this.instrumentValues;
   }
 }

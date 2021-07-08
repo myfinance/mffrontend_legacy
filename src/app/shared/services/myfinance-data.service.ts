@@ -98,6 +98,13 @@ export class MyFinanceDataService {
       instrumentId, this.currentEnv, this.getDateString(start), this.getDateString(end));
   }
 
+  getInstrumentValues(dueDate: Date, diffDate: Date): Observable<InstrumentDetailModel> {
+    return this.myfinanceService.getAccountValueTupleMap_tenantId_envID_date_diffdate(this.configService.getCurrentTenant().instrumentid,
+      this.configService.getCurrentEnv(),
+      this.getDateString(dueDate),
+      this.getDateString(diffDate));
+  }
+
   getValueCurveForTenant(start: Date, end: Date): Observable<DateDoubleModel> {
 
     this.myfinanceService.setBasePath(this.configService.get('currentZone').url);
@@ -424,14 +431,6 @@ export class MyFinanceDataService {
     return this.myfinanceService.getIncomeBudget_envID_budgetGroup(this.configService.getCurrentEnv(),
       budgetGroupId);
   }
-
-  getInstrumentValues(dueDate: Date, diffDate: Date): Observable<InstrumentDetailModel> {
-    return this.myfinanceService.getAccountValueTupleMap_tenantId_envID_date_diffdate(this.configService.getCurrentTenant().instrumentid,
-      this.configService.getCurrentEnv(),
-      this.getDateString(dueDate),
-      this.getDateString(diffDate));
-  }
-
   printError(errResp: HttpErrorResponse) {
     console.error('error', errResp);
     let errrormsg: string = errResp.error.toString();
